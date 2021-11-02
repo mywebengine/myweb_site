@@ -1,0 +1,17 @@
+<div class="h-logo">
+	<a attr.href.push="loc.path !== `/index.html` && `/index.html`">myweb</a>
+</div>
+<nav class="h-menu">
+	<ul>
+		<li foreach.page="[
+			{href: `/doc.html`, name: `Документация`},
+			{href: `/tour.html`, name: `Тур`},
+			{href: `/about.html`, name: `О проекте`},
+			{href: `/donate.html`, name: `Поддержать myweb`},
+			{href: `lang`, name: `Переводы`},
+		]">
+			<a attr.href.push="loc.path !== page.href && page.href"
+				html="page.name"></a>
+		</li>
+	</ul>
+</nav>

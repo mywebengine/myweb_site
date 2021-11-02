@@ -1,0 +1,20 @@
+<header class="h"
+	exec="self.lang = localStorage.getItem(`lang`) || navigator.language.substr(0, 2); self.defLang = `ru`">
+	<div class="w">
+		<link exec.i="loc.path.indexOf('.html')"
+			inc="fetch(`/page/body/header/${self.lang}.html`)
+				.then(res => res.ok ? res : fetch(`/page/body/header/${self.defLang}.html`))
+				.then(res => res.ok ? res : false)" />
+	</div>
+</header>
+<main class="m">
+	<link inc="loc.path.indexOf(`/doc`) === 0 ? `./body/2cols.html` : `./body/1cols.html`" />
+</main>
+<footer class="f">
+	<div class="w">
+		<link exec.i="loc.path.indexOf('.html')"
+			inc="fetch(`/page/body/footer/${self.lang}.html`)
+				.then(res => res.ok ? res : fetch(`/page/body/footer/${self.defLang}.html`))
+				.then(res => res.ok ? res : false)" />
+	</div>
+</footer>
