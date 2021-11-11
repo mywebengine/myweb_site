@@ -1,5 +1,1 @@
-<link exec.i="loc.path.indexOf('.html')"
-	inc="fetch(`${loc.path.substr(0, i)}/${self.lang}.html`)
-		.then(res => res.ok ? res : fetch(`${loc.path.substr(0, i)}/${self.defLang}.html`))
-		.then(res => res.ok ? res : fetch(`/page/err/404/${self.lang}.html`))
-		.then(res => res.ok ? res : `/page/err/404/${self.defLang}.html`)" />
+<link inc="getLangInc(loc.path.substr(0, loc.path.indexOf('.html')), true)" />

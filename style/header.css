@@ -28,6 +28,7 @@
 }
 .h-menu {
 	grid-area: menu;
+	font-size: 14px;
 }
 .h-menu ul {
 	display: flex;

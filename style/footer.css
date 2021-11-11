@@ -1,7 +1,22 @@
 .f {
+	font-size: 14px;
 }
 .f > .w {
 	border-top: solid 1px #ccc;
-/*
-	padding-left: calc(var(--menu_width) + var(--gap) * 2);*/
+}
+.f.is_col2 > .w {
+	margin-left: calc(var(--menu_width) + var(--gap) * 2);
+	padding-left: 0;
+}
+.f.is_col2 > .w {
+	position: relative;
+}
+.f.is_col2 > .w::before {
+	content: "";
+	position: absolute;
+	top: calc(var(--gap) * -2);
+	bottom: 0;
+	left: calc(var(--gap) * -1 - 1px);
+	width: 0px;
+	border-left: solid 1px #ccc;
 }

@@ -1,20 +1,21 @@
 <header class="h"
-	exec="self.lang = localStorage.getItem(`lang`) || navigator.language.substr(0, 2); self.defLang = `ru`">
+	exec="self.isCol2 = loc.path.indexOf(`/doc`) === 0;
+		const l = localStorage.getItem(`lang`) || navigator.language.substr(0, 2);
+		if (l === self.glob.lang) {
+			return;
+		}
+		self.glob.lang = l;
+		self.defLang = `ru`;">
 	<div class="w">
-		<link exec.i="loc.path.indexOf('.html')"
-			inc="fetch(`/page/body/header/${self.lang}.html`)
-				.then(res => res.ok ? res : fetch(`/page/body/header/${self.defLang}.html`))
-				.then(res => res.ok ? res : false)" />
+		<link inc="getLangInc(`/page/body/header`)" />
 	</div>
 </header>
 <main class="m">
-	<link inc="loc.path.indexOf(`/doc`) === 0 ? `./body/2cols.html` : `./body/1cols.html`" />
+	<link inc="self.isCol2 ? `./body/2cols.html` : `./body/1cols.html`" />
 </main>
-<footer class="f">
+<footer class="f"
+	attr.class.is_col2="self.isCol2">
 	<div class="w">
-		<link exec.i="loc.path.indexOf('.html')"
-			inc="fetch(`/page/body/footer/${self.lang}.html`)
-				.then(res => res.ok ? res : fetch(`/page/body/footer/${self.defLang}.html`))
-				.then(res => res.ok ? res : false)" />
+		<link inc="getLangInc(`/page/body/footer`)" />
 	</div>
 </footer>
