@@ -1,19 +1,19 @@
-<h1 exec="glob.pageTitle = `${this.textContent} - myweb`"><span class="cd">html</span></h1>
+<h1 exec="glob.pageTitle = `${this.textContent} - myweb`"><span class="cd" translate="no">html</span></h1>
 <p><a href="">Команда</a> создания HTML-разметки, выполняет <a href="">выражение</a> как <a href="">js-код</a>, в контексте <a href="">текущего элемента</a>.</p>
 <h2>
 	<a href="">Синтаксис</a>
 </h2>
-<p><span class="cd">&lt;div html[.text]="expression">...</span></p>
-<p><a href="">Значение выражения</a> интерпретируется как строка, по которой создаётся разметка через <span class="cd">.innerHTML</span> или <span class="cd">.textContent</span>.</p>
+<p><span class="cd" translate="no">&lt;div html[.text]="expression">...</span></p>
+<p><a href="">Значение выражения</a> интерпретируется как строка, по которой создаётся разметка через <span class="cd" translate="no">.innerHTML</span> или <span class="cd" translate="no">.textContent</span>.</p>
 <h2>
 	<a href="">Параметры</a>
 </h2>
 <ul>
 	<li>
-		<p><span class="cd">text</span> <span class="nr">необязательный</span> - если параметр указан, то значение выражения интерпретируется как текст: <span class="cd">.textContent = значение выражения</span>. Название параметра может быть любым.</p>
+		<p><span class="cd" translate="no">text</span> <span class="nr">необязательный</span> - если параметр указан, то значение выражения интерпретируется как текст: <span class="cd" translate="no">.textContent = expression</span>. Название параметра может быть любым.</p>
 	</li>
 </ul>
-<p>Команда может быть записана через шаблон <span class="cd"><span>$</span>{выражение}</span>, эта кнострукция эквивалентна вызову команды с первым параметром - значение будет интерпретировано как текст.</p>
+<p>Команда может быть записана через шаблон <span class="cd" translate="no"><span>$</span>{expression}</span>, эта кнострукция эквивалентна вызову команды с первым параметром - значение будет интерпретировано как текст.</p>
 <link inc="`/ctrl/mwex/mwex.html`"
 	exec.code="const r = new Request(`/doc/html/_ex1.html`);
 		return self[r.url] || (self[r.url] = fetch(r).then(res => res.text()))"

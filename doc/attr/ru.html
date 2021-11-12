@@ -1,24 +1,24 @@
-<h1 exec="glob.pageTitle = `${this.textContent} - myweb`"><span class="cd">attr</span></h1>
+<h1 exec="glob.pageTitle = `${this.textContent} - myweb`"><span class="cd" translate="no">attr</span></h1>
 <p><a href="">Команда</a> управляет HTML-атрибутами, выполняет <a href="">выражение</a>, как <a href="">js-код</a> в контексте <a href="">текущего элемента</a>.</p>
 <h2>
 	<a href="">Синтаксис</a>
 </h2>
-<p><span class="cd">&lt;div attr.name[.value-part-or-href-mode]="expression">...</span></p>
+<p><span class="cd" translate="no">&lt;div attr.name[.value-part-or-href-mode]="expression">...</span></p>
 <h2>
 	<a href="">Параметры</a>
 </h2>
 <ul>
 	<li>
-		<p><span class="cd">name</span> - имя атрибута</p>
+		<p><span class="cd" translate="no">name</span> - имя атрибута</p>
 	</li>
 	<li>
-		<p><span class="cd">value-part-or-href-mode</span> <span class="nr">необязательный</span> - параметр может интерпретироваться двумя способами:</p>
+		<p><span class="cd" translate="no">value-part-or-href-mode</span> <span class="nr">необязательный</span> - параметр может интерпретироваться двумя способами:</p>
 		<ol>
 			<li>
 				<p>Как часть значения атрибута, которое будет добавлено через пробел, в случаи положительного значенния выражения, или будет удалено, если занчение выражения ложно.</p>
 			</li>
 			<li>
-				<p>Для атрибута <span class="cd">href</span> тага <span class="cd">&lt;a></span> занчение второго параметра может быть <span class="cd">push</span> или <span class="cd">replace</span>, что будет интерпретировано как создание атрибута со значением значения выражения, при клике на элемент будет вызван метод <span class="cd">history.pushState(undefined, undefined, .href)</span> для <span class="cd">push</span> или <span class="cd">history.replaceState(...)</span> для <span class="cd">replace</span>.</p>
+				<p>Для атрибута <span class="cd" translate="no">href</span> тага <span class="cd" translate="no">&lt;a></span> занчение второго параметра может быть <span class="cd" translate="no">push</span> или <span class="cd" translate="no">replace</span>, что будет интерпретировано как создание атрибута со значением значения выражения, при клике на элемент будет вызван метод <span class="cd" translate="no">history.pushState(undefined, undefined, .href)</span> для <span class="cd" translate="no">push</span> или <span class="cd" translate="no">history.replaceState(...)</span> для <span class="cd" translate="no">replace</span>.</p>
 			</li>
 		</ol>
 	</li>
