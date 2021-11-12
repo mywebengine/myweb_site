@@ -1,0 +1,7 @@
+<h1 exec="glob.pageTitle = `${this.textContent} - myweb`"><span class="cd">exec</span></h1>
+<p>Команда выполняет выражение, как js-код в контексте текущего элемента.</p>
+<p>Результат выполнения можно записать в переменную с именем которое может быть указано как название первого параметра. Имя указывается в нотации kebab-case и переводиться в нотацию camel-case.</p>
+<link inc="`/ctrl/mwex/mwex.html`"
+	exec.code="const r = new Request(`/doc/exec/_ex1.html`);
+		return self[r.url] || (self[r.url] = fetch(r).then(res => res.text()))"
+	exec.height="`120px`" />

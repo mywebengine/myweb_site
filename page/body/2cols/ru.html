@@ -1,0 +1,52 @@
+<nav class="sub_menu">
+	<ul>
+		<li foreach.page="[{
+				name: `html`,
+				href: `/doc/html.html`
+			},
+			{
+				name: `attr`,
+				href: `/doc/attr.html`
+			},
+			{
+				name: `foreach`,
+				href: `/doc/foreach.html`
+			},
+			{
+				name: `if, switch`,
+				href: `/doc/if.html`
+			},
+			{
+				name: `exec`,
+				href: `/doc/exec.html`
+			},
+			{
+				name: `scope`,
+				href: `/doc/scope.html`
+			},
+			{
+				name: `on`,
+				href: `/doc/on.html`
+			},
+			{
+				name: `watch`,
+				href: `/doc/watch.html`
+			},
+			{
+				name: `fetch`,
+				href: `/doc/fetch.html`
+			},
+			{
+				name: `inc`,
+				href: `/doc/inc.html`
+			},
+			{
+				name: `filling`,
+				href: `/doc/filling.html`
+			}]">
+			<a attr.href.push="loc.path !== page.href && page.href">
+				<span class="cd">${page.name}</span>
+			</a>
+		</li>
+	</ul>
+</nav>

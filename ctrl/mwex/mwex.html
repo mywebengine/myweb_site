@@ -1,0 +1,15 @@
+<div class="mwex"
+	scope="mwex"
+	on.mount.self="_go(this, mwex.code)">
+	<div class="mwex-code">
+		<textarea spellcheck="false"
+			attr.value="mwex.code"
+			attr.style="mwex.height && `min-height: ${mwex.height}`"
+			on.keydown="keyDown(this, evt)"
+			on.input="go(this.parentNode.parentNode, this.value)"></textarea>
+	</div>
+	<div class="mwex-div"></div>
+	<div class="mwex-view"></div>
+</div>
+<link href="./mwex.css" type="text/css" rel="stylesheet" />
+<script src="./mwex.js" type="module"></script>

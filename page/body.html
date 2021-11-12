@@ -1,13 +1,7 @@
 <header class="h"
-	exec="self.isCol2 = loc.path.indexOf(`/doc`) === 0;
-		const l = localStorage.getItem(`lang`) || navigator.language.substr(0, 2);
-		if (l === self.glob.lang) {
-			return;
-		}
-		self.glob.lang = l;
-		self.defLang = `ru`;">
+	exec="self.isCol2 = loc.path.indexOf(`/doc`) === 0">
 	<div class="w">
-		<link inc="getLangInc(`/page/body/header`)" />
+		<link inc="getLangInc(`/page/body/header`, self.glob.lang)" />
 	</div>
 </header>
 <main class="m">
@@ -16,6 +10,6 @@
 <footer class="f"
 	attr.class.is_col2="self.isCol2">
 	<div class="w">
-		<link inc="getLangInc(`/page/body/footer`)" />
+		<link inc="getLangInc(`/page/body/footer`, self.glob.lang)" />
 	</div>
 </footer>

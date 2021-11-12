@@ -3,12 +3,22 @@
 </div>
 <nav class="h-menu">
 	<ul>
-		<li foreach.page="[
-			{href: `/doc.html`, name: `Документация`},
-			{href: `/tour.html`, name: `Тур`},
-			{href: `/about.html`, name: `О проекте`},
-			{href: `/donate.html`, name: `Поддержать myweb`}
-		]">
+		<li foreach.page="[{
+				name: `Документация`,
+				href: `/doc.html`
+			},
+			{
+				name: `Тур`,
+				href: `/tour.html`
+			},
+			{
+				name: `О проекте`,
+				href: `/about.html`
+			},
+			{
+				name: `Поддержать myweb`,
+				href: `/donate.html`
+			}]">
 			<a attr.href.push="loc.path !== page.href && page.href"
 				html="page.name"></a>
 		</li>

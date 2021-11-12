@@ -1,6 +1,18 @@
-<h1 exec="glob.pageTitle = `exec`">exec</h1>
-<p>Команда выполняет выражение, как js-код в контексте текущего элемента.</p>
-<p>Результат выполнения можно записать в переменную с именем которое может быть указано как название первого параметра. Имя указывается в нотации kebab-case и переводиться в нотацию camel-case.</p>
-<link inc="`/ctrl/z/z.html`" style="min-height: 120px"
+<h1 exec="glob.pageTitle = `${this.textContent} - myweb`"><span class="cd">exec</span></h1>
+<p><a href="">Команда</a> выполняет <a href="">выражение</a> как <a href="">js-код</a>, в контексте <a href="">текущего элемента</a>.</p>
+<h2>
+	<a href="">Синтаксис</a>
+</h2>
+<p><span class="cd">&lt;div exec[.var-name]="expression">...</span></p>
+<h2>
+	<a href="">Параметры</a>
+</h2>
+<ul>
+	<li>
+		<p><span class="cd">var-name</span> <span class="nr">необязательный</span> - имя переменной в которую будет записан занчение выражения. Имя указывается в нотации kebab-case и переводиться в нотацию camel-case.</p>
+	</li>
+</ul>
+<link inc="`/ctrl/mwex/mwex.html`"
 	exec.code="const r = new Request(`/doc/exec/_ex1.html`);
-		return self[r.url] || (self[r.url] = fetch(r).then(res => res.text()))" />
+		return self[r.url] || (self[r.url] = fetch(r).then(res => res.text()))"
+	exec.height="`120px`" />

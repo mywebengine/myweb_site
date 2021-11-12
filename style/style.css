@@ -18,8 +18,9 @@ html {
 body {
 	--gap: 30px;
 	--gap2: 15px;
+	--text_gap: 10px;
         --menu_width: 150px;
-        --cnt_width: 600px;
+        --cnt_width: 680px;
 
 	display: flex;
 	flex-direction: column;
@@ -38,6 +39,27 @@ a[href] {
 a:visited {
 	color: blue;
 }
-a[href]:hover {
-	text-decoration: underline;
+a[href]:hover,
+.cnt a[href]:hover {
+/*
+	text-decoration: underline;*/
+	color: blue;
+}
+.cnt a[href] {
+	color: midnightblue;
+}
+.cd {
+	font-family: monospace;
+	background: beige;
+}
+.nr {
+	font-style: italic;
+	background: lavender;
+	color: #555;
+}
+
+@media screen and (max-width: 1024px) {
+	body {
+		--cnt_width: auto;
+	}
 }
