@@ -1,52 +1,112 @@
 <nav class="sub_menu">
 	<ul>
-		<li foreach.page="[{
-				name: `html`,
-				href: `/doc/html.html`
+		<li foreach.p="[
+			{
+				name: `Введение`,
+				href: `/introduction.html`
 			},
 			{
-				name: `attr`,
-				href: `/doc/attr.html`
+				name: `Быстрый старт`,
+				href: `/get_started.html`
 			},
 			{
-				name: `foreach`,
-				href: `/doc/foreach.html`
+				name: `Установка`,
+				href: `/use.html`
 			},
 			{
-				name: `if, switch`,
-				href: `/doc/if.html`
+				name: `Реактивность`,
+				href: `/reactivity.html`
 			},
 			{
-				name: `exec`,
-				href: `/doc/exec.html`
+				name: `Шаблон`,
+				href: `/tpl.html`,
+				li: [
+					{
+						name: `Синтаксис команд`,
+						href: `/syntax.html`
+					},
+					{
+						name: `<span class='cd' translate='no'>html</span>
+							<span class='descr'>разметка и текст</span>`,
+						href: `/doc/html.html`
+					},
+					{
+						name: `<span class='cd' translate='no'>attr</span>
+							<span class='descr'>атрибуты</span>`,
+						href: `/doc/attr.html`
+					},
+					{
+						name: `<span class='cd' translate='no'>foreach</span>
+							<span class='descr'>цикл</span>`,
+						href: `/doc/foreach.html`
+					},
+					{
+						name: `<span class='cd' translate='no'>if, switch</span>
+							<span class='descr'>ветвления</span>`,
+						href: `/doc/if.html`
+					},
+					{
+						name: `<span class='cd' translate='no'>exec</span>
+							<span class='descr'>выполнеие js-кода</span>`,
+						href: `/doc/exec.html`
+					},
+					{
+						name: `<span class='cd' translate='no'>scope</span>
+							<span class='descr'>область видимости</span>`,
+						href: `/doc/scope.html`
+					},
+					{
+						name: `<span class='cd' translate='no'>on</span>
+							<span class='descr'>события</span>`,
+						href: `/doc/on.html`
+					},
+					{
+						name: `<span class='cd' translate='no'>watch</span>
+							<span class='descr'>отслеживание изменений</span>`,
+						href: `/doc/watch.html`
+					},
+					{
+						name: `<span class='cd' translate='no'>fetch</span>
+							<span class='descr'>загрузка данных</span>`,
+						href: `/doc/fetch.html`
+					},
+					{
+						name: `<span class='cd' translate='no'>inc</span>
+							<span class='descr'>вставки</span>`,
+						href: `/doc/inc.html`
+					},
+					{
+						name: `<span class='cd' translate='no'>filling</span>
+							<span class='descr'>статус загрузки</span>`,
+						href: `/doc/filling.html`
+					},
+					{
+						name: `<span class='cd' translate='no'>lazyrender</span>
+							<span class='descr'>ленивый рендер</span>`,
+						href: `/doc/filling.html`
+					}
+				]
 			},
 			{
-				name: `scope`,
-				href: `/doc/scope.html`
+				name: `API`,
+				href: `/api.html`
 			},
 			{
-				name: `on`,
-				href: `/doc/on.html`
-			},
-			{
-				name: `watch`,
-				href: `/doc/watch.html`
-			},
-			{
-				name: `fetch`,
-				href: `/doc/fetch.html`
-			},
-			{
-				name: `inc`,
-				href: `/doc/inc.html`
-			},
-			{
-				name: `filling`,
-				href: `/doc/filling.html`
+				name: `Примеры`,
+				href: `/examples.html`,
+				li: [
+					{
+						name: `Todo list`,
+						href: `/examples/todo.html`
+					}
+				]
 			}]">
-			<a attr.href.push="loc.path !== page.href && page.href">
-				<span class="cd" translate="no">${page.name}</span>
-			</a>
+			<a attr.href.push="loc.path !== p.href && p.href" html="p.name"></a>
+			<ul if="p.li">
+				<li foreach.p="p.li">
+					<a attr.href.push="loc.path !== p.href && p.href" html="p.name"></a>
+				</li>
+			</ul>
 		</li>
 	</ul>
 </nav>

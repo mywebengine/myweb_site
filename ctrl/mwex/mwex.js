@@ -12,6 +12,8 @@ export function _go($e, code, s) {
 	if ($c.firstChild !== null) {
 		mw_removeChild($c.firstChild);
 	}
+	const debug = self.mw_debugLevel;
+	self.mw_debugLevel = 1;
 	$c.innerHTML = `<div scope="glob" is_filling="" on.mount.self='this.removeAttribute("is_filling")'
 		exec='if (this._init) { return }
 			this._init = true;
@@ -32,7 +34,12 @@ export function _go($e, code, s) {
 						}));
 			}
 			return Promise.all(pSet);'>${code}</div>`;
-	mw_render($c.firstElementChild);
+	mw_render($c.firstElementChild)
+		.then(() => self.mw_debugLevel = debug)
+		.catch(err => {
+			self.mw_debugLevel = debug;
+			throw err;
+		});
 }
 export function keyDown($e, evt) {
 	if (evt.key === "Tab") {

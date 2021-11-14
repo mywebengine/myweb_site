@@ -1,4 +1,6 @@
-<h1 exec="glob.pageTitle = `${this.textContent} - myweb`"><span class="cd" translate="no">exec</span></h1>
+<h1 exec="glob.pageTitle = `${this.textContent} - myweb`">
+	<span class="cd" translate="no">exec</span> - выполнеие js-кода
+</h1>
 <p><a href="">Команда</a> выполняет <a href="">выражение</a> как <a href="">js-код</a>, в контексте <a href="">текущего элемента</a>.</p>
 <h2>
 	<a href="">Синтаксис</a>
@@ -7,9 +9,12 @@
 <h2>
 	<a href="">Параметры</a>
 </h2>
-<ul>
+<ul class="props">
 	<li>
-		<p><span class="cd" translate="no">var-name</span> <span class="nr">необязательный</span> - имя переменной в которую будет записан занчение выражения. Имя указывается в нотации kebab-case и переводиться в нотацию camel-case.</p>
+		<div class="props-marker">
+			<span class="cd" translate="no">var-name</span> <span class="nr">необязательный</span>
+		</div>
+		<p>Имя переменной в которую будет записан занчение выражения. Имя указывается в нотации kebab-case и переводиться в нотацию camel-case.</p>
 	</li>
 </ul>
 <link inc="`/ctrl/mwex/mwex.html`"

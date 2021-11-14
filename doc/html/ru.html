@@ -1,4 +1,6 @@
-<h1 exec="glob.pageTitle = `${this.textContent} - myweb`"><span class="cd" translate="no">html</span></h1>
+<h1 exec="glob.pageTitle = `${this.textContent} - myweb`">
+	<span class="cd" translate="no">html</span> - разметка и текст
+</h1>
 <p><a href="">Команда</a> создания HTML-разметки, выполняет <a href="">выражение</a> как <a href="">js-код</a>, в контексте <a href="">текущего элемента</a>.</p>
 <h2>
 	<a href="">Синтаксис</a>
@@ -8,12 +10,16 @@
 <h2>
 	<a href="">Параметры</a>
 </h2>
-<ul>
+<ul class="props">
 	<li>
-		<p><span class="cd" translate="no">text</span> <span class="nr">необязательный</span> - если параметр указан, то значение выражения интерпретируется как текст: <span class="cd" translate="no">.textContent = expression</span>. Название параметра может быть любым.</p>
+		<div class="props-marker">
+			<span class="cd" translate="no">text</span> <span class="nr">необязательный</span>
+		</div>
+		<p>Eсли параметр указан, то значение выражения интерпретируется как текст: <span class="cd" translate="no">.textContent = expression</span>. Название параметра может быть любым.</p>
 	</li>
 </ul>
-<p>Команда может быть записана через шаблон <span class="cd" translate="no"><span>$</span>{expression}</span>, эта кнострукция эквивалентна вызову команды с первым параметром - значение будет интерпретировано как текст.</p>
+<p>Команда может быть записана через шаблон <span class="cd" translate="no"><span>$</span>{expression}</span>, эта кнострукция эквивалентна вызову команды с первым параметром - значение будет интерпретировано
+как текст.</p>
 <link inc="`/ctrl/mwex/mwex.html`"
 	exec.code="const r = new Request(`/doc/html/_ex1.html`);
 		return self[r.url] || (self[r.url] = fetch(r).then(res => res.text()))"

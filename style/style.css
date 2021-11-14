@@ -12,13 +12,13 @@ body {
 html {
 	font-family: arial, sans-serif;
 	font-size: 18px;
-	line-height: 1.4em;
+	line-height: 1.5em;
 	color: #222;
 }
 body {
 	--gap: 30px;
 	--gap2: 15px;
-	--text_gap: 10px;
+	--text_gap: 1em;
         --menu_width: 150px;
         --cnt_width: 680px;
 
@@ -47,6 +47,9 @@ a[href]:hover,
 }
 .cnt a[href] {
 	color: midnightblue;
+}
+.cnt h2 > a[href] {
+	color: black;
 }
 .cd {
 	font-family: monospace;
