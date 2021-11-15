@@ -5,7 +5,9 @@
 <h2>
 	<a href="">Синтаксис</a>
 </h2>
-<p><span class="cd" translate="no">&lt;div html[.text]="expression">...</span></p>
+<div class="code cd" translate="no">&lt;div html[.text]="expression">&lt;/div>
+&lt;div><span>$</span>{expression}&lt;/div>
+</div>
 <p><a href="">Значение выражения</a> интерпретируется как строка, по которой создаётся разметка через <span class="cd" translate="no">.innerHTML</span> или <span class="cd" translate="no">.textContent</span>.</p>
 <h2>
 	<a href="">Параметры</a>
@@ -17,10 +19,14 @@
 		</div>
 		<p>Eсли параметр указан, то значение выражения интерпретируется как текст: <span class="cd" translate="no">.textContent = expression</span>. Название параметра может быть любым.</p>
 	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no"><span>$</span>{expression}</span>
+		</div>
+		<p>Эта кнострукция эквивалентна вызову команды с первым параметром - значение будет интерпретировано как текст.</p>
+	</li>
 </ul>
-<p>Команда может быть записана через шаблон <span class="cd" translate="no"><span>$</span>{expression}</span>, эта кнострукция эквивалентна вызову команды с первым параметром - значение будет интерпретировано
-как текст.</p>
-<link inc="`/ctrl/mwex/mwex.html`"
-	exec.code="const r = new Request(`/doc/html/_ex1.html`);
-		return self[r.url] || (self[r.url] = fetch(r).then(res => res.text()))"
-	exec.height="`120px`" />
+<link exec.code="const url = `/doc/html/_ex1.html`; return exCache[url] || (exCache[url] = fetch(new Request(url)).then(res => res.text()))"
+	inc="`/ctrl/mwex/mwex.html`" />
+<link exec.menu="self.leftNav"
+	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />

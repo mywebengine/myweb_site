@@ -40,27 +40,16 @@ a:visited {
 	color: blue;
 }
 a[href]:hover,
+a.no_href:hover,
 .cnt a[href]:hover {
 /*
 	text-decoration: underline;*/
 	color: blue;
 }
-.cnt a[href] {
-	color: midnightblue;
+a.no_href {
+       	color: inherit;
+	cursor: pointer;
 }
-.cnt h2 > a[href] {
-	color: black;
-}
-.cd {
-	font-family: monospace;
-	background: beige;
-}
-.nr {
-	font-style: italic;
-	background: lavender;
-	color: #555;
-}
-
 @media screen and (max-width: 1024px) {
 	body {
 		--cnt_width: auto;

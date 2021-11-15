@@ -1,20 +1,19 @@
 //let sync = 0;
-export function go($e, code) {
+export function go($view, code) {
 //	const s = ++sync;
-//	setTimeout(() => _go($e, code, s), 500);
-	_go($e, code);
+//	setTimeout(() => _go($view, code, s), 500);
+	_go($view, code);
 }
-export function _go($e, code, s) {
+export function _go($view, code, s) {
 //	if (s && s !== sync) {
 //		return;
 //	}
-	const $c = $e.querySelector(".mwex-view");
-	if ($c.firstChild !== null) {
-		mw_removeChild($c.firstChild);
+	for (let $i = $view.firstChild; $i !== null; $i = $view.firstChild) {
+		mw_removeChild($i);
 	}
 	const debug = self.mw_debugLevel;
 	self.mw_debugLevel = 1;
-	$c.innerHTML = `<div scope="glob" is_filling="" on.mount.self='this.removeAttribute("is_filling")'
+	$view.innerHTML = `<div scope="glob" is_filling="" on.mount.self='this.removeAttribute("is_filling")'
 		exec='if (this._init) { return }
 			this._init = true;
 			const pSet = new Set();
@@ -34,7 +33,7 @@ export function _go($e, code, s) {
 						}));
 			}
 			return Promise.all(pSet);'>${code}</div>`;
-	mw_render($c.firstElementChild)
+	mw_render($view.firstElementChild)
 		.then(() => self.mw_debugLevel = debug)
 		.catch(err => {
 			self.mw_debugLevel = debug;
@@ -42,21 +41,19 @@ export function _go($e, code, s) {
 		});
 }
 export function keyDown($e, evt) {
+	const val = $e.textContent,
+		pos = self.getSelection().focusOffset;
 	if (evt.key === "Tab") {
 		evt.preventDefault();
-		const pos = $e.selectionStart,
-			newPos = pos + 1,
-			val = $e.value;
-		$e.value = val.substr(0, pos) + "\t" + val.substr(pos);
-		$e.setSelectionRange(newPos, newPos);
+		const newPos = pos + 1;
+		$e.textContent = val.substr(0, pos) + "\t" + val.substr(pos);
+		setSelectionRange($e, newPos, newPos);
 		return;
 	}
 	if (evt.key !== "Enter") {
 		return;
 	}
-	const pos = $e.selectionStart,
-		val = $e.value,
-		toSpaceVal = val.substr(0, pos);
+	const toSpaceVal = val.substr(0, pos);
 	let spaceBeginIdx = 0,
 		spaceCount = 0;
 	for (let i = toSpaceVal.length - 1; i > -1; i--) {
@@ -74,11 +71,24 @@ export function keyDown($e, evt) {
 		}
 		break;
 	}
-	if (spaceCount === 0) {
-		return;
-	}
+//	if (spaceCount === 0) {
+//		return;
+//	}
 	evt.preventDefault();
 	const newPos = pos + spaceCount + 1;
-	$e.value = val.substr(0, pos) + "\n" + val.substr(spaceBeginIdx, spaceCount) + val.substr(pos);
-	$e.setSelectionRange(newPos, newPos);
+	$e.textContent = val.substr(0, pos) + "\n" + val.substr(spaceBeginIdx, spaceCount) + val.substr(pos);
+	setSelectionRange($e, newPos, newPos);
+}
+function setSelectionRange($e, begin, end) {
+	const range = document.createRange(),
+		sel = window.getSelection();
+	sel.removeAllRanges();
+	if (begin <= end) {
+		range.setStart($e.firstChild, begin);
+		range.setEnd($e.firstChild, end);
+	} else {
+		range.setStart($e.firstChild, end);
+		range.setEnd($e.firstChild, begin);
+	}
+	sel.addRange(range);
 }

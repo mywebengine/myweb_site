@@ -1,6 +1,7 @@
 if (!self.glob) {
 	self.glob = {};
 }
+self.exCache = {}
 self.glob.lang = localStorage.getItem(`lang`) || navigator.language.substr(0, 2);
 const acceprLanguages = new Set(["en", "ru"]),
 	defLang = `ru`;

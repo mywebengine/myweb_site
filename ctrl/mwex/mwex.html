@@ -1,13 +1,10 @@
 <div class="mwex"
 	scope="mwex"
-	on.mount.self="_go(this, mwex.code)">
-	<div class="mwex-code">
-		<textarea spellcheck="false"
-			attr.value="mwex.code"
-			attr.style="mwex.height && `min-height: ${mwex.height}`"
-			on.keydown="keyDown(this, evt)"
-			on.input="go(this.parentNode.parentNode, this.value)"></textarea>
-	</div>
+	attr.style="mwex.minHeight && `min-height: ${mwex.minHeight}`"
+	on.mount.self="_go(this.querySelector(`.mwex-view`), mwex.code)">
+	<div class="mwex-code" contenteditable="true" spellcheck="false"
+		on.keydown="keyDown(this, evt)"
+		on.input="go(this.parentNode.querySelector(`.mwex-view`), this.textContent)">${mwex.code}</div>
 	<div class="mwex-div"></div>
 	<div class="mwex-view" translate="no"></div>
 </div>

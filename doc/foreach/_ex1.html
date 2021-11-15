@@ -1,8 +1,20 @@
-<div exec="console.warn(`exec example 1 info message...`, this)"
-	exec.a="1"
-	exec.b="2">
-	<div exec.a-plus-b="a + b + aaa">${aPlusB}</div>
-</div>
-<script type="module">
-	export const aaa = 101;
-</script>
+<b>String</b>
+<ul>
+	<li foreach.str-val.str-idx="`abc`">${strIdx} = ${strVal}</li>
+</ul>
+<b>Array</b>
+<ul>
+	<li foreach.v.i="[`d`, `e`, `f`]">${i} = ${v}</li>
+</ul>
+<b>Set</b>
+<ul>
+	<li foreach.v.i="new Set([`g`, `h`, `i`])">${i} = ${v}</li>
+</ul>
+<b>Map</b>
+<ul>
+	<li foreach.v.i="new Map([[`j`, `k`], [`l`, `m`], [`n`, `o`]])">${i} = ${v}</li>
+</ul>
+<b>Object</b>
+<ul>
+	<li foreach.v.i="{ p: `q`, r: `s`, t: `u` }">${i} = ${v}</li>
+</ul>

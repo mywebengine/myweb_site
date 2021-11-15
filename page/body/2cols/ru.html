@@ -1,106 +1,114 @@
-<nav class="sub_menu">
+<nav class="sub_menu"
+	exec="self.leftNav = [{
+			name: `Введение`,
+			href: `/introduction.html`
+		},
+		{
+			name: `Быстрый старт`,
+			href: `/get_started.html`
+		},
+		{
+			name: `Подключение`,
+			href: `/use.html`
+		},
+		{
+			name: `Реактивность`,
+			href: `/reactivity.html`
+		},
+		{
+			name: `Команды`,
+			href: `/cmd.html`,
+			li: [
+				{
+					name: `<span class='cd' translate='no'>html</span>
+						<span class='descr'>разметка и текст</span>`,
+					href: `/doc/html.html`
+				},
+				{
+					name: `<span class='cd' translate='no'>exec</span>
+						<span class='descr'>выполнеие js-кода</span>`,
+					href: `/doc/exec.html`
+				},
+				{
+					name: `<span class='cd' translate='no'>attr</span>
+						<span class='descr'>атрибуты</span>`,
+					href: `/doc/attr.html`
+				},
+				{
+					name: `<span class='cd' translate='no'>foreach</span>
+						<span class='descr'>цикл</span>`,
+					href: `/doc/foreach.html`
+				},
+				{
+					name: `<span class='cd' translate='no'>if, switch</span>
+						<span class='descr'>ветвления</span>`,
+					href: `/doc/if.html`
+				},
+				{
+					name: `<span class='cd' translate='no'>scope</span>
+						<span class='descr'>область видимости</span>`,
+					href: `/doc/scope.html`
+				},
+				{
+					name: `<span class='cd' translate='no'>on</span>
+						<span class='descr'>события</span>`,
+					href: `/doc/on.html`
+				},
+				{
+					name: `<span class='cd' translate='no'>watch</span>
+						<span class='descr'>отслеживание изменений</span>`,
+					href: `/doc/watch.html`
+				},
+				{
+					name: `<span class='cd' translate='no'>fetch</span>
+						<span class='descr'>загрузка данных</span>`,
+					href: `/doc/fetch.html`
+				},
+				{
+					name: `<span class='cd' translate='no'>inc</span>
+						<span class='descr'>вставки</span>`,
+					href: `/doc/inc.html`
+				},
+				{
+					name: `<span class='cd' translate='no'>filling</span>
+						<span class='descr'>статус загрузки</span>`,
+					href: `/doc/filling.html`
+				},
+				{
+					name: `<span class='cd' translate='no'>lazyrender</span>
+						<span class='descr'>ленивый рендер</span>`,
+					href: `/doc/filling.html`
+				}
+			]
+		},
+		{
+			name: `API`,
+			href: `/api.html`
+		},
+		{
+			name: `Примеры`,
+			href: `/examples.html`,
+			li: [
+				{
+					name: `Отправка формы`,
+					href: `/examples/form.html`
+				},
+				{
+					name: `Получение данных с сервера`,
+					href: `/examples/todo.html`
+				},
+				{
+					name: `Вставки, как компоненты`,
+					href: `/examples/todo.html`
+				},
+				{
+					name: `Todo list`,
+					href: `/examples/todo.html`
+				}
+			]
+		}]">
 	<ul>
-		<li foreach.p="[
-			{
-				name: `Введение`,
-				href: `/introduction.html`
-			},
-			{
-				name: `Быстрый старт`,
-				href: `/get_started.html`
-			},
-			{
-				name: `Установка`,
-				href: `/use.html`
-			},
-			{
-				name: `Реактивность`,
-				href: `/reactivity.html`
-			},
-			{
-				name: `Шаблон`,
-				href: `/tpl.html`,
-				li: [
-					{
-						name: `Синтаксис команд`,
-						href: `/syntax.html`
-					},
-					{
-						name: `<span class='cd' translate='no'>html</span>
-							<span class='descr'>разметка и текст</span>`,
-						href: `/doc/html.html`
-					},
-					{
-						name: `<span class='cd' translate='no'>attr</span>
-							<span class='descr'>атрибуты</span>`,
-						href: `/doc/attr.html`
-					},
-					{
-						name: `<span class='cd' translate='no'>foreach</span>
-							<span class='descr'>цикл</span>`,
-						href: `/doc/foreach.html`
-					},
-					{
-						name: `<span class='cd' translate='no'>if, switch</span>
-							<span class='descr'>ветвления</span>`,
-						href: `/doc/if.html`
-					},
-					{
-						name: `<span class='cd' translate='no'>exec</span>
-							<span class='descr'>выполнеие js-кода</span>`,
-						href: `/doc/exec.html`
-					},
-					{
-						name: `<span class='cd' translate='no'>scope</span>
-							<span class='descr'>область видимости</span>`,
-						href: `/doc/scope.html`
-					},
-					{
-						name: `<span class='cd' translate='no'>on</span>
-							<span class='descr'>события</span>`,
-						href: `/doc/on.html`
-					},
-					{
-						name: `<span class='cd' translate='no'>watch</span>
-							<span class='descr'>отслеживание изменений</span>`,
-						href: `/doc/watch.html`
-					},
-					{
-						name: `<span class='cd' translate='no'>fetch</span>
-							<span class='descr'>загрузка данных</span>`,
-						href: `/doc/fetch.html`
-					},
-					{
-						name: `<span class='cd' translate='no'>inc</span>
-							<span class='descr'>вставки</span>`,
-						href: `/doc/inc.html`
-					},
-					{
-						name: `<span class='cd' translate='no'>filling</span>
-							<span class='descr'>статус загрузки</span>`,
-						href: `/doc/filling.html`
-					},
-					{
-						name: `<span class='cd' translate='no'>lazyrender</span>
-							<span class='descr'>ленивый рендер</span>`,
-						href: `/doc/filling.html`
-					}
-				]
-			},
-			{
-				name: `API`,
-				href: `/api.html`
-			},
-			{
-				name: `Примеры`,
-				href: `/examples.html`,
-				li: [
-					{
-						name: `Todo list`,
-						href: `/examples/todo.html`
-					}
-				]
-			}]">
+		<li foreach.p="self.leftNav">
 			<a attr.href.push="loc.path !== p.href && p.href" html="p.name"></a>
 			<ul if="p.li">
 				<li foreach.p="p.li">

@@ -5,7 +5,7 @@
 <h2>
 	<a href="">Синтаксис</a>
 </h2>
-<p><span class="cd" translate="no">&lt;div attr.name[.value-part-or-href-mode]="expression">...</span></p>
+<div class="code cd" translate="no">&lt;div attr.name[.value-part-or-href-mode]="expression">...</div>
 <h2>
 	<a href="">Параметры</a>
 </h2>
@@ -34,7 +34,7 @@
 		</ol>
 	</li>
 </ul>
-<link inc="`/ctrl/mwex/mwex.html`" style="min-height: 120px"
-	exec.code="const r = new Request(`/doc/attr/_ex1.html`);
-		return self[r.url] || (self[r.url] = fetch(r).then(res => res.text()))"
-	exec.height="`320px`" />
+<link exec.code="const url = `/doc/attr/_ex1.html`; return exCache[url] || (exCache[url] = fetch(new Request(url)).then(res => res.text()))"
+	inc="`/ctrl/mwex/mwex.html`" />
+<link exec.menu="self.leftNav"
+	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />
