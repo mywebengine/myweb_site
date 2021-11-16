@@ -1,8 +1,21 @@
-<div exec="console.warn(`exec example 1 info message...`, this)"
-	exec.a="1"
-	exec.b="2">
-	<div exec.a-plus-b="a + b + aaa">${aPlusB}</div>
+<div scope.a-scope=""
+	exec.a="1">
+	<div scope.b-scope=""
+		exec.b="2">
+		<div scope.c-scope=""
+			exec.c="3">
+			<b>aScope</b>
+			<ul>
+				<li foreach.v.k="aScope">${k} => ${v}</li>
+			</ul>
+			<b>bScope</b>
+			<ul>
+				<li foreach.v.k="bScope">${k} => ${v}</li>
+			</ul>
+			<b>cScope</b>
+			<ul>
+				<li foreach.v.k="cScope">${k} => ${v}</li>
+			</ul>
+		</div>
+	</div>
 </div>
-<script type="module">
-	export const aaa = 101;
-</script>

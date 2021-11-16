@@ -1,8 +1,31 @@
-<div exec="console.warn(`exec example 1 info message...`, this)"
-	exec.a="1"
-	exec.b="2">
-	<div exec.a-plus-b="a + b + aaa">${aPlusB}</div>
-</div>
-<script type="module">
-	export const aaa = 101;
-</script>
+<ul>
+	<li scope.i-scope=""
+		exec.i="0">
+		<div>Press key "a"</div>
+		<input on.keydown.a.prevent="iScope.i++" />
+		<div>i = ${iScope.i}<div>
+	</li>
+	<li scope.i-scope=""
+		exec.i="0">
+		<div>Press key shift + "a" and try - shift + alt + "a"</div>
+		<input on.keydown.a.shift.exact="iScope.i++" />
+		<div>i = ${iScope.i}<div>
+	</li>
+	<li scope.i-scope=""
+		exec.i="0">
+		<div>Press key shift + alt + "a"</div>
+		<input on.keydown.a.shift.alt="iScope.i++" />
+		<div>i = ${iScope.i}<div>
+	</li>
+	<li scope.i-scope=""
+		exec.i="0">
+		<div>Paste string "abc"</div>
+		<input on.input.abc="iScope.i++" />
+		<div>i = ${iScope.i}<div>
+	</li>
+	<li scope.i-scope=""
+		exec.i="0">
+		<div>Click + shift</div>
+		<button on.click.shift="iScope.i++">i = ${iScope.i}</button>
+	</li>
+</ul>

@@ -73,7 +73,8 @@
 .cnt a[href] {
 	color: midnightblue;
 }
-.cnt h2 > a[href] {
+.cnt h2 > a[href],
+.cnt h3 > a[href] {
 	color: black;
 }
 .nr {

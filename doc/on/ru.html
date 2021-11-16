@@ -1,7 +1,134 @@
-<h1 exec="glob.pageTitle = `${this.textContent} - myweb`"><span class="cd">exec</span></h1>
-<p>Команда выполняет выражение, как js-код в контексте текущего элемента.</p>
-<p>Результат выполнения можно записать в переменную с именем которое может быть указано как название первого параметра. Имя указывается в нотации kebab-case и переводиться в нотацию camel-case.</p>
-<link inc="`/ctrl/mwex/mwex.html`"
-	exec.code="const r = new Request(`/doc/exec/_ex1.html`);
-		return self[r.url] || (self[r.url] = fetch(r).then(res => res.text()))"
-	exec.height="`120px`" />
+<h1 exec="glob.pageTitle = `${this.textContent} - myweb`">
+	<span class="cd" translate="no">on</span> - прослушивание событий
+</h1>
+<p><a href="">Команда</a> для создания обработчиков событий, выполняет <a href="">выражение</a> как <a href="">js-код</a> в момент получения события, в контексте <a href="">текущего элемента</a>.</p>
+<h2>
+	<a href="">Синтаксис</a>
+</h2>
+<div class="code cd" translate="no">&lt;div on.event-name[.capture.once.passive.self.prevent.stop.ctrl.alt.shift.meta.(key).(string).(mouse button: 0, 1, 2).exact]="expression">...&lt;/div></div>
+<p>В область видимости текущего элемента помещается переменная с именем <span class="cd" translate="no">evt</span> в которую записывается текущее событие.</p>
+<h2>
+	<a href="">Параметры</a>
+</h2>
+<ul class="props">
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">event-name</span>
+		</div>
+		<p>Имя прослушиваемого события<a class="sup" href="#f1">1</a></p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">capture</span>
+		</div>
+		<p>Запустить обработчик на на стадии погружения - по умолчния события отлавливаеются на стадии всплытия</p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">once</span>
+		</div>
+		<p>Событие удалится сраже после запуска</p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">passive</span>
+		</div>
+		<p>Указывает на то что событие не будет вызывать отмену дествия по умолчанию</p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">self</span>
+		</div>
+		<p>Прослушивать событие только с текущего элемента</p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">prevent</span>
+		</div>
+		<p>Отменяет действие по умолчанию вызвавшее событие - <span class="cd" translate="no">evt.preventDefault()</span></p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">stop</span>
+		</div>
+		<p>Отменяет всплывание события - <span class="cd" translate="no">evt.stopPropagation()</span></p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">ctrl</span>
+		</div>
+		<p>Код выражения будет вызван если пользователь удерживает клавишу ctrl</p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">alt</span>
+		</div>
+		<p>- если пользователь удерживает клавишу alt</p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">shift</span>
+		</div>
+		<p>- если пользователь удерживает клавишу shift</p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">meta</span>
+		</div>
+		<p>- если пользователь удерживает клавишу meta (кнопка "Пуск")</p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">(key)</span>
+		</div>
+		<p>Для событий KeyboardEvent - если пользователь нажал клавишу <span class="cd" translate="no">key</span> - регистр не имеет занчения - <span class="cd" translate="no">evt.key.toLowerCase()</span>.
+			Пример: <span class="cd" translate="no">&lt;div on.keydown.a.b.1.2="alert(evt.key)" ...</span> - срабоатет на нажатие клавиш: "a" или "b" или "1" или "2".</p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">(string)</span>
+		</div>
+		<p>Для событий InputEvent - если пользователь ввел текст значение которого равно <span class="cd" translate="no">string</span> - регистр не имеет занчения - <span class="cd" translate="no">evt.data.toLowerCase()</span>.
+			Пример: <span class="cd" translate="no">&lt;div on.input.abc="alert(evt.data)" ...</span> - срабоатет тогда когда пользователь вставит из буфера строку "abc".</p>
+		<p><i>Для собтий этого типа нет возможнасти определить нажаты ли клавиши: ctrl, alt, shift, meta.</i></p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">(mouse button: 0, 1, 2)</span>
+		</div>
+		<p>Для событий MouseEvent - если пользователь нажал клавишу мыши с номером <span class="cd">0</span> - левая клавиши, <span class="cd">1</span> - средняя и <span class="cd">2</span> - парвая или другой номер - <span class="cd" translate="no">evt.button</span>.
+			Пример: <span class="cd" translate="no">&lt;div on.click.ctrl.0="alert(0)" ...</span> - сработает на клик с удержание клавиши ctrl.</p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">exact</span>
+		</div>
+		<p>- если все перечисленные условия по нажатию клавишь или совпадению строк выполнены, и не нажато ничего лишнего. Использовать данный модификатор не в конце команды следует только
+			если после ннего идут управляющие параметры: <span class="cd" translate="no">.capture, once, passive, self, prevent stop</span> - в противном случии применения
+			этого параметра никогда не вызовет код обработчика.</p>
+	</li>
+</ul>
+<p>Параметры просматриваются и проверяются слева направо:</p>
+<ul>
+	<li>
+		<p><span class="cd" translate="no">&lt;div on.keydown.stop.self.a.prevent="..." ...</span> - любое нажатие клавиши с дочерних и текущего элементов,
+			далее будет отмену всплытия события,
+			дальше будет выполнена проверка на то, что событие пришло с текущего элемента,
+			дальше будет проверка на то, что была нажата клавиши "a" или "A" и если это так, то будет отменено действие по умолчанию. </p>
+	</li>
+	<li>
+		<p><span class="cd" translate="no">&lt;div on.keydown.a.shift.exact="..." ...</span> - любое нажатие клавиши с дочерних и текущего элементов запустит проверку,
+			что была нажата клавиши "a" или "A",
+			далее проверка что нажата клавиша shift,
+			далее проверка что не нажата какаято еще клавиша, например alt.</p>
+	</li>
+</ul>
+
+<div class="footnote">
+	<p exec.num="1"
+		inc="getLangInc(`/page/footnote/kebab`, self.glob.lang)"></p>
+</div>
+<link exec.code="const url = `/doc/on/_ex1.html`; return exCache[url] || (exCache[url] = fetch(new Request(url)).then(res => res.text()))"
+	inc="`/ctrl/mwex/mwex.html`" />
+<link exec.menu="self.leftNav"
+	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />
