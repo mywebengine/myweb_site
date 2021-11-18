@@ -1,0 +1,23 @@
+.next_prev {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	margin: 60px 0 0 0;
+}
+.next_prev a {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 0;
+	padding: 0;
+}
+.next_prev a:first-child::before {
+	content: "← ";
+	font-size: 16px;
+	line-height: 12px;
+}
+.next_prev a:last-child::after {
+	content: " →";
+	font-size: 16px;
+	line-height: 12px;
+}
