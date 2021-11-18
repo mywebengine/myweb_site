@@ -1,10 +1,10 @@
 //let sync = 0;
-export function go($view, code) {
+export function go($view, code, fillingOff) {
 //	const s = ++sync;
-//	setTimeout(() => _go($view, code, s), 500);
-	_go($view, code);
+//	setTimeout(() => _go($view, code, fillingOff, s), 500);
+	_go($view, code, fillingOff);
 }
-export function _go($view, code, s) {
+export function _go($view, code, fillingOff, s) {
 //	if (s && s !== sync) {
 //		return;
 //	}
@@ -13,7 +13,7 @@ export function _go($view, code, s) {
 	}
 	const debug = self.mw_debugLevel;
 	self.mw_debugLevel = 1;
-	$view.innerHTML = `<div scope.glob="" is_filling="" on.mount.self='this.removeAttribute("is_filling")'
+	$view.innerHTML = '<div scope.glob=""' + (fillingOff ? "" : ` is_filling='' on.mount.self='this.removeAttribute("is_filling")'`) + `
 		exec='if (this._init) { return }
 			this._init = true;
 			const pSet = new Set();

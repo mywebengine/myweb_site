@@ -1,8 +1,12 @@
-<div exec="console.warn(`exec example 1 info message...`, this)"
-	exec.a="1"
-	exec.b="2">
-	<div exec.a-plus-b="a + b + aaa">${aPlusB}</div>
+<div scope.w=""
+	exec="if (!w.obj) w.obj = {}">
+	<input placeholder="obj.text"
+		attr.value="obj.text" 
+		on.input="w.obj.text = this.value" />
+	<button on.click="w.obj = { text: `new val` }">Set new val</button>
+	<p watch="obj">obj is changed: ${Math.random()}</p>
+	<p watch.text="obj.text">
+		obj.text is changed: ${Math.random()}
+		<br />${text}
+	</p>
 </div>
-<script type="module">
-	export const aaa = 101;
-</script>

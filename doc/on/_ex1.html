@@ -1,8 +1,12 @@
-<ul on.mount.self="console.log(`on ex1: mount`, evt.target)">
+<ul on.mount.self="console.log(`mount`, evt.target)"
+	on.my-event="console.log(`myEvent`, evt.detail.key)">
 	<li scope.i-scope=""
 		exec.i="0">
 		<div>Press key "a"</div>
-		<input on.keydown.a.prevent="iScope.i++" />
+		<input on.keydown="mw_dispatchCustomEvent(this, `myEvent`, {
+				key: evt.key
+			})"
+			on.keydown.a.prevent="iScope.i++" />
 		<div>i = ${iScope.i}</div>
 	</li>
 	<li scope.i-scope=""

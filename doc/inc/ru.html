@@ -1,5 +1,5 @@
 <h1 exec="glob.pageTitle = `${this.textContent} - myweb`">
-	<span class="cd" translate="no">inc</span> - вставки
+	<span class="cd" translate="no">inc</span> - вставки (компоненты)
 </h1>
 <p><a href="">Команда</a> добавления в основной шаблон друго шаблона по url. Выполняет <a href="">выражение</a> как <a href="">js-код</a>, в контексте <a href="">текущего элемента</a>.</p>
 <h2>
@@ -44,13 +44,13 @@
 	</li>
 	<li>
 		<div class="props-marker">
-			<span class="cd" translate="no">Request</span> (стандартный объект)
+			<a class="cd" translate="no" href="https://developer.mozilla.org/docs/Web/API/Request" target="_blank">Request</a> (стандартный объект)
 		</div>
 		<p>Этот объект будет использоваться функцией <span class="cd" translate="no">fetch</span> для загрузки кода вставки. Если способ получения запроса является GET, то данные попадают в кэш вставок по свойтву .url и используются в дальнейшем.</p>
 	</li>
 	<li>
 		<div class="props-marker">
-			<span class="cd" translate="no">Response</span> (стандартный объект)
+			<a class="cd" translate="no" href="https://developer.mozilla.org/ru/docs/Web/API/Response" target="_blank">Response</a> (стандартный объект)
 		</div>
 		<p>Этот объект будет использоваться как результат который является кодом вставки. Данные попадают в кэш вставок по свойтву <span class="cd" translate="no">url</span> и используются в дальнейшем.</p>
 	</li>
@@ -58,17 +58,17 @@
 		<div class="props-marker">
 			<span class="cd" translate="no">== false</span>
 		</div>
-		<p>Если значение можно интерпретировать как ложь, то ничего вставлятся не будет и рендер продолжется со следующей команды</p>
+		<p>Если значение можно интерпретировать как ложь, то ничего вставлятся не будет и рендер продолжется со следующего тега (дети рендерится не будут)</p>
 	</li>
 </ul>
 <p>В коде втавок можно подключать все что позворляет браузер подключать из HTML разметки (CSS, скрипты, ...).</p>
 <p>При подключении скриптов с типом модуль <span class="cd" translate="no">&lt;script type="module"></span>, все экспортируемые значения попадают в область видимости элементов вставки - экспорт по умолчанию будет назывтаься: <span class="cd" translate="no">default</span>.</p>
-<p>При загрузки вставки теги: <span class="cd" translate="no">&lt;link type="text/css" rel="stylesheet" /></span>, <span class="cd" translate="no">&lt;style></span> и <span class="cd" translate="no">&lt;script></span> перезжают в тег <span class="cd" translate="no">&lt;head></span>, при последующих вставках этой вставки, экспорты скриптов с типом модуль будет добавлятся область видимости новых элементов вставки.</p>
+<p>При загрузки вставки все теги: <span class="cd" translate="no">&lt;link type="text/css" rel="stylesheet" /></span>, <span class="cd" translate="no">&lt;style></span> и <span class="cd" translate="no">&lt;script></span> перезжают в тег <span class="cd" translate="no">&lt;head></span>, при последующих вставках этой вставки, экспорты скриптов с типом модуль будет добавлятся область видимости новых элементов вставки.</p>
 <p>Вставки реализуют механизм передачи контента в <span class="cd" translate="no">slot</span>-ы - получить информацию о слотах можно на странице <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots#adding_flexibility_with_slots" target="_blank">документации MDN</a>.</p>
 <div class="p info">
 	<ul>
 		<li>
-			<p>Для проверки находится ли в кэше вставок url, нужно использовать объект <span class="cd" translate="no">mw_incCache</span> (это <span class="cd" translate="no">Map</span>), в ключами которого являются адреса вставок.</p>
+			<p>Если нужно проверить находится ли в кэше вставок url, нужно использовать объект <span class="cd" translate="no">mw_incCache</span> (это <span class="cd" translate="no">Map</span>), ключами которого являются адреса вставок.</p>
 		</li>
 		<li>
 			<p>Код шаблона вставки не требует существоания только одного родительского тега - вставка может состоять только из одно текстовй ноды</p>

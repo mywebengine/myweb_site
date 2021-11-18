@@ -87,6 +87,14 @@
 	vertical-align: super;
 	font-size: smaller;
 }
+.cnt sup::before,
+.sup::before {
+	content: "[";
+}
+.cnt sup::after,
+.sup::after {
+	content: "]";
+}
 .code {
 	display: block;
 	padding: 10px 10px 10px 20px;
@@ -100,7 +108,7 @@
 	background: aliceblue;
 	border-left: solid 2px #ccc;
 }
-.cnt .info > ul {
+.info > ul {
 	margin-left: -22px;
 }
 .footnote {
@@ -158,8 +166,11 @@
 .p:last-child {
 	margin-bottom: 0;
 }
-.cnt .props {
-	list-style-type: none;
+.props {
+	list-style-type: none !important;
+}
+.info > .props {
+	margin-left: 0;
 }
 .props-marker {
 	margin: 0 0 5px calc(var(--left_gap) * -1);

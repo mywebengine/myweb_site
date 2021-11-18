@@ -1,7 +1,63 @@
-<h1 exec="glob.pageTitle = `${this.textContent} - myweb`"><span class="cd">exec</span></h1>
-<p>Команда выполняет выражение, как js-код в контексте текущего элемента.</p>
-<p>Результат выполнения можно записать в переменную с именем которое может быть указано как название первого параметра. Имя указывается в нотации kebab-case и переводиться в нотацию camel-case.</p>
-<link inc="`/ctrl/mwex/mwex.html`"
-	exec.code="const r = new Request(`/doc/exec/_ex1.html`);
-		return self[r.url] || (self[r.url] = fetch(r).then(res => res.text()))"
-	exec.height="`120px`" />
+<h1 exec="glob.pageTitle = `${this.textContent} - myweb`">
+	<span class="cd" translate="no">fetch</span> - загрузка данных
+</h1>
+<p><a href="">Команда</a> позволяет загрузить данные по сети. Выполняет <a href="">выражение</a> как <a href="">js-код</a>, в контексте <a href="">текущего элемента</a>.</p>
+<h2>
+	<a href="">Синтаксис</a>
+</h2>
+<div class="p code cd" translate="no">&lt;div fetch="expression">...&lt;/div></div>
+<h2>Описание</h2>
+<p>Возвращаемое значение выражения может быть черех типов:</p>
+<ul class="props">
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">string</span>
+		</div>
+		<p>Строка будет интерпретирована как URL</p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<a class="cd" translate="no" href="https://developer.mozilla.org/docs/Web/API/Request" target="_blank">Request</a> (стандартный объект)
+		</div>
+		<p>Этот объект будет использоваться функцией <span class="cd" translate="no">fetch</span> для загрузки данных</p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<a class="cd" translate="no" href="https://developer.mozilla.org/ru/docs/Web/API/Response" target="_blank">Response</a> (стандартный объект)
+		</div>
+		<p>Этот объект будет использоваться как результат работы команды. Применение команды в таком варианте может пригодится при тестировании кода.</p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">== false</span>
+		</div>
+		<p>Если значение можно интерпретировать как ложь, тогда рендер продолжется со следующего тега (дети рендерится не будут)</p>
+	</li>
+</ul>
+<h3>Процесс получение данных - события</h3>
+<p>После получения данных с сервера отправляется события на текущий элемент:</p>
+<ul class="props">
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">load</span>
+		</div>
+		<p>Отправляется после получения данных. Ответ сервера находится в переменной <span class="cd" translate="no">evt.detail.res</span> (это <span class="cd" translate="no">Response</span>).</p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">ok</span>
+		</div>
+		<p>Отправляется после получения данных и статус ответа сервера равен 200 - <span class="cd" translate="no">evt.detail.res.ok === true</span>.
+			Ответ сервера находится в переменной <span class="cd" translate="no">evt.detail.res</span> (это <span class="cd" translate="no">Response</span>).</p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">error</span>
+		</div>
+		<p>Отправляется если в процессе загрузки произошла ошибка. Объект произошедшей ошибки находится в переменной <span class="cd" translate="no">evt.detail.err</span>.</p>
+	</li>
+</ul>
+<link exec.code="const url = `/doc/fetch/_ex1.html`; return exCache[url] || (exCache[url] = fetch(new Request(url)).then(res => res.text()))"
+	inc="`/ctrl/mwex/mwex.html`" />
+<link exec.menu="self.leftNav"
+	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />

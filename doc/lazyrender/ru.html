@@ -1,27 +1,22 @@
 <h1 exec="glob.pageTitle = `${this.textContent} - myweb`">
-	<span class="cd" translate="no">exec</span> - выполнеие js-кода
+	<span class="cd" translate="no">lazyrender</span> - ленивый рендеринг
 </h1>
-<p><a href="">Команда</a> выполняет <a href="">выражение</a> как <a href="">js-код</a>, в контексте <a href="">текущего элемента</a>.</p>
+<p>Этот атрибут позволяет включить режим ленивого рендеринга на элементе у которого он установлен.</p>
+<p><b>Ленивый рендер</b> - это алгоритм при котором рендерятся только элементы в области видимости, а то что не видно, ожидает того момента когда они попадут в область видимости.</p>
+<p><b>Область видимости</b> - это область текущего экрана + еще две ширины влево и вправо, и и две высоты вверх вниз - это значение по умолчанию,
+	которое записано в файле <span class="cd" translate="no">config.js</span>.</p>
+<p>Атрибут проверяется при каждом новом ренедере и его можно можно добавлять или удалять, если того требудет логика приложения.</p>
 <h2>
 	<a href="">Синтаксис</a>
 </h2>
-<div class="p code cd" translate="no">&lt;div exec[.var-name]="expression">...&lt;/div></div>
-<h2>
-	<a href="">Параметры</a>
-</h2>
-<ul class="props">
-	<li>
-		<div class="props-marker">
-			<span class="cd" translate="no">var-name</span> <span class="nr">необязательный</span>
-		</div>
-		<p>Имя переменной в которую будет записано занчение выражения<a class="sup" href="#f1">1</a></p>
-	</li>
-</ul>
-<div class="p footnote">
-	<p exec.num="1"
-		inc="getLangInc(`/page/footnote/kebab`, self.glob.lang)"></p>
+<div class="p code cd" translate="no">&lt;div lazyrender="">...&lt;/div></div>
+<div class="p info">
+	<p>Если элемент с ленивым рендером "спртан" за <span class="cd" translate="no">display: none</span>
+		(например, команда <span class="cd" translate="no">filling</span> так дклает с дочерними элементами), то такой элемент считается видимым,
+		так как нельзя с увериностью сказать как нужно обработать такую ситуацию.</p>
 </div>
-<link exec.code="const url = `/doc/exec/_ex1.html`; return exCache[url] || (exCache[url] = fetch(new Request(url)).then(res => res.text()))"
+<link exec.code="const url = `/doc/lazyrender/_ex1.html`; return exCache[url] || (exCache[url] = fetch(new Request(url)).then(res => res.text()))"
+	exec.filling-off="true"
 	inc="`/ctrl/mwex/mwex.html`" />
 <link exec.menu="self.leftNav"
 	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />

@@ -50,6 +50,11 @@ a.no_href {
        	color: inherit;
 	cursor: pointer;
 }
+a[href][target="_blank"]::after {
+	content: "↗";
+	vertical-align: super;
+	font-size: smaller;
+}
 @media screen and (max-width: 1024px) {
 	body {
 		--cnt_width: auto;
