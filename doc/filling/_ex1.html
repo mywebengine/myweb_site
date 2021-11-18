@@ -1,8 +1,30 @@
-<div exec="console.warn(`exec example 1 info message...`, this)"
-	exec.a="1"
-	exec.b="2">
-	<div exec.a-plus-b="a + b + aaa">${aPlusB}</div>
-</div>
-<script type="module">
-	export const aaa = 101;
-</script>
+<style>
+	[is_filling-cyan] {
+		background-color: cyan;
+		min-height: 85px;
+	}
+	[is_filling-skeleton1] {
+		background: url("/doc/filling/skeleton1.svg") no-repeat;
+		background-size: contain;
+		min-height: 85px;
+	}
+</style>
+<div scope.f="">
+	<fieldset>
+		<label>
+			<input type="checkbox"
+				attr.checked="f.ok"
+				on.input="f.ok = this.checked" />
+			f.ok
+		</label>
+	</fieldset>
+	<p filling.spinner.1000="f.ok"
+		filling.skeleton1.2000="f.ok"
+		exec="if (!f.ok) setTimeout(() => f.ok = true, 3000)">
+			<b>Box 1</b>
+	</p>
+	<p filling.cyan.500="f.ok"
+		filling.skeleton1.2000="f.ok">
+		<b>Box 2</b>
+	</p>
+</section>

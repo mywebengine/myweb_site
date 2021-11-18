@@ -1,27 +1,27 @@
-<ul>
+<ul on.mount.self="console.log(`on ex1: mount`, evt.target)">
 	<li scope.i-scope=""
 		exec.i="0">
 		<div>Press key "a"</div>
 		<input on.keydown.a.prevent="iScope.i++" />
-		<div>i = ${iScope.i}<div>
+		<div>i = ${iScope.i}</div>
 	</li>
 	<li scope.i-scope=""
 		exec.i="0">
 		<div>Press key shift + "a" and try - shift + alt + "a"</div>
 		<input on.keydown.a.shift.exact="iScope.i++" />
-		<div>i = ${iScope.i}<div>
+		<div>i = ${iScope.i}</div>
 	</li>
 	<li scope.i-scope=""
 		exec.i="0">
 		<div>Press key shift + alt + "a"</div>
 		<input on.keydown.a.shift.alt="iScope.i++" />
-		<div>i = ${iScope.i}<div>
+		<div>i = ${iScope.i}</div>
 	</li>
 	<li scope.i-scope=""
 		exec.i="0">
 		<div>Paste string "abc"</div>
 		<input on.input.abc="iScope.i++" />
-		<div>i = ${iScope.i}<div>
+		<div>i = ${iScope.i}</div>
 	</li>
 	<li scope.i-scope=""
 		exec.i="0">

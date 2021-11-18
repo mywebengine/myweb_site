@@ -94,8 +94,16 @@
 	white-space: pre;
 	overflow: auto;
 }
+.info {
+	display: block;
+	padding: 20px;
+	background: aliceblue;
+	border-left: solid 2px #ccc;
+}
+.cnt .info > ul {
+	margin-left: -22px;
+}
 .footnote {
-	margin: 1em 0;
 	padding: 0 10px;
 	font-size: 14px;
 	line-height: 1.2em;
@@ -107,6 +115,7 @@
 .cnt h2 {
 	margin: 1.1em 0 0.87em 0;
 }
+.p,
 .cnt p {
 	margin: 1em 0;
 }
@@ -135,7 +144,7 @@
 .cnt ul:first-child,
 .cnt ol:first-child,
 .cnt li:first-child,
-.footnote:first-child {
+.p:first-child {
 	margin-top: 0;
 }
 .cnt h1:last-child,
@@ -146,7 +155,7 @@
 .cnt ul:last-child,
 .cnt ol:last-child,
 .cnt li:last-child,
-.footnote:last-child {
+.p:last-child {
 	margin-bottom: 0;
 }
 .cnt .props {

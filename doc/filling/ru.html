@@ -1,6 +1,62 @@
-<h1 exec="glob.pageTitle = `${this.textContent} - myweb`"><span class="cd">exec</span></h1>
-<p>Команда выполняет выражение, как js-код в контексте текущего элемента.</p>
-<p>Результат выполнения можно записать в переменную с именем которое может быть указано как название первого параметра. Имя указывается в нотации kebab-case и переводиться в нотацию camel-case.</p>
-<link inc="`/ctrl/mwex/mwex.html`" style="min-height: 120px"
-	exec.code="const r = new Request(`/doc/exec/_ex1.html`);
-		return self[r.url] || (self[r.url] = fetch(r).then(res => res.text()))" />
+<h1 exec="glob.pageTitle = `${this.textContent} - myweb`">
+	<span class="cd" translate="no">filling</span> - статуст загрузки
+</h1>
+<p><a href="">Команда</a> управления статусом загрузки элемента. В зависимости от значения <a href="">выражения</a> статус загрузки будет показан или скрыт.
+	Если значение истинно, то статус будет показан, если нет - скрыт.
+	Выражение выполняется как <a href="">js-код</a>, в контексте <a href="">текущего элемента</a>.</p>
+<h2>
+	<a href="">Синтаксис</a>
+</h2>
+<div class="p code cd" translate="no">&lt;div filling[.type.time]="expression">...&lt;/div></div>
+<h2>
+	<a href="">Параметры</a>
+</h2>
+<ul class="props">
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">type</span> <span class="nr">необязательный</span>
+		</div>
+		<p>Тип загрузчика, в комплекте есть только один варант реализации типа, название его <span class="cd" translate="no">spinner</span> - это очень простая крутилка. О том как добавить собственные типы, обсуждается ниже.</p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">time</span> <span class="nr">необязательный</span>
+		</div>
+		<p>Время в мс через которое нужно показать загрузчик, если выражение будет ложно.</p>
+	</li>
+</ul>
+<h2>Описание</h2>
+<p>За визуализацию статуса загрузки отвечает CSS. Когда статус загрузки показывается: на элементе появляется атрибут <span class="cd" translate="no">is_filling=""</span>,
+	если указан <span class="cd" translate="no">type</span>, например <span class="cd" translate="no">spinner</span>,
+	то добавляется еще одни атрибудт <span class="cd" translate="no">is_filling-spinner=""</span>.
+	В CSS нужно описывать правила для тегов с данными атрибутами. Стандартные парвила описываются в файле <a href="/myweb/myweb.css" target="_blank">myweb.css</a>.</p>
+<p>Для атрибута <span class="cd" translate="no">is_filling=""</span> описано правило, которое удаляет все дочерние элементы из области видимости:</p>
+<div class="p code cd">*[is_filling] > * {
+	display: none !important;
+}</div>
+<p>Для типа <span class="cd" translate="no">spinner</span> атрибута <span class="cd" translate="no">is_filling-spinner=""</span>, объявление правила выглядит так:</p>
+<div class="p code cd">*[is_filling-spinner] {
+	...
+}</div>
+<p>Для пользовательского типа с названием <span class="cd" translate="no">skeleton1</span> атрибутом которого будет <span class="cd" translate="no">is_filling-skeleton1=""</span>, объявление правила выглядит так:</p>
+<div class="p code cd">*[is_filling-skeleton1] {
+	...
+}</div>
+<div class="p info">
+	<p>Если у вас SPA то может возникнуть ситуация, что клиент видит загруженную HTML разметку которая еще не прошла рендер. И для того что бы скрыть шаблон можно указать
+		атрибут <span class="cd" translate="no">is_filling[-type]=""</span> сразу, не дожидаясь того когда это сделает команда <span class="cd" translate="no">filling</span>.</p>
+	<div class="p code cd">&lt;div is_filling="" filling="..." ...</div>
+</div>
+<div class="p info">
+	<p>Для того что бы сделать отображение скилета интерфейса на момент загрузки данных можно изсопльзовать такой поход:</p>
+	<ol>
+		<li>Выражение: проверять рективные переменные с данными, которые ожидаем</li>
+		<li>Тип: название типа в соответствии с частью интерфейса для которого делается статус</li>
+		<li>Время: на ваше усмотрение, так как дочерние элементы шаблона будут скрыты за <span class="cd" translate="no">display: none</span>,
+			то можно предположить что для более приятного повления интерфейса стоило бы заложить хотя бы пол секунды до применения скилета</li>
+	</ol>
+</div>
+<link exec.code="const url = `/doc/filling/_ex1.html`; return exCache[url] || (exCache[url] = fetch(new Request(url)).then(res => res.text()))"
+	inc="`/ctrl/mwex/mwex.html`" />
+<link exec.menu="self.leftNav"
+	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />
