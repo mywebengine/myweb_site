@@ -1,0 +1,32 @@
+<h1 exec="glob.pageTitle = `${this.textContent} - myweb`">
+	<span class="cd" translate="no">html</span> - разметка и текст
+</h1>
+<p><a href="">Команда</a> создания HTML-разметки. <a href="">Выражение</a> выполняется как <a href="">js-код</a>, в контексте <a href="">текущего элемента</a>.</p>
+<h2>
+	<a href="">Синтаксис</a>
+</h2>
+<div class="p code cd" translate="no">&lt;div html[.text]="expression">&lt;/div>
+&lt;div><span>$</span>{expression}&lt;/div>
+</div>
+<p><a href="">Значение выражения</a> интерпретируется как строка, по которой создаётся разметка через <span class="cd" translate="no">.innerHTML</span> или <span class="cd" translate="no">.textContent</span>.</p>
+<h2>
+	<a href="">Параметры</a>
+</h2>
+<ul class="props">
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no">text</span> <span class="nr">необязательный</span>
+		</div>
+		<p>Eсли параметр указан, то значение выражения интерпретируется как текст: <span class="cd" translate="no">.textContent = expression</span>. Название параметра может быть любым.</p>
+	</li>
+	<li>
+		<div class="props-marker">
+			<span class="cd" translate="no"><span>$</span>{expression}</span>
+		</div>
+		<p>Эта кнострукция эквивалентна вызову команды с первым параметром - значение будет интерпретировано как текст.</p>
+	</li>
+</ul>
+<link exec.code="const url = mw_getUrl(`./html/_ex1.html`); return exCache[url] || (exCache[url] = fetch(new Request(url)).then(res => res.text()))"
+	inc="`/ctrl/mwex/mwex.html`" />
+<link exec.menu="self.leftNav"
+	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />

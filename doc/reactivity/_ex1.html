@@ -1,0 +1,20 @@
+<ul>
+	<li>
+		<a href="#mypage">mypage</a>
+	</li>
+	<li>
+		<a href="#example_page.html">example_page.html</a>
+	</li>
+	<li>
+		<a href="#not_found_page">not_found_page</a>
+	</li>
+</nav>
+<hr />
+<div if="loc.hash.path === `mypage`">
+	<h1>My page headline</h1>
+	<p>My page text</p>
+</div>
+<link else=""
+	inc="const r = new Request(`/doc/routing/${loc.hash.path}`);
+		return mw_incCache.has(r.url) ? r.url : fetch(r.url)
+			.then(r => r.ok ? r : `/doc/routing/404.html`)" />
