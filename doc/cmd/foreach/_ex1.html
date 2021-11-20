@@ -1,20 +1,20 @@
 <b>String</b>
 <ul>
-	<li foreach.str-val.str-idx="`abc`">${strIdx} = ${strVal}</li>
+	<li foreach.str-val.str-idx="`ab`">${strIdx} = ${strVal}</li>
 </ul>
 <b>Array</b>
 <ul>
-	<li foreach.v.i="[`d`, `e`, `f`]">${i} = ${v}</li>
+	<li foreach.v.i="[`c`, `d`]">${i} = ${v}</li>
 </ul>
 <b>Set</b>
 <ul>
-	<li foreach.v.i="new Set([`g`, `h`, `i`])">${i} = ${v}</li>
+	<li foreach.v.i="new Set([`e`, `f`])">${i} = ${v}</li>
 </ul>
 <b>Map</b>
 <ul>
-	<li foreach.v.i="new Map([[`j`, `k`], [`l`, `m`], [`n`, `o`]])">${i} = ${v}</li>
+	<li foreach.v.i="new Map([[`g`, `h`], [`i`, `j`]])">${i} = ${v}</li>
 </ul>
 <b>Object</b>
 <ul>
-	<li foreach.v.i="{ p: `q`, r: `s`, t: `u` }">${i} = ${v}</li>
+	<li foreach.v.i="{ k: `l`, m: `n`, o: `p` }">${i} = ${v}</li>
 </ul>

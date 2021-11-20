@@ -1,52 +1,212 @@
-<h1 exec="glob.pageTitle = `${this.textContent} - myweb`">
-	<span class="cd" translate="no">loc</span> - маршрутизация
-</h1>
-<p>Для организации марштизации приложения можно использовать реактивный объект <span class="cd" translate="no">loc</span>, который содержит информацию об адресной строке запрошенного документа.</p>
-<p>Этот объект изменяется при изменении адреса текущего документа (изменение истории), которое может быть вызвано методами <span class="cd" translate="no">history.pushState()</span>
-	или <span class="cd" translate="no">history.replaceState()</span>, или изменение свойства <span class="cd" translate="no">location.hash</span>.</p>
-<p>Используя этот объект можно реагировать на изменение адреса документа и отображать изменения интерфейса без перезагрузки страницы.</p>
-<h2>Структура объекта</h2>
-<ul class="props">
-	<li>
+<h1 exec="glob.pageTitle = `${this.textContent} - myweb`">API</h1>
+<p>Все функции и объекты находятся в глобальной области видимости <span class="cd" translate="no">self</span></p>
+<ul class="props api">
+	<li id="glob">
 		<div class="props-marker">
-			<span class="cd" translate="no">href</span>
+			<span class="cd" translate="no">glob</span>
 		</div>
-		<p>Строка с URL, для теущего документа равна: <span class="cd" translate="no">${loc.href}</span></p>
+		<p>Глобальный реактивный объект</p>
 	</li>
-	<li>
+	<li id="mw_$src">
 		<div class="props-marker">
-			<span class="cd" translate="no">path</span>
+			<span class="cd" translate="no">mw_$src</span>
 		</div>
-		<p>Строка содержащая URL без хоста, для теущего документа равна: <span class="cd" translate="no">${loc.path}</span></p>
+		<p>Родителький DOM элменет для области рендера, равен <span class="cd" translate="no">document.documentElement</span></p>
 	</li>
-	<li>
+	<li id="mw_render">
 		<div class="props-marker">
-			<span class="cd" translate="no">query</span>
+			<span class="cd" translate="no">mw_render($src = mw_$src, delay, scope, isLinking = false)</span>
 		</div>
-		<p><span class="cd" translate="no">Map</span> c GET параметрами, для теущего документа равна: <span class="cd" translate="no">[${Array.from(loc.query).map(v => v.join('='))}]</span></p>
-	</li>
-	<li>
-		<div class="props-marker">
-			<span class="cd" translate="no">hash</span>
-		</div>
-		<p>Объект с информацией о хэше документа:</p>
+		<p>Функция запуска рендера</p>
 		<ul class="props">
 			<li>
 				<div class="props-marker">
-					<span class="cd" translate="no">href</span>
+					<span class="cd" translate="no">$src</span>
 				</div>
-				<p>Строка с хэшем включая символ "#", для теущего документа равна: <span class="cd" translate="no">${loc.hash.href || `empty string`}</span></p>
+				<p>DOM элемент, который будет рендерится</p>
 			</li>
 			<li>
 				<div class="props-marker">
-					<span class="cd" translate="no">path</span>
+					<span class="cd" translate="no">delay</span> <span class="nr">необязательный</span>
 				</div>
-				<p>Строка с хэшем исключая символ "#", для теущего документа равна: <span class="cd" translate="no">${loc.hash.path || `empty string`}</span></p>
+				<p>Задержка в мс перед рендером</p>
+			</li>
+			<li>
+				<div class="props-marker">
+					<span class="cd" translate="no">scope</span> <span class="nr">необязательный</span>
+				</div>
+				<p>Объект которым будет иницализирован скоп</p>
+			</li>
+			<li>
+				<div class="props-marker">
+					<span class="cd" translate="no">isLinking</span> <span class="nr">необязательный</span>
+				</div>
+				<p>Признак того что рендере будет в режиме линковки</p>
 			</li>
 		</ul>
 	</li>
+	<li id="mw_curRender">
+		<div class="props-marker">
+			<span class="cd" translate="no">mw_curRender</span>
+		</div>
+		<p>Глобальный промис рендера - доступен всегда</p>
+	</li>
+	<li id="mw_setDelay">
+		<div class="props-marker">
+			<span class="cd" translate="no">mw_setDelay(delay)</span>
+		</div>
+		<p>Функция устанавлиевает задержку в мс, перед запуском рендера</p>
+	</li>
+	<li id="mw_debugLevel">
+		<div class="props-marker">
+			<span class="cd" translate="no">mw_debugLevel</span>
+		</div>
+		<p>Уровень режима отладки, может быть устанавлен при <a attr.href.push="`/doc/use.html`">подключении скрипта</a></p>
+		<ul class="props">
+			<li>
+				<div class="props-marker">
+					<span class="cd" translate="no">0</span>
+				</div>
+				<p>Отладка выключина</p>
+			</li>
+			<li>
+				<div class="props-marker">
+					<span class="cd" translate="no">1</span>
+				</div>
+				<p>Отладка включена: будут выводится подробные сообщения об ошибках, с указанием в каком файле она произошла</p>
+			</li>
+			<li>
+				<div class="props-marker">
+					<span class="cd" translate="no">2</span>
+				</div>
+				<p>Отладка включена: будут выводится подробные сообщения об ошибках и логирование изменений в реактивных переменных</p>
+			</li>
+		</ul>
+	</li>
+
+	<li id="mw_removeChild">
+		<div class="props-marker">
+			<span class="cd" translate="no">mw_removeChild($src)</span>
+		</div>
+		<p>Удаляет DOM элемент <span class="cd" translate="no">$src</span>, очищая данные которые были с неим связаны в процессе рендера</p>
+	</li>
+
+	<li id="mw_incCache">
+		<div class="props-marker">
+			<span class="cd" translate="no">mw_incCache</span>
+		</div>
+		<p>Кэш вставок - это <span class="cd" translate="no">Map</span> клячами которого являются URL вставок. Применение обсуждается в статье <a href="/doc/inc.html">inc</a>.</p>
+	</li>
+
+	<li id="mw_dispatchCustomEvent">
+		<div class="props-marker">
+			<span class="cd" translate="no">mw_dispatchCustomEvent($src, evtName[, detail])</span>
+		</div>
+		<p>Функция для отправки пользовательских событи</p>
+		<ul class="props">
+			<li>
+				<div class="props-marker">
+					<span class="cd" translate="no">$src</span>
+				</div>
+				<p>Указатель на DOM элемент</p>
+			</li>
+			<li>
+				<div class="props-marker">
+					<span class="cd" translate="no">evtName</span>
+				</div>
+				<p>Имя события</p>
+			</li>
+			<li>
+				<div class="props-marker">
+					<span class="cd" translate="no">detail</span> <span class="nr">необязательный</span>
+				</div>
+				<p>Объект с пользовательскими данными, которые будут доступны при получении события - <a href="https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/detail" target="_blank" translate="no">CustomEvent.detail</a></p>
+			</li>
+		</ul>
+	</li>
+
+	<li id="mw_p_target">
+		<div class="props-marker">
+			<span class="cd" translate="no">mw_getProxy(value)</span>
+		</div>
+		<p>Функция возвращает реактивный объект (<span class="cd" translate="no">Proxy</span>) на объект <span class="cd" translate="no">value</span></p>
+	</li>
+	<li id="mw_p_target">
+		<div class="props-marker">
+			<span class="cd" translate="no">mw_p_target</span>
+		</div>
+		<p>Символ - имя свойства для реaктивноого объекта. Значение свойства будет базовым объект на основоании которого был создан реактивный:
+			<span class="cd" translate="no">reactivityObject[mw_p_target]</span></p>
+	</li>
+
+	<li id="mw_setLoc">
+		<div class="props-marker">
+			<span class="cd" translate="no">mw_setLoc(url)</span>
+		</div>
+		<p>Функция изменяет значение реактивного объекта <a attr.href.push="`/doc/routing.html`">маршрутизации <span class="cd" translate="no">loc</span></a> исходя из значения передоваемого в <span class="cd" translate="no">url</span></p>
+	</li>
+	<li id="mw_getUrl">
+		<div class="props-marker">
+			<span class="cd" translate="no">mw_getUrl(url[, topUrl])</span>
+		</div>
+		<p>Функция вернёт нормализованный URL</p>
+		<ul class="props">
+			<li>
+				<div class="props-marker">
+					<span class="cd" translate="no">url</span>
+				</div>
+				<p>Относительный или абсолютный URL</p>
+			</li>
+			<li>
+				<div class="props-marker">
+					<span class="cd" translate="no">topUrl</span> <span class="nr">необязательный</span>
+				</div>
+				<p>Функция вернет адрес исходя из того что <span class="cd" translate="no">url</span> указан относительно <span class="cd" translate="no">topUrl</span></p>
+			</li>
+		</ul>
+	</li>
+	<!--li id="mw_isUri">
+		<div class="props-marker">
+			<span class="cd" translate="no">mw_isUri(url)</span>
+		</div>
+		<p>Функция проверки яволяется ли адрес относительным</p>
+	</li>
+	<li id="mw_normalizeUrl">
+		<div class="props-marker">
+			<span class="cd" translate="no">mw_normalizeUrl(url)</span>
+		</div>
+		<p>Функция вернёт нормализованный URL</p>
+	</li-->
+	<li id="mw_p_topUrl">
+		<div class="props-marker">
+			<span class="cd" translate="no">mw_p_topUrl</span>
+		</div>
+		<p>Символ - имя свойства для DOM элемента. Который предназначен указывать на URL копонента - это нужно в случаи когда пользовательский коптонент находится в другом месте DOM,
+			относительноь своего первоночально положения:
+			<span class="cd" translate="no">$src[mw_p_topUrl]</span>.</p>
+	</li>
+
+	<li id="mw_oset">
+		<div class="props-marker">
+			<span class="cd" translate="no">mw_oset(target, propName, newValue)</span>
+		</div>
+		<p>Изменяет или создаёт свойство <span class="cd" translate="no">propName</span> объекта <span class="cd" translate="no">target</span> значением <span class="cd" translate="no">newValue</span>.
+			Если <span class="cd" translate="no">target.propName</span> - это объект, массив, Map или Set - то обходит их рекурсивно и изменяет или добавляет значения.</p>
+		<p>Смысл этой функции в том, что если объект назначения реaктивный, то изменить в нём только то что изменилось, для того что бы минимизировать количество рендеров.</p>
+	</li>
+	<li id="mw_del">
+		<div class="props-marker">
+			<span class="cd" translate="no">mw_del(target, propName)</span>
+		</div>
+		<p>Удаляет из объекта <span class="cd" translate="no">target</span> свойство <span class="cd" translate="no">propName</span> и возвращает значение этого свойства значение</p>
+	</li>
+
+	<li id="mw_copyToClipboard">
+		<div class="props-marker">
+			<span class="cd" translate="no">mw_copyToClipboard(str)</span>
+		</div>
+		<p>Помещает в буфер объмена строку <span class="cd" translate="no">str</span></p>
+	</li>
 </ul>
-<link exec.code="const url = `/doc/routing/_ex1.html`; return exCache[url] || (exCache[url] = fetch(new Request(url)).then(res => res.text()))"
-	inc="`/ctrl/mwex/mwex.html`" />
 <link exec.menu="self.leftNav"
 	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />

@@ -1,4 +1,30 @@
 <h1 exec="glob.pageTitle = `${this.textContent} - myweb`">Команды</h1>
-<p>fdsfds</p>
+<p>Команда шаблона - это HTML атрибут элемента, который интерпретируется алогоритмом рендера. Любая команда имеет вид:</p>
+<div class="p code cd">&lt;div cmd-name[.param.param2.param3 ...]="expression" ...</div>
+<p>Каждый HTML элемент может иметь сколь угодно команд, которые интерпертируются последовательно слева-направо.</p>
+<ul class="props">
+	<li id="cmd-name">
+		<div class="props-marker">
+			<span class="cd" translate="no">cmd-name</span>
+		</div>
+		<p>Имя команды. Далее в разделе документации описываются все команды.</p>
+	</li>
+	<li id="param">
+		<div class="props-marker">
+			<span class="cd" translate="no">param</span> <span class="nr">необязательный</span>
+		</div>
+		<p>Параметр команды.</p>
+		<p>Команда может иметь неограниченное количество параметров, которые отделяются друг от друга символом "."</p>
+		<p>Каждая команда интерпретирует параметы по свойму.</p>
+		<p>Название параметра может быть пустой строкой, выглядит это так: <span class="cd" translate="no">&lt;div cmd-name.param1..param4.="expression" ...</span>
+			Таким образом можно не&#160;указывать параметр или добиваться уникальности атрибутов на элементе (название атрибутов у элемента должны быть уникальными).</p>
+	</li>
+	<li id="expression">
+		<div class="props-marker">
+			<span class="cd" translate="no">expression</span>
+		</div>
+		<p>Выраженеие команды, которое является строкой javascript-кода</p>
+	</li>
+</ul>
 <link exec.menu="self.leftNav"
 	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />

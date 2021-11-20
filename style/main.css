@@ -153,7 +153,7 @@
 .cnt ol:first-child,
 .cnt li:first-child,
 .p:first-child {
-	margin-top: 0;
+	margin-top: 0 !important;
 }
 .cnt h1:last-child,
 .cnt h2:last-child,
@@ -164,13 +164,16 @@
 .cnt ol:last-child,
 .cnt li:last-child,
 .p:last-child {
-	margin-bottom: 0;
+	margin-bottom: 0 !important;
 }
 .props {
 	list-style-type: none !important;
 }
 .info > .props {
 	margin-left: 0;
+}
+.props.api > li {
+	margin: calc(var(--text_gap) * 3) 0;
 }
 .props-marker {
 	margin: 0 0 5px calc(var(--left_gap) * -1);
@@ -180,6 +183,9 @@
 }
 .props-marker + p {
 	margin-top: 0;
+}
+.props .props .props-marker .cd:first-of-type {
+	font-weight: normal;
 }
 .cnt .mwex {
 	margin: var(--gap) 0;

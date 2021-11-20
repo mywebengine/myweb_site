@@ -1,13 +1,13 @@
 <h1 exec="glob.pageTitle = `${this.textContent} - myweb`">
 	<span class="cd" translate="no">on</span> - прослушивание событий
 </h1>
-<p><a href="">Команда</a> для создания обработчиков событий, выполняет <a href="">выражение</a> как <a href="">js-код</a> в момент получения события, в контексте <a href="">текущего элемента</a>.</p>
+<p><a attr.href.push="`/doc/cmd.html`">Команда</a> для создания обработчиков событий, выполняет <a attr.href.push="`/doc/cmd.html#expression`">выражение</a> в момент получения события, в контексте текущего элемента</p>
 <h2>
-	<a href="">Синтаксис</a>
+	<a attr.href.push="`/doc/cmd.html`">Синтаксис</a>
 </h2>
 <div class="p code cd" translate="no">&lt;div on.event-name[.capture.once.passive.self.prevent.stop.ctrl.alt.shift.meta.(key).(string).(mouse button: 0, 1, 2).exact]="expression">...&lt;/div></div>
 <h2>
-	<a href="">Параметры</a>
+	<a attr.href.push="`/doc/cmd.html#param`">Параметры</a>
 </h2>
 <ul class="props">
 	<li>
@@ -132,7 +132,7 @@
 					<div class="props-marker">
 						<span class="cd" translate="no">remove</span>
 					</div>
-					<p>Отправляется сразу же после того как элемент будет удален из DOM</p>
+					<p>Отправляется сразу же после того как элемент будет удален из DOM функцией <a class="cd" translate="no" attr.href.push="`/doc/api.html#mw_removeChild`">mw_removeChild</a> (алгоритм рендера использует эту функцию)</p>
 				</li>
 			</ul>
 		</li>
@@ -162,27 +162,7 @@
 <p>Для создания события можно использовать стандартный механизм создания пользовательского события <a href="https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent" target="_blank" translate="no">CustomEvent</a>
 	и механизм его отправки <a href="https://developer.mozilla.org/docs/Web/API/EventTarget/dispatchEvent" target="_blank" translate="no">dispatchEvent</a>.</p>
 <div class="p info">
-	<p>Для упрощения создания и отправки пользовательских события в API есть функция <span class="cd" translate="no">mw_dispatchCustomEvent($src, evtName[, detail])</span></p>
-	<ul class="props">
-		<li>
-			<div class="props-marker">
-				<span class="cd" translate="no">$src</span>
-			</div>
-			<p>Указатель на DOM элемент</p>
-		</li>
-		<li>
-			<div class="props-marker">
-				<span class="cd" translate="no">evtName</span>
-			</div>
-			<p>Имя события</p>
-		</li>
-		<li>
-			<div class="props-marker">
-				<span class="cd" translate="no">detail</span> <span class="nr">необязательный</span>
-			</div>
-			<p>Объект с пользовательскими данными, которые будут доступны при получении события - <a href="https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/detail" target="_blank" translate="no">CustomEvent.detail</a></p>
-		</li>
-	</ul>
+	<p>Для упрощения создания и отправки пользовательских событий в API есть функция <a class="cd" translate="no" attr.href.push="`/doc/api.html#mw_dispatchCustomEvent`">mw_dispatchCustomEvent($src, evtName[, detail])</a></p>
 </div>
 <div class="p footnote">
 	<p exec.num="1"
