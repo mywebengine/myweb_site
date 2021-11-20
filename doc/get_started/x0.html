@@ -1,0 +1,117 @@
+<div class="x0"
+	scope.game=""
+	exec="if (!game.score) init(game)"
+	attr.class.game_over="game.winner">
+	<div class="x0-score">
+		<div class="x0-score-i player_x">X = ${game.score.X}</div>
+		<div class="x0-score-i player_0">0 = ${game.score["0"]}</div>
+	</div>
+	<div class="x0-message">${game.message}</div>
+	<div if="game.winner">
+		<button on.click="newGame(game)">Start new game</button>
+	</div>
+	<div class="x0-board">
+		<div class="x0-board-cell"
+			foreach..cell="new Array(9)"
+				exec.player="game.log.find(i => i.cell === cell)?.player"
+				attr.class.player_x="player === `X`"
+				attr.class.player_0="player === `0`"
+				on.click="!player && !game.winner && setMove(game, `X`, cell)"></div>
+	</div>
+	<div class="x0-log">
+		<div class="x0-log-title">Game log</div>
+		<button class="x0-log-i"
+			foreach.move.i="game.log"
+				on.click="goToMove(game, i)">Move #${i + 1}: player ${move.player} move to ${move.cell + 1} cell</button>
+	</div>
+</div>
+<script type="module">
+	//0 1 2
+	//3 4 5
+	//6 7 8
+	//Все выигрышные варианты
+	const winArr = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+	//Инициализация компонента
+	export function init(game) {
+		game.score = { X: 0, "0": 0 };
+		newGame(game);
+	}
+	//Запускаем новую игру
+	export function newGame(game) {
+		game.currentPlayer = game.currentPlayer !== "X" ? "X" : "0";
+		delete game.winner;
+		game.log = [];//будет хранить объекты вида: { payer: "X", cell: 1 }
+		if (game.currentPlayer === "X") {
+			game.message = `The first one walks X is you`;
+			return;
+		}
+		//Первый ход сопервинка случайный от 0 да 8
+		setMove(game, "0", Math.floor(9 * Math.random()));
+	}
+	//Делаем ход
+	export function setMove(game, player, cell) {
+		game.log.push({ player, cell });
+		if (testWin(game, player, cell)) {
+			gameOver(game, player, true);
+			return;
+		}
+		if (player === "0") {
+			game.message = "Your turn";
+			return;
+		}
+		//Сначала занимаем лучшуу клетку соперника
+		const nextMove = getNextMove(game, "X");
+		if (nextMove === -1) {
+			gameOver(game, player, false);
+			return;
+		}
+		setMove(game, "0", nextMove);
+	}
+	//Возвращается к предыдущему ходу
+	export function goToMove(game, i) {
+		if (game.winner) {
+			if (game.winner !== "DH") {
+				game.score[game.winner]--;
+			}
+			delete game.winner;
+		}
+		game.log.splice(game.log[i].player === "X" ? i : i - 1);//ход можно отменить, только так что бы X ходил следующим
+	}
+	//Проверяем ход на победу
+	function testWin(game, player, cell) {
+		const playerCells = new Set;
+		game.log.forEach(l => l.player === player && playerCells.add(l.cell));
+		return winArr.findIndex(line => line.filter(i => playerCells.has(i)).length === 3) !== -1;
+	}
+	//Вычисляем следующий ход для нашего ИИ
+	function getNextMove(game, player) {
+		const cells = new Set,
+			playerCells = new Set,
+			rivalCells = new Set;
+		game.log.forEach(l => {
+			if (l.player === player) {
+				playerCells.add(l.cell);
+				return;
+			}
+			rivalCells.add(l.cell);
+		});
+		//Ищим лучший ход для игрока
+		const nextLine = winArr
+			.filter(line => line.findIndex(i => rivalCells.has(i)) === -1)
+			.sort((a, b) => a.filter(i => playerCells.has(i)).length < b.filter(i => playerCells.has(i)).length ? 1 : -1);
+		//Если player === "X" - это значит что противнику некуда ходить, а раз так, то попытаемся выиграть
+		return nextLine.length !== 0 ? nextLine[0].find(i => !playerCells.has(i)) : (player === "X" ? getNextMove(game, "0") : -1);
+	}
+	//Инициализация окончания игры
+	function gameOver(game, player, isWin) {
+		if (isWin) {
+			game.winner = player;
+			game.message = player + " the winner!";
+			game.score[player]++;
+			return;
+		}
+		game.winner = "DH";
+		game.message = "Dead heat";
+	}
+</script>
+<link href="./get_started/x0.css" type="text/css" rel="stylesheet" />

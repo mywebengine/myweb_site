@@ -1,52 +1,24 @@
-<h1 exec="glob.pageTitle = `${this.textContent} - myweb`">
-	<span class="cd" translate="no">loc</span> - маршрутизация
-</h1>
-<p>Для организации марштизации приложения можно использовать реактивный объект <span class="cd" translate="no">loc</span>, который содержит информацию об адресной строке запрошенного документа.</p>
-<p>Этот объект изменяется при изменении адреса текущего документа (изменение истории), которое может быть вызвано методами <span class="cd" translate="no">history.pushState()</span>
-	или <span class="cd" translate="no">history.replaceState()</span>, или изменение свойства <span class="cd" translate="no">location.hash</span>.</p>
-<p>Используя этот объект можно реагировать на изменение адреса документа и отображать изменения интерфейса без перезагрузки страницы.</p>
-<h2>Структура объекта</h2>
-<ul class="props">
+<h1 exec="glob.pageTitle = `${this.textContent} - myweb`">Реактивность</h1>
+<p>Реактивная переменная - это Proxy, которая обладает следующими характеристиками:</p>
+<ol>
 	<li>
-		<div class="props-marker">
-			<span class="cd" translate="no">href</span>
-		</div>
-		<p>Строка с URL, для теущего документа равна: <span class="cd" translate="no">${loc.href}</span></p>
+		<p>Все свойства/элементы этого объекта являются такм же Proxy</p>
 	</li>
 	<li>
-		<div class="props-marker">
-			<span class="cd" translate="no">path</span>
-		</div>
-		<p>Строка содержащая URL без хоста, для теущего документа равна: <span class="cd" translate="no">${loc.path}</span></p>
+		<p>Если изменить или создать нове свойтсво этому объекту другим объектом, то присваиваемый объект станет такм же Proxy</p>
 	</li>
 	<li>
-		<div class="props-marker">
-			<span class="cd" translate="no">query</span>
-		</div>
-		<p><span class="cd" translate="no">Map</span> c GET параметрами, для теущего документа равна: <span class="cd" translate="no">[${Array.from(loc.query).map(v => v.join('='))}]</span></p>
+		<p>Когда происходит вычисление <a attr.href.push="`/doc/cmd.html#expression`">выражений команд</a> шаблона,
+			учавствующие в этих выражениях реактивные переменные будут связаны с HTML элементов на котором происходит вычисление</p>
 	</li>
 	<li>
-		<div class="props-marker">
-			<span class="cd" translate="no">hash</span>
-		</div>
-		<p>Объект с информацией о хэше документа:</p>
-		<ul class="props">
-			<li>
-				<div class="props-marker">
-					<span class="cd" translate="no">href</span>
-				</div>
-				<p>Строка с хэшем включая символ "#", для теущего документа равна: <span class="cd" translate="no">${loc.hash.href || `empty string`}</span></p>
-			</li>
-			<li>
-				<div class="props-marker">
-					<span class="cd" translate="no">path</span>
-				</div>
-				<p>Строка с хэшем исключая символ "#", для теущего документа равна: <span class="cd" translate="no">${loc.hash.path || `empty string`}</span></p>
-			</li>
-		</ul>
+		<p>При изменение реактивной переменной, связанные с ним HTML элементы будут отправлены на рендер</p>
 	</li>
-</ul>
-<link exec.code="const url = `/doc/routing/_ex1.html`; return exCache[url] || (exCache[url] = fetch(new Request(url)).then(res => res.text()))"
-	inc="`/ctrl/mwex/mwex.html`" />
+</ol>
+<div class="p info">
+	<p>Все объекты <a attr.href.push="`/doc/cmd/scope.html`">области видимости</a> элементов являются реактивными. Что позволяет реализовывать реактивное взаимодействия без каких либо дополнительных действий.</p>
+</div>
+<p>Для создания реактивного объекта можно воспользоваться функций <a attr.href.push="`/doc/api.html#mw_getProxy`" class="cd" translate="no">mw_getProxy(value)</a>.
+	Так же есть глобальный рекстивный объект <a attr.href.push="`/doc/api.html#glob`" class="cd" translate="no">glob</a>.</p>
 <link exec.menu="self.leftNav"
 	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />

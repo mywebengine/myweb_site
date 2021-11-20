@@ -34,7 +34,7 @@ export function _go($view, code, fillingOff, s) {
 			}
 			return Promise.all(pSet);'>${code}</div>`;
 	mw_render($view.firstElementChild)
-		.then(() => self.mw_debugLevel = debug)
+//		.then(() => self.mw_debugLevel = debug)
 		.catch(err => {
 			self.mw_debugLevel = debug;
 			throw err;

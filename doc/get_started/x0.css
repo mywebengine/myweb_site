@@ -1,0 +1,61 @@
+	.x0 {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		align-items: center;
+	}
+.x0-board {
+	grid-area: board;
+	display: grid;
+	grid-template-columns: repeat(3, 50px);
+	grid-template-rows: repeat(3, 50px);
+	border: solid 1px #000;
+	border-right: 0;
+	border-bottom: 0;
+}
+.x0.game_over .x0-board {
+	opacity: 0.5;
+}
+.x0-board-cell {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 40px;
+	line-height: 1em;
+	border: solid 1px #000;
+	border-top: 0;
+	border-left: 0;
+	cursor: pointer;
+}
+.x0-board-cell.player_x,
+.x0-board-cell.player_0,
+.game_over .x0-board-cell {
+	cursor: default;
+}
+.x0-board-cell.player_x::before {
+	content: "X";
+}
+.x0-board-cell.player_0::before {
+	content: "0";
+}
+
+.x0-score {
+	grid-area: score;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	color: red;
+}
+.x0-score-i.player_x {
+	color: blue;
+}
+.x0-log {
+	grid-area: log;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 10px;
+	text-align: center;
+}
+.x0-log-title {
+	font-weight: bold;
+}
