@@ -1,6 +1,6 @@
 <h1 exec="glob.pageTitle = `${this.textContent} - myweb`">Быстрый старт</h1>
 <p>Реализуем игру в крестики-нолики</p>
-<ol>
+<ul>
 	<li>
 		<p>Ирать мы будем против искусственного интелекта</p>
 	</li>
@@ -13,7 +13,7 @@
 	<li>
 		<p>Каждый новый рауд право первого хода будет переходить сопернику</p>
 	</li>
-</ol>
+</ul>
 <p>Алгорим игры будет такой:</p>
 <ol>
 	<li>
@@ -29,11 +29,11 @@
 	</li>
 	<li>
 		<p>Далее мы проверим выиграл ли этим ходом игрок игру:
-			если выиграл, то напишем об этом, изменим сёт побед и поражений, и начнём новый раунд;
-			если нет, противник получает параво хода, и мы переоходим на шаг 2.</p>
+			если выиграл, то напишем об этом, изменим счёт побед и поражений, и начнём новый раунд;
+			если нет, противник получает параво хода, и мы переоходим на шаг&#160;2.</p>
 	</li>
 </ol>
-<link exec.code="const url = `/doc/get_started/x0.html`; return exCache[url] || (exCache[url] = fetch(new Request(url)).then(res => res.text()))"
+<link exec.code="getLangEx(`/doc/examples/x0`, self.glob.lang)"
 	inc="`/ctrl/mwex/mwex.html`" />
 <link exec.menu="self.leftNav"
 	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />

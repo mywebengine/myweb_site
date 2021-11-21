@@ -1,4 +1,58 @@
 <h1 exec="glob.pageTitle = `${this.textContent} - myweb`">Серверный рендеринг</h1>
-<p>О серверном рендереге можно говорить долго - этот рендеринг будет быстрый и простой. Такой реализвации еще небыло на свете.</p>
+<p>На данный момент есть два подхода к рендерингу на сервере</p>
+<h2>Рендера-сервер</h2>
+<p>
+	<i>Этот механизм еще не готов, но если он получится, то мир еще не видело более прекраного механизма рендера <big>▪</big></i>
+</p>
+<h2 id="linking">Режим линковки</h2>
+<p>
+	<i>Этот раздел документации не полон. Если в дальнейшем будет нужна в этом методе рендеринга - описание будет дополнено</i>
+</p>
+<p>Сборка HTML документа (html/text) на сервере. Формируя документ следующими правилами:</p>
+<ol>
+	<li>
+		<p>Подключить скрип <span class="cd" translate="no">/myweb/myweb.js</span> с параметром <span class="cd" translate="no">linking=1</span>
+			- обсуждается в <a attr.href.push="`/doc/use.html#linking`">разделе подключение</a></p>
+	</li>
+	<li>
+		<p>Все скрытые конструкция оборачиваются в <span class="cd" translate="no">&lt;template></span> - с повторение всех атрибутов скрытого элемента.
+			Скрываются теги в двух случаях: для команды <span class="cd" translate="no">if/switch</span> и <span class="cd" translate="no">foreach</span>.</p>
+		<p>Для <span class="cd" translate="no">if</span> это выглядит так:</p>
+		<div class="p info">
+			<p>Шаблон:<br /><span class="cd" translate="no">&lt;div if="0 > 1">...&lt;/div>&lt;div else="">...&lt;/div></span></p>
+			<p>Должно получиться:<br /><span class="cd" translate="no">&lt;template if="0 > 1">&lt;div if="0 > 1">...&lt;/div>&lt;/template>&lt;div else="">...&lt;/div></span></p>
+		</div>
+		<p>Для <span class="cd" translate="no">foreach</span> это выглядит так:</p>
+		<div class="p info">
+			<p>Шаблон:<br /><span class="cd" translate="no">&lt;div foreach="[]">...&lt;/div></span></p>
+			<p>Должно получиться:<br /><span class="cd" translate="no">&lt;template foreach="[]">&lt;div foreach="[]">...&lt;/div>&lt;/template></span></p>
+		</div>
+	</li>
+	<li>
+		<p>Для циклов нужно проставить индексы элементов используя атрибут <span class="cd" translate="no">_idx</span> - индекс элемента начиная с "0" и признак одинаковости, использовав атрибут <span class="cd" translate="no">_aidx</span> - идентификатор, который будет одинаковм для команды и уникальный документа:</p>
+		<div class="p info">
+			<p>Шаблон:<br /><span class="cd" translate="no">&lt;div foreach="{ a: 1, b: 2 }">...&lt;/div></span></p>
+			<p>Должно получиться:<br /><span class="cd" translate="no">&lt;div foreach="{ a: 1, b: 2 }" _idx="0" _aidx="1">...&lt;/div><br />&lt;div foreach="{ a: 1, b: 2 }" _idx="1" _aidx="1">...&lt;/div></span></p>
+		</div>
+		<p>Для большей производительности рендера, можно указать атрибут <span class="cd" translate="no">_did</span> - идентификатор описания элемента.
+			Для всех однотипных элементов он должен быть одним и темже, а в перделах всего документа уникальным:</p>
+		<div class="p info">
+			<p>Должно получиться:<br /><span class="cd" translate="no">&lt;div foreach="{ a: 1, b: 2 }" _idx="0" _aidx="1" _did="2">...&lt;/div><br />&lt;div foreach="{ a: 1, b: 2 }" _idx="1" _aidx="1" _did="1">...&lt;/div></span></p>
+		</div>
+		<p><b>Важно:</b> значения атрибутов <span class="cd" translate="no">_aidx</span> и <span class="cd" translate="no">_did</span>,
+			для всех однотипных элементов должено быть одним и темже, а в перделах всего документа уникальным</p>
+	</li>
+	<li>
+		<p>Для втавок нужно сделать:</p>
+		<div class="p info">
+			<p>Шаблон:<br /><span class="cd" translate="no">&lt;div inc="`1.html`">...&lt;/div></span></p>
+			<p>Должно получиться:<br /><span class="cd" translate="no">&lt;!--begin--><br />text1 on inc<br />&lt;div inc="`1.html`" _idx="1.html">first tag on inc&lt;/div><br />...<br />&lt;/div><br />&lt;!--end--></span></p>
+		</div>
+	</li>
+</ol>
+<div class="p info">
+	<p>Самый простой способ понять как это работает - это посмотреть в Инспектор DOM элементов при включеном режиме отладки.
+		Посути вам нужно скопировать отрендереный шаблон и если есть возможнасть не забыть про <span class="cd" translate="no">_did</span>.</b>
+</div>
 <link exec.menu="self.leftNav"
 	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />

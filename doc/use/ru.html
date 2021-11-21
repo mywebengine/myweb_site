@@ -1,5 +1,11 @@
 <h1 exec="glob.pageTitle = `${this.textContent} - myweb`">Поключение</h1>
-<p>Что бы подключить myweb нужно добвить скрипт и CSS-файл на страницу. Размер сжатой версии скрипта <span class="cd">28 KB</span>, размер CSS-файла 1 KB.</p>
+<p>Что бы подключить myweb нужно добвить скрипт и CSS-файл на страницу. Размер сжатой минимизированной версии скрипта&#160;<span class="cd">28&#160;KB</span>,
+	размер <span style="white-space: nowrap">CSS-файла 1 KB</span>.</p>
+<p>Подключать CSS-файл не обязательно, будет достаточно, если вы скопируете в свой CSS правило (это правило нужно для скрытия элементов тегом <a attr.href.push="`/doc.html#tag_template`" class="cd" translate="no">&lt;template></a>):</p>
+<div class="p code cd">template,
+*[is_filling] > * {
+	display: none !important;
+}</div>
 <h2>Файлы можно взять с CDN</h2>
 <div class="p code cd">&lt;script src="https://cdn.jsdelivr.net/gh/mywebengine/myweb@latest/myweb.min.js" type="module" async="">&lt;/script>
 &lt;link href="https://cdn.jsdelivr.net/gh/mywebengine/myweb@latest/myweb.min.css" type="text/css" rel="stylesheet" /></div>
@@ -29,11 +35,11 @@
 		<p>Если указать <span class="cd" translate="no">onload</span> - то первый проход рендера по документу будет запущен после полной загрузки страницы.</p>
 		<p>Если указать <span class="cd" translate="no">skip</span> - то первый проход рендера будет отменён.</p>
 	</li>
-	<li>
+	<li id="linking">
 		<div class="props-marker">
 			<span class="cd" translate="no">linking</span>
 		</div>
-		<p>Если укаать значение "1", то первый проход рендера будет в режиме линоковки, подробнее это обсуждается в разделе <a attr.href.push="`/do/ssr.html`">серверный рендеринг</a></p>
+		<p>Если укаать значение "1", то первый проход рендера будет в режиме линоковки, подробнее это обсуждается в разделе <a attr.href.push="`/doc/ssr.html#linking`">серверный рендеринг, режим линковки</a></p>
 	</li>
 </ul>
 <link exec.menu="self.leftNav"

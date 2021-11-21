@@ -4,6 +4,9 @@
 .m > .w {
 	height: 100%;
 }
+.m > .w.cnt {
+	max-width: 920px;
+}
 
 .m-2col {
 	display: grid;

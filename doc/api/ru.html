@@ -137,6 +137,9 @@
 		</div>
 		<p>Символ - имя свойства для реaктивноого объекта. Значение свойства будет базовым объект на основоании которого был создан реактивный:
 			<span class="cd" translate="no">reactivityObject[mw_p_target]</span></p>
+		<p>Для того что бы сделать объект, который  попадая в <span class="cd" translate="no">mw_getProxy</span> не будет становится реактивной переменной,
+			нужно устновить ему свойства это свойство значением <span class="cd" translate="no">null</span>:
+			<span class="cd" translate="no">FormData.prototype[p_target] = null</span></p>
 	</li>
 
 	<li id="mw_setLoc">

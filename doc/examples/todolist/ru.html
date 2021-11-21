@@ -1,0 +1,69 @@
+<h1>Todo list - example, myweb</h1>
+<div class="todos"
+	scope.todo=""
+	is_filling="" filling.spinner.500="todo.todos">
+	<link fetch="!todo.todos && `/doc/examples/todolist/todos.json`"
+		on.ok="todo.todos = await evt.detail.res.json()"
+		on.error="onError(evt.detail.res, evt.detail.err)" />
+	<div class="todos-top">
+		<form id="addForm"
+			on.submit.prevent="fetch(`/doc/examples/todolist/submit.json`, { method: `post`, body: new FormData(this) })
+				.then(res => addTodo(todo, res))">
+			<label for="name">New todo</label>
+			<div>
+				<input id="name" name="name" required="" />
+			</div>
+			<button>Add</button>
+			<div class="todos-top-sum">${todo.todos?.filter(todo => !todo.ok).length} item left</div>
+		</form>
+		<div class="todos-filter">
+			<button attr.class.sel="!todo.filter"
+				on.click="delete todo.filter">All</button>
+			<button attr.class.sel="todo.filter === `active`"
+				on.click="todo.filter = `active`">Active</button>
+			<button attr.class.sel="todo.filter === `complited`"
+				on.click="todo.filter = `complited`">Complited</button>
+			<button attr.disabled="!todo.todos?.find(todo => todo.ok)"
+				on.click="todo.todos = todo.todos.filter(todo => !todo.ok)">Clear complited</button>
+		</div>
+	</div>
+	<div class="todos-cnt"
+		if.arr="todo.todos?.filter(i => todo.filter === `complited` ? i.ok : todo.filter !== `active` || !i.ok)">
+		<div class="todos-list"
+			if="arr.length > 0"
+			filling="true">
+			<label class="todos-list-select">
+				<input type="checkbox"
+					on.change="arr.forEach(todo => todo.ok = this.checked)"
+					attr.checked="arr.length === arr.filter(todo => todo.ok).length" />
+				Select all
+			</label>
+			<div class="todos-list-i"
+				foreach.item.idx="arr"
+				attr.class.todos-list-i-ok="item.ok">
+				<input type="checkbox"
+					attr.checked="item.ok"
+					on.change="item.ok = this.checked" />
+				<div contenteditable="true"
+					on.blur="item.name = this.textContent"
+					html.text="item.name"></div>
+				<button on.click="todo.todos.splice(idx, 1)">×</button>
+			</div>
+		</div>
+		<p elseif="arr">${todo.filter || `all`} list is empty</p>
+	</div>
+</div>
+<script type="module">
+	export function addTodo(todo, newItem) {
+		console.info(`This REST was bogus since we don't have
+			a handler on the server`, newItem);
+		todo.todos.push({
+			name: document.forms.addForm.elements.name.value
+		});
+		document.forms.addForm.reset();
+	}
+	export function onError(res, err) {
+		console.log("Todolist error:", err);
+	}
+</script>
+<link href="/doc/examples/todolist/todolist.css" type="text/css" rel="stylesheet" />

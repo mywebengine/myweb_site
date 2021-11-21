@@ -1,3 +1,4 @@
+<h1>Tic-tac-toe - example, myweb</h1>
 <div class="x0"
 	scope.game=""
 	exec="if (!game.score) init(game)"
@@ -104,14 +105,14 @@
 	}
 	//Инициализация окончания игры
 	function gameOver(game, player, isWin) {
-		if (isWin) {
-			game.winner = player;
-			game.message = player + " the winner!";
-			game.score[player]++;
+		if (!isWin) {
+			game.winner = "DH";
+			game.message = "Dead heat";
 			return;
 		}
-		game.winner = "DH";
-		game.message = "Dead heat";
+		game.winner = player;
+		game.message = player + " the winner!";
+		game.score[player]++;
 	}
 </script>
-<link href="./get_started/x0.css" type="text/css" rel="stylesheet" />
+<link href="/doc/examples/x0/x0.css" type="text/css" rel="stylesheet" />

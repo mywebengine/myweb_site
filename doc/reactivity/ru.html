@@ -18,7 +18,44 @@
 <div class="p info">
 	<p>Все объекты <a attr.href.push="`/doc/cmd/scope.html`">области видимости</a> элементов являются реактивными. Что позволяет реализовывать реактивное взаимодействия без каких либо дополнительных действий.</p>
 </div>
-<p>Для создания реактивного объекта можно воспользоваться функций <a attr.href.push="`/doc/api.html#mw_getProxy`" class="cd" translate="no">mw_getProxy(value)</a>.
-	Так же есть глобальный рекстивный объект <a attr.href.push="`/doc/api.html#glob`" class="cd" translate="no">glob</a>.</p>
+<div class="p info">
+	<p>Для создания реактивного объекта можно воспользоваться функций <a attr.href.push="`/doc/api.html#mw_getProxy`" class="cd" translate="no">mw_getProxy(value)</a>.
+		Так же есть глобальный рекстивный объект <a attr.href.push="`/doc/api.html#glob`" class="cd" translate="no">glob</a>.</p>
+</div>
+<div class="p info">
+	<p>Есть объекты которые не будут становится реактивной переменной, это станртные объекты:</p>
+	<ul>
+		<li>
+			<span class="cd" translate="no">FormData</span>
+		</li>
+		<li>
+			<span class="cd" translate="no">Document</span>
+		</li>
+		<li>
+			<span class="cd" translate="no">DocumentFragment</span>
+		</li>
+		<li>
+			<span class="cd" translate="no">HTMLElement</span>
+		</li>
+		<li>
+			<span class="cd" translate="no">Text</span>
+		</li>
+		<li>
+			<span class="cd" translate="no">Date</span>
+		</li>
+		<li>
+			<span class="cd" translate="no">Request</span>
+		</li>
+		<li>
+			<span class="cd" translate="no">Response</span>
+		</li>
+	</li>
+	<p>
+		<i>Список этиъ объектов может быть в будующем расширен</i>
+	</p>
+	<p>Для того что бы сделать объект, который не будет становится реактивной переменной,
+		нужно устновить ему свойства <a attr.href.push="`/doc/api.html#mw_p_target`" class="cd" translate="no">mw_p_target</a> равное <span class="cd" translate="no">null</span>:
+		<span class="cd" translate="no">FormData.prototype[p_target] = null</span></p>
+</div>
 <link exec.menu="self.leftNav"
 	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />

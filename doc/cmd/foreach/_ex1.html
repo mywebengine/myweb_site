@@ -18,3 +18,8 @@
 <ul>
 	<li foreach.v.i="{ k: `l`, m: `n`, o: `p` }">${i} = ${v}</li>
 </ul>
+<b>Nested loop</b>
+<ul>
+	<li foreach.i-val.i="[1, 2]"
+		foreach.j-val.j="[3, 4]">${i}, ${j} = ${iVal}, ${jVal}</li>
+</ul>
