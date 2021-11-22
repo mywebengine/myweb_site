@@ -4,6 +4,7 @@ export function go($view, code, fillingOff) {
 //	setTimeout(() => _go($view, code, fillingOff, s), 500);
 	_go($view, code, fillingOff);
 }
+let debug;
 export function _go($view, code, fillingOff, s) {
 //	if (s && s !== sync) {
 //		return;
@@ -11,7 +12,9 @@ export function _go($view, code, fillingOff, s) {
 	for (let $i = $view.firstChild; $i !== null; $i = $view.firstChild) {
 		mw_removeChild($i);
 	}
-	const debug = self.mw_debugLevel;
+	if (debug === undefined) {
+		debug = self.mw_debugLevel;
+	}
 	self.mw_debugLevel = 1;
 	$view.innerHTML = '<div scope.glob=""' + (fillingOff ? "" : ` is_filling='' on.mount.self='this.removeAttribute("is_filling")'`) + `
 		exec='if (this._init) { return }
@@ -19,7 +22,7 @@ export function _go($view, code, fillingOff, s) {
 			const pSet = new Set();
 			for (const $s of this.querySelectorAll("script")) {
 				if ($s.type !== "module") {
-					new Function("glob", $s.textContent).apply(self, [glob[mw_p_target]]);
+					self.eval($s.textContent);
 					continue;
 				}
 				pSet.add(import($s.src || URL.createObjectURL(new Blob([$s.textContent], {
@@ -34,7 +37,7 @@ export function _go($view, code, fillingOff, s) {
 			}
 			return Promise.all(pSet);'>${code}</div>`;
 	mw_render($view.firstElementChild)
-//		.then(() => self.mw_debugLevel = debug)
+//		.then(() => setTimeout(() => self.mw_debugLevel = debug, 500))
 		.catch(err => {
 			self.mw_debugLevel = debug;
 			throw err;
