@@ -1,0 +1,15 @@
+<div scope.inc="">
+	<h3>Dynamic URL example and slots</h3>
+	<fieldset>
+		<select on.change="inc.dynamicUrl = this.value">
+			<option value="">empty</option>
+			<option value="/doc/cmd/inc/_inc1.html">/doc/cmd/inc/_inc1.html</option>
+			<option value="/doc/cmd/inc/_inc2.html">/doc/cmd/inc/_inc2.html</option>
+		</select>
+	</fieldset>
+	<div inc="inc.dynamicUrl">
+		<div slot="header">Header text</div>
+		<p>This text moves to the default slot without a name</p>
+		<div slot="footer">Footer text</div>
+	</div>
+</div>

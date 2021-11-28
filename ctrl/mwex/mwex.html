@@ -1,12 +1,21 @@
 <div class="mwex"
-	scope.mwex=""
-	attr.style="mwex.minHeight && `min-height: ${mwex.minHeight}`"
-	on.mount.self="_go(this.querySelector(`.mwex-view`), mwex.code, mwex.fillingOff)">
-	<div class="mwex-code" contenteditable="true" spellcheck="false"
-		on.keydown="keyDown(this, evt)"
-		on.input="go(this.parentNode.querySelector(`.mwex-view`), this.textContent, mwex.fillingOff)">${mwex.code}</div>
-	<div class="mwex-div"></div>
-	<div class="mwex-view" translate="no"></div>
+	scope.scope="">
+	<div if="scope.url" class="mwex-download"
+		exec.lang="navigator.language.substr(0, 2)">
+		<a if="lang === `ru`" attr.href="scope.url" target="_blank">Открыть пример в новой вкладке</a>
+		<a else="" attr.href="scope.url" target="_blank">Open example in new tab</a>
+	</div>
+	<div class="mwex-cnt"
+		attr.style="scope.minHeight && `min-height: ${scope.minHeight}`">
+		<div class="mwex-cnt-code" contenteditable="true" spellcheck="false"
+			on.keydown="onKeyDown(this, evt)"
+			on.input="onInput(this, this.parentNode.querySelector(`iframe`))">${scope.code || ``}</div>
+		<div class="mwex-cnt-div"></div>
+		<div class="mwex-cnt-view">
+			<iframe attr.src="scope.url" translate="no"
+				on.load="onLoad(scope, this)"></iframe>
+		</div>
+	</div>
 </div>
 <link href="./mwex.css" type="text/css" rel="stylesheet" />
 <script src="./mwex.js" type="module"></script>

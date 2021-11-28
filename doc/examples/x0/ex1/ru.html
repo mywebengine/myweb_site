@@ -1,14 +1,16 @@
+<!doctype html>
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<!--script src="https://cdn.jsdelivr.net/gh/mywebengine/myweb@0.9.03/myweb.min.js" type="module" async=""></script>
-		<link href="https://cdn.jsdelivr.net/gh/mywebengine/myweb@0.9.03/myweb.min.css" type="text/css" rel="stylesheet" /-->
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes" />
 		<script src="https://mywebengine.org/myweb/myweb.js?debug=1" type="module" async=""></script>
 		<link href="https://mywebengine.org/myweb/myweb.css" type="text/css" rel="stylesheet" />
+		<title>Tic-tac-toe - example, myweb</title>
 	</head> 
 	<body>
 
-
+<!-- *** имена CSS-классов
+	- используются только для применения стилей к элементам *** -->
 <h1>Tic-tac-toe - example, myweb</h1>
 <div class="x0"
 	scope.game=""
@@ -37,12 +39,11 @@
 				on.click="goToMove(game, i)">Move #${i + 1}: player ${move.player} move to ${move.cell + 1} cell</button>
 	</div>
 </div>
-<!--script type="module"-->
 <script>
 	//0 1 2
 	//3 4 5
 	//6 7 8
-	//Все выигрышные варианты
+	//Все выигрышные комбинации
 	const winArr = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 	//Инициализация компонента
 	function init(game) {
@@ -58,9 +59,17 @@
 			game.message = `The first one walks X is you`;
 			return;
 		}
-		//Первый ход сопервинка случайный от 0 да 8
-		//setMove(game, "0", Math.floor(9 * Math.random()));
-		setMove(game, "0", 0);
+                do {//Первый ход 0 случайный (от 0 до 8) и проверяем что бы это был угол
+                	const i = Math.floor(9 * Math.random());
+			switch (i) {
+				case 0:
+				case 2:
+				case 6:
+				case 8:
+					setMove(game, "0", i);
+					return;
+			}
+		} while (true);
 	}
 	//Делаем ход
 	function setMove(game, player, cell) {
@@ -149,8 +158,7 @@
 		game.score[player]++;
 	}
 </script>
-<link href="/doc/examples/x0/x0.css" type="text/css" rel="stylesheet" />
-
+<link href="/doc/examples/x0/ex1/x0.css" type="text/css" rel="stylesheet" />
 
 	</body>
 </html>

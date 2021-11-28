@@ -124,7 +124,7 @@
 	margin: 0.67em 0;
 }
 .cnt h2 {
-	margin: 1.1em 0 0.87em 0;
+	margin: 1.5em 0 0.87em 0;
 }
 .p,
 .cnt p {
@@ -192,15 +192,17 @@
 }
 .cnt .mwex {
 	margin: var(--gap) 0;
+}
+.cnt .mwex-cnt {
 	margin-right: calc(-100vw + var(--menu_width) + var(--cnt_width) + var(--gap) * 3);
 	grid-template-columns:
 		auto	auto	1fr;
 }
-.cnt .mwex-code {
+.cnt .mwex-cnt-code {
 	width: var(--cnt_width);
 }
 @media screen and (max-width: 1024px) {
-	.cnt .mwex {
+	.cnt .mwex-cnt {
 		margin-right: 0;
 		grid-template-columns:
 			1fr	auto	1fr;

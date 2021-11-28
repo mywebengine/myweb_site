@@ -30,13 +30,13 @@ function getLangInc(path, lang, isErr, cache = mw_incCache) {
 			if (cache !== self.exCache) {
 				return res;
 			}
-			const t = res.text();
-			cache.set(res.url, t);
-			return t;
+			cache.set(res.url, res);
+			return res;
 		});
 }
 function getLangEx(path, lang) {
-	return getLangInc(path, lang, true, self.exCache);
+	const r = getLangInc(path, lang, false, self.exCache);
+	return r.then ? r.then(res => res.url) : r.url;
 }
 function getExText(path) {
 	const url = mw_getUrl(path),

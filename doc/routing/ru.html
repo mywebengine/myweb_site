@@ -46,7 +46,19 @@
 		</ul>
 	</li>
 </ul>
-<link exec.code="getExText(`./routing/_ex1.html`)"
+<h2>Пример</h2>
+<p>В прмере используются файлы для вставок</p>
+<ol>
+	<li>
+		<p>Файл <a href="/doc/routing/ex1/example_page.html" target="_blank" translate="no">example_page.html</a></p>
+		<div class="code cd" html.t="fetch(`/doc/routing/ex1/example_page.html`).then(res => res.text())"></div>
+	</li>
+	<li>
+		<p>Файл <a href="/doc/routing/ex1/404.html" target="_blank" translate="no">404.html</a></p>
+		<div class="code cd" html.t="fetch(`/doc/routing/ex1/404.html`).then(res => res.text())"></div>
+	</li>
+</ol>
+<link exec.url="getLangEx(`./routing/ex1`, self.glob.lang)"
 	inc="`/ctrl/mwex/mwex.html`" />
 <link exec.menu="self.leftNav"
 	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />

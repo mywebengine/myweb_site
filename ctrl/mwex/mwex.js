@@ -1,21 +1,31 @@
-//let sync = 0;
-export function go($view, code, fillingOff) {
-//	const s = ++sync;
-//	setTimeout(() => _go($view, code, fillingOff, s), 500);
-	_go($view, code, fillingOff);
-}
-let debug;
-export function _go($view, code, fillingOff, s) {
+export function onInput($cnt, $iframe) {//, fillingOff, s) {
+	for (const sync of $iframe.contentWindow.mw_syncInRender) {
+		$iframe.contentWindow.mw_cancelSync(sync, 8);
+	}
+//	await $iframe.contentWindow.mw_getCurRender();
+	const $body = $iframe.contentDocument.body;
+	for (let $i = $body.firstChild; $i !== null; $i = $body.firstChild) {
+		$iframe.contentWindow.mw_removeChild($i);
+	}
+	$body.innerHTML = $cnt.textContent;
+	for (let $i = $body.firstChild; $i !== null; $i = $i.nextSibling) {
+//		if ($i.nodeType === 1) {
+			$iframe.contentWindow.mw_preRender($i);
+//		}
+	}
+	$iframe.contentWindow.mw_render(undefined, 0)
+		.then(() => resize($iframe));
+/*
 //	if (s && s !== sync) {
 //		return;
 //	}
 	for (let $i = $view.firstChild; $i !== null; $i = $view.firstChild) {
 		mw_removeChild($i);
 	}
-	if (debug === undefined) {
-		debug = self.mw_debugLevel;
-	}
-	self.mw_debugLevel = 1;
+//	if (debug === undefined) {
+//		debug = self.mw_debugLevel;
+//	}
+//	self.mw_debugLevel = 1;
 	$view.innerHTML = '<div scope.glob=""' + (fillingOff ? "" : ` is_filling='' on.mount.self='this.removeAttribute("is_filling")'`) + `
 		exec='if (this._init) { return }
 			this._init = true;
@@ -41,9 +51,23 @@ export function _go($view, code, fillingOff, s) {
 		.catch(err => {
 			self.mw_debugLevel = debug;
 			throw err;
-		});
+		});*/
 }
-export function keyDown($e, evt) {
+export function onLoad(scope, $iframe) {
+	if (!$iframe.src) {
+		return;
+	}
+	scope.code = prepareCode($iframe.contentDocument.body.innerHTML);
+	$iframe.contentDocument.documentElement.addEventListener("render", () => resize($iframe));
+}
+function prepareCode(code) {
+	return code.trim().replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+}
+function resize($iframe) {
+	$iframe.style.height = "";
+	$iframe.style.height = $iframe.contentDocument.scrollingElement.scrollHeight + "px";
+}
+export function onKeyDown($e, evt) {
 	const val = $e.textContent,
 		pos = self.getSelection().focusOffset;
 	if (evt.key === "Tab") {

@@ -1,9 +1,9 @@
-	.x0 {
-		display: flex;
-		flex-direction: column;
-		gap: 20px;
-		align-items: center;
-	}
+.x0 {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	align-items: center;
+}
 .x0-board {
 	grid-area: board;
 	display: grid;
@@ -58,4 +58,7 @@
 }
 .x0-log-title {
 	font-weight: bold;
+}
+body > h1 {
+	text-align: center;
 }

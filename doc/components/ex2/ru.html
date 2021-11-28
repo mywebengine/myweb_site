@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes" />
+		<script src="https://mywebengine.org/myweb/myweb.js?debug=1" type="module" async=""></script>
+		<link href="https://mywebengine.org/myweb/myweb.css" type="text/css" rel="stylesheet" />
+		<title>Components example 2 - myweb</title>
+	</head>
+	<body>
+
+<h3>Component expecting an array named "list"</h3>
+<div scope.s="" exec="s.myList = [
+		{ name: `name 1`, descr: `Descr text 1` },
+		{ name: `name 2`, descr: `Descr text 2` }
+	]">
+	<div exec.list="myList"
+		inc="`/doc/components/inc/ul.html`"></div>
+</div>
+
+	</body>
+</html>

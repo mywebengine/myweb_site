@@ -1,0 +1,55 @@
+<h1 exec="glob.pageTitle = `${this.textContent} - myweb`">Компоненты</h1>
+<p>Компоненты документа - это куски шаблона, которые можно использовать повторно. Каждый компонент может включать в себя другие компаненты, скрипты, файлы стилей и другую разметку HTML.</p>
+<p>Подключение компонета - это использование команды <a attr.href.push="`/doc/inc.html`" translate="no">inc</a>, которая по указанному URL подключает шаблон.</p>
+<div class="p info">
+	<p>Когда вставка подключает скрипт-модуль <span class="cd" translate="no">&lt;script type="module"></span>, то всё что экспортируется из скрипта попадает
+		в <a attr.href.push="`/doc/cmd/scope.html`">область видимости</a> тегов этой вставки.</p>
+</div>
+<p>Все вставки кэшируются и загружаются только один раз (кроме тех которые запрашиваются методом POST). Все скрипты и стили подключаемые из вставки, подключаются одни раз и помещаются в тег <span class="cd">&lt;head></span>.</p>
+
+<h2>Передача данных в компонент</h2>
+<p>Данные в компонент передавайть не нужно - они там будут по правилам <a attr.href.push="`/doc/cmd/scope.html`">области видимости</a>.
+	Т.е каждый тэг имеет свою обаласть видимости (в которую попадает область видимости родителя), и поэтому в компоненте будут доступны все переменные текущей области видимости.</p>
+<div class="p info">
+	<p>Можно использовать команду <a attr.href.push="`/doc/exec.html`" translate="no">exec</a> и назвать имена перевенных так, как этого ожидает компонент.</p>
+</div>
+<h2>Получение сообщений от компонента</h2>
+<p>Для того что бы дочерние компонеты могли сообщийть о том, что с ними происходит родительским комптонентам - можно использовать стандартные событя браузера.</p>
+<p>Что бы создать и отправить события можно используя стандартный механизм
+	создания пользовательского события <a href="https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent" target="_blank" translate="no">CustomEvent</a>,
+	и механизм его отправки <a href="https://developer.mozilla.org/docs/Web/API/EventTarget/dispatchEvent" target="_blank" translate="no">dispatchEvent</a>.
+	А что бы прослушгать эти события на родительских компонентах можно использовать
+		механизм <a href="https://developer.mozilla.org/docs/Web/API/EventTarget/addEventListener" target="_blank" translate="no">addEventListener</a>.</p>
+<div class="p info">
+	<p>Для упрощения создания и отправки пользовательских событий в API
+		есть функция <a class="cd" translate="no" attr.href.push="`/doc/api.html#mw_dispatchCustomEvent`">mw_dispatchCustomEvent($src, evtName[, detail])</a></p>
+	<p>Для упрощения прослушивания событий можно воспользоваться <a attr.href.push="`/doc/cmd/on.html`">команду&#160;<span class="cd" translate="no">on</span></a>.</p>
+</div>
+<h2>Пример</h2>
+<p>Далее рассмотри пример в котором будем использовать компонент <a href="/doc/components/inc/button.html" target="_blank" translate="no">button.html</a>:</p>
+<div class="code cd" html.t="fetch(`/doc/components/inc/button.html`).then(res => res.text())"></div>
+<p>Вы этом копоненте есть экспортируемая функция <span class="cd" translate="no">click</span>, котолрая будет достептольтко в <a attr.href.push="`/doc/cmd/scope.html`">области видимости</a>
+	элементов этого копонента (в данном примере только тэг <span class="cd" translate="no">&lt;button></span>).</p>
+<p>В примере ниже используем этот копонент передавая значение переменной text и разметку для слота по умолчанию:</p>
+<link exec.url="getLangEx(`./components/ex1`, self.glob.lang)"
+	inc="`/ctrl/mwex/mwex.html`" />
+<p>Далее рассмотрим пример, как использовать компоненты в компонетах:</p>
+<ol>
+	<li>
+		<p>Список, файл компонента <a href="/doc/components/inc/ul.html" target="_blank" translate="no">ul.html</a></p>
+		<div class="code cd" html.t="fetch(`/doc/components/inc/ul.html`).then(res => res.text())"></div>
+	</li>
+	<li>
+		<p>Элемент списка - <a href="/doc/components/inc/li.html" target="_blank" translate="no">li.html</a></p>
+		<div class="code cd" html.t="fetch(`/doc/components/inc/li.html`).then(res => res.text())"></div>
+	</li>
+	<li>
+		<p>Кнопка (описанная выше) - <a href="/doc/components/inc/button.html" target="_blank" translate="no">button.html</a></p>
+		<div class="code cd" html.t="fetch(`/doc/components/inc/button.html`).then(res => res.text())"></div>
+	</li>
+</ol>
+<!--p class="aaa" scope.s="">${s.url}</p-->
+<link exec.url="getLangEx(`./components/ex2`, self.glob.lang)"
+	inc="`/ctrl/mwex/mwex.html`" />
+<link exec.menu="self.leftNav"
+	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />

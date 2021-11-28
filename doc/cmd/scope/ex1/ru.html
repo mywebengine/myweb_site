@@ -1,3 +1,11 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<script src="/myweb/myweb.js?debug=1" type="module" async=""></script>
+	</head>
+	<body>
+
 <div scope.a-scope=""
 	exec.a="1">
 	<div scope.b-scope=""
@@ -17,5 +25,15 @@
 				<li foreach.v.k="cScope">${k} => ${v}</li>
 			</ul>
 		</div>
+		<div scope.d-scope=""
+			exec.d="3">
+			<b>dScope</b>
+			<ul>
+				<li foreach.v.k="dScope">${k} => ${v}</li>
+			</ul>
+		</div>
 	</div>
 </div>
+
+	</body>
+</html>

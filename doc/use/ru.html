@@ -1,6 +1,6 @@
 <h1 exec="glob.pageTitle = `${this.textContent} - myweb`">Поключение</h1>
-<p>Что бы подключить myweb нужно добвить скрипт и CSS-файл на страницу. Размер сжатой минимизированной версии скрипта&#160;<span class="cd">28&#160;KB</span>,
-	размер <span style="white-space: nowrap">CSS-файла 1 KB</span>.</p>
+<p>Что бы подключить myweb нужно добвить скрипт и CSS-файл на страницу. Размер сжатой минимизированной версии (алгоритмом Brotli): скрипт&#160;<span class="cd">28&#160;KB</span>
+	<span style="white-space: nowrap">и CSS-файла 1 KB</span>.</p>
 <p>Подключать CSS-файл не обязательно, будет достаточно, если вы скопируете в свой CSS правило (это правило нужно
 	для скрытия элементов тегом <a attr.href.push="`/doc/cmd.html#tag_template`" class="cd" translate="no">&lt;template></a>
 	и для скртия элеменов командой <a attr.href.push="`/doc/cmd/filling.html`" class="cd" translate="no">filling</a>):</p>
@@ -9,10 +9,13 @@
 	display: none !important;
 }</div>
 <h2>Файлы можно взять с сайта https://mywebengine.org</h2>
-<div class="p code cd">&lt;script src="https://mywebengine.org/myweb/myweb.js?debug=1" type="module" async=""></script>
+<div class="p code cd">&lt;script src="https://mywebengine.org/myweb/myweb.js" type="module" async=""></script>
 &lt;link href="https://mywebengine.org/myweb/myweb.css" type="text/css" rel="stylesheet" /></div>
+<p>Подключение минимизированнй версии:</p>
+<div class="p code cd">&lt;script src="https://mywebengine.org/myweb/myweb.min.js" type="module" async=""></script>
+&lt;link href="https://mywebengine.org/myweb/myweb.min.css" type="text/css" rel="stylesheet" /></div>
 
-<h2>Файлы можно взять с CDN</h2>
+<!--h2>Файлы можно взять с CDN</h2>
 
 
 <p style="color: red">Этот вариант как оказалось не позволяет передать параметры в URL - т.е включить отладку не вйдет - пока подумаю об этом.
@@ -20,16 +23,17 @@
 
 
 <div class="p code cd">&lt;script src="https://cdn.jsdelivr.net/gh/mywebengine/myweb0.9.03/myweb.min.js" type="module" async="">&lt;/script>
-&lt;link href="https://cdn.jsdelivr.net/gh/mywebengine/myweb@0.9.03/myweb.min.css" type="text/css" rel="stylesheet" /></div>
+&lt;link href="https://cdn.jsdelivr.net/gh/mywebengine/myweb@0.9.03/myweb.min.css" type="text/css" rel="stylesheet" /></div-->
 
 <h2>Файлы можно взять с GitHub</h2>
 <div class="p code cd">git clone git@github.com:mywebengine/myweb.git</div>
-<p>И подулючить минимизированные версии:</p>
-<div class="p code cd">&lt;script src="/myweb.min.js" type="module" async="">&lt;/script>
-&lt;link href="/myweb.min.css" type="text/css" rel="stylesheet" /></div>
-<p>Или подключить основные файлы:</p>
+<p>Подключение файлов:</p>
 <div class="p code cd">&lt;script src="/myweb.js" type="module" async="">&lt;/script>
 &lt;link href="/myweb.css" type="text/css" rel="stylesheet" /></div>
+<p>Подключиние минимизированной версии:</p>
+<div class="p code cd">&lt;script src="/myweb.min.js" type="module" async="">&lt;/script>
+&lt;link href="/myweb.min.css" type="text/css" rel="stylesheet" /></div>
+
 <h2>Параметры подключения</h2>
 <p>Подключение скрипта можно конфигурировать используя GET параметры:</p>
 <div class="p code cd">&lt;script src="/myweb.min.js?debug=(0|1|2)&load=(onload|skip)&linking=1" type="module" async="">&lt;/script>
@@ -55,5 +59,23 @@
 		<p>Если укаать значение "1", то первый проход рендера будет в режиме линоковки, подробнее это обсуждается в разделе <a attr.href.push="`/doc/ssr.html#linking`">серверный рендеринг, режим линковки</a></p>
 	</li>
 </ul>
+<h2>Базовый файл с поключенными файлами</h2>
+<p>
+	<a href="./use/p0.html" target="_blank">Скачать файл</a>
+</p>
+<div class="p code cd">&lt;!doctype html>
+&lt;html>
+	&lt;head>
+		&lt;script src="https://mywebengine.org/myweb/myweb.js?debug=1" type="module" async="">&lt;/script>
+		&lt;link href="https://mywebengine.org/myweb/myweb.css" type="text/css" rel="stylesheet" />
+		&lt;meta charset="utf-8" />
+		&lt;title><span>$</span>{location.href}&lt;/title>
+	&lt;/head> 
+	&lt;body>
+		<span>$</span>{location.href}
+	&lt;/body>
+&lt;/html>
+</div>
+<p></p>
 <link exec.menu="self.leftNav"
 	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />
