@@ -1,6 +1,12 @@
 <div class="w m-2col">
-	<div class="m-2col-col1">
-		<link inc="getLangInc(`/page/body/2cols`, self.glob.lang)" />
+	<div class="m-2col-col1"
+		attr.class.scrolling="view.scrollTop >= 214">
+		<nav class="sub_menu"
+			exec.f="640 >= view.clientWidth"
+			on.render.self="const $p = document.querySelector(f ? `#h_menu_doc` : `.m-2col-col1`);
+				if ($p && $p !== this.parentNode) $p.appendChild(this)">
+			<link inc="getLangInc(`/page/body/2cols`, self.glob.lang)" />
+		</nav>
 	</div>
 	<div class="m-2col-col2 cnt">
 		<link inc="`./cnt.html`" />

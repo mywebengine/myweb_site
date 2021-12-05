@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes" />
+		<script src="https://mywebengine.org/myweb/myweb.js?debug=1" type="module" async=""></script>
+		<link href="https://mywebengine.org/myweb/myweb.css" type="text/css" rel="stylesheet" />
+		<title>watch commaand - example, myweb</title>
+	</head>
+	<body>
+
+<div scope.w=""
+	exec="if (!w.obj) w.obj = {}">
+	<input placeholder="obj.text"
+		attr.value="obj.text || ''" 
+		on.input="w.obj.text = this.value" />
+	<button on.click="w.obj = { text: `new val` }">Set new val</button>
+	<p watch="obj">obj is changed: ${Math.random()}</p>
+	<p watch.text="obj.text">
+		obj.text is changed: ${Math.random()}
+		<br />${text}
+	</p>
+</div>
+
+	</body>
+</html>

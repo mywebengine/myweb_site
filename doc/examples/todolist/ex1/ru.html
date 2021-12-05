@@ -13,7 +13,8 @@
 	- используются только для применения стилей к элементам *** -->
 <h1>Todo list - example, myweb</h1>
 <div class="todos"
-	scope.todo="">
+	scope.todo=""
+	is_filling="" filling="todo.todos">
 	<!-- Загружаем данные с сервера
 		evt - ссылка событие, обсуждается в https://mywebengine.org/doc/cmd/on.html#description
 		evt.detail.res находится ответ сервера, обсуждается в https://mywebengine.org/doc/cmd/fetch.html#get_result -->
@@ -66,7 +67,7 @@
 				Select all
 			</label>
 			<div class="todos-list-i"
-				foreach.item.idx="arr"
+				foreach.item="arr"
 				attr.class.todos-list-i-ok="item.ok">
 				<input type="checkbox"
 					attr.checked="item.ok"
@@ -74,7 +75,7 @@
 				<div contenteditable="true"
 					on.blur="item.name = this.textContent"
 					html.text="item.name"></div>
-				<button on.click="todo.todos.splice(idx, 1)">×</button>
+				<button on.click="todo.todos.splice(todo.todos.findIndex(i => i === item), 1)">×</button>
 			</div>
 		</div>
 		<p elseif="arr">${todo.filter || `all`} list is empty</p>

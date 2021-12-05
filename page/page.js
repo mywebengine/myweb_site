@@ -49,3 +49,9 @@ function getExText(path) {
 	self.exCache.set(url, tt);
 	return tt;
 }
+/*
+self.addEventListener("scroll", () => {
+	document.documentElement.classList.toggle("scrolling", document.scrollingElement.scrollTop >= 98 + 116);
+}, {
+	passive: true
+});*/

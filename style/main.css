@@ -18,8 +18,8 @@
 }
 .m-2col-col1 {
 	margin-bottom: -112px;
-	border-right: solid 1px #ccc;
 	z-index: 1;
+	border-right: solid 1px #ccc;
 }
 .m-2col-col2 {
 /*
@@ -28,11 +28,12 @@
 }
 
 .sub_menu {
-	--gap: 10px;
-	margin-top: calc(var(--gap) * -1);
-	padding-right: 10px;
-	font-size: 14px;
-	line-height: 1.5em;
+	--mgap: 12px;
+	margin-top: calc(var(--mgap) * -1);
+	padding-right: 15px;
+	font-size: var(--sfont_size);
+/*
+	line-height: 1.5em;*/
 }
 .sub_menu > ul {
 	margin: 0;
@@ -40,30 +41,35 @@
 	list-style: none;
 }
 .sub_menu ul ul {
-	padding: 0 0 0 var(--gap);
+	padding: 0 0 0 var(--mgap);
 	list-style: none;
 }
 .sub_menu li {
-	margin: var(--gap) 0 0 0;
+	margin: var(--mgap) 0 0 0;
 }
 .h-menu a,
 .sub_menu a {
 	display: inline-block;
-	margin: calc(var(--gap) * -1);
-	padding: var(--gap);
+	margin: -5px;
+	padding: 5px;
 	color: blue;
 }
 .h-menu a[href],
 .sub_menu a[href] {
 	color: inherit;
 }
+/*
+.sub_menu ul ul .cd {
+	font-size: 1.1em;
+}*/
 .sub_menu .descr {
 	display: block;
-	font-size: 12px;
-	line-height: 1em;
+	font-size: var(--sfont_size);
+/*
+	line-height: 1em;*/
 }
 .sub_menu a[href] .descr {
-	color: #777;
+	color: #555;
 }
 .sub_menu a .descr {
 	color: inherit;
@@ -116,16 +122,18 @@
 }
 .footnote {
 	padding: 0 10px;
-	font-size: 14px;
-	line-height: 1.2em;
+	font-size: var(--sfont_size);
+/*
+	line-height: 1.2em;*/
 	border-left: solid 2px #ccc;
 }
+/*
 .cnt h1 {
 	margin: 0.67em 0;
 }
 .cnt h2 {
 	margin: 1.5em 0 0.87em 0;
-}
+}*/
 .p,
 .cnt p {
 	margin: 1em 0;
@@ -187,9 +195,10 @@
 .props-marker + p {
 	margin-top: 0;
 }
+/*
 .props .props .props-marker .cd:first-of-type {
 	font-weight: normal;
-}
+}*/
 .cnt .mwex {
 	margin: var(--gap) 0;
 }
@@ -201,10 +210,53 @@
 .cnt .mwex-cnt-code {
 	width: var(--cnt_width);
 }
+
+.cd,
+.mwex-cnt-code {
+	font-size: 1.1em;
+}
+
+
+.scrolling .sub_menu {
+	position: fixed;
+	top: 10px;
+	bottom: 10px;
+	left: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+	width: calc(var(--menu_width) - 6px);
+	padding-left: var(--gap);
+	padding-top: 10px;
+	padding-right: 5px;
+	background: #fff;
+}
+#h_menu_doc .sub_menu {
+	display: none;
+}
+
 @media screen and (max-width: 1024px) {
 	.cnt .mwex-cnt {
 		margin-right: 0;
 		grid-template-columns:
 			1fr	auto	1fr;
+	}
+}
+@media screen and (max-width: 640px) {
+	.m-2col {
+		grid-template-columns:
+			1fr;
+		gap: var(--gap);
+		padding-left: 0;
+	}
+	.m-2col-col1 {
+		display: none;
+	}
+	#h_menu_doc .sub_menu {
+		display: block;
+	}
+	.code,
+	.cnt .mwex-cnt-code {
+		width: calc(100vw - 60px);
+		box-sizing: border-box;
 	}
 }

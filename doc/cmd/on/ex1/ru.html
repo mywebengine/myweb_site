@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes" />
+		<script src="https://mywebengine.org/myweb/myweb.js?debug=1" type="module" async=""></script>
+		<link href="https://mywebengine.org/myweb/myweb.css" type="text/css" rel="stylesheet" />
+		<title>on commaand - example, myweb</title>
+	</head>
+	<body>
+
+<ul on.mount.self="console.log(`mount`, evt.target)"
+	on.my-event="console.log(`myEvent`, evt.detail.key)">
+	<li scope.i-scope=""
+		exec.i="0">
+		<div>Press key "a"</div>
+		<input on.keydown="mw_dispatchCustomEvent(this, `myEvent`, {
+				key: evt.key
+			})"
+			on.keydown.a.prevent="iScope.i++" />
+		<div>i = ${iScope.i}</div>
+	</li>
+	<li scope.i-scope=""
+		exec.i="0">
+		<div>Press key shift + "a" and try - shift + alt + "a"</div>
+		<input on.keydown.a.shift.exact="iScope.i++" />
+		<div>i = ${iScope.i}</div>
+	</li>
+	<li scope.i-scope=""
+		exec.i="0">
+		<div>Press key shift + alt + "a"</div>
+		<input on.keydown.a.shift.alt="iScope.i++" />
+		<div>i = ${iScope.i}</div>
+	</li>
+	<li scope.i-scope=""
+		exec.i="0">
+		<div>Paste string "abc"</div>
+		<input on.input.abc="iScope.i++" />
+		<div>i = ${iScope.i}</div>
+	</li>
+	<li scope.i-scope=""
+		exec.i="0">
+		<div>Click + shift</div>
+		<button on.click.shift="iScope.i++">i = ${iScope.i}</button>
+	</li>
+</ul>
+
+	</body>
+</html>

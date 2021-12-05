@@ -6,13 +6,14 @@ html,
 body {
 	margin: 0;
 	padding: 0;
-	height: 100%;
 	background: white;
+	height: 100%;
 }
 html {
 	font-family: arial, sans-serif;
+/*
 	font-size: 18px;
-	line-height: 1.5em;
+	line-height: 1.5em;*/
 	color: #222;
 }
 body {
@@ -21,6 +22,7 @@ body {
 	--text_gap: 1em;
         --menu_width: 150px;
         --cnt_width: 680px;
+        --sfont_size: 0.9em;
 
 	display: flex;
 	flex-direction: column;
@@ -52,9 +54,21 @@ a.no_href {
 }
 a[href][target="_blank"]::after {
 	content: "↗";
-	vertical-align: super;
-	font-size: smaller;
 }
+
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background: #b6b6b6;
+	border: solid 3px #f6f6f6;
+}
+::-webkit-scrollbar-track {
+	background: #fff;
+}
+
 @media screen and (max-width: 1024px) {
 	body {
 		--cnt_width: auto;

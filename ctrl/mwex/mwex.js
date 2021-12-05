@@ -1,3 +1,35 @@
+export function onMount(scope, $iframe) {
+//!!это из-за Сафари, такое чувство, что после начала загрузки она инициализирует новый виндов и тем самым сбрасывает установленный DOMContentLoaded
+	load(scope, $iframe, $iframe.contentDocument.readyState);
+//, поуму должно роальтоать так:
+//	$iframe.contentWindow.addEventListener(`DOMContentLoaded`, () => {
+//		onLoad(scope, $iframe);
+//	});
+	$iframe.src = scope.url;
+}
+function load(scope, $iframe, state) {
+	if ($iframe.contentDocument.readyState === state) {
+		setTimeout(() => load(scope, $iframe, state), 0);
+		return;
+	}
+	if ($iframe.contentDocument.readyState === `interactive` || $iframe.contentDocument.readyState === `complete`) {
+		onLoad(scope, $iframe);
+		return;
+	}
+	$iframe.contentWindow.addEventListener(`DOMContentLoaded`, () => onLoad(scope, $iframe));
+}
+export function onLoad(scope, $iframe) {
+	scope.code = prepareCode($iframe.contentDocument.body.innerHTML);
+	let sync = 0
+	$iframe.contentDocument.documentElement.addEventListener("render", function(evt) {
+		const s = ++sync;
+		setTimeout(() => {
+			if (s === sync) {
+				resize($iframe);
+			}
+		}, 100);
+	});
+}
 export function onInput($cnt, $iframe) {//, fillingOff, s) {
 	for (const sync of $iframe.contentWindow.mw_syncInRender) {
 		$iframe.contentWindow.mw_cancelSync(sync, 8);
@@ -13,58 +45,20 @@ export function onInput($cnt, $iframe) {//, fillingOff, s) {
 			$iframe.contentWindow.mw_preRender($i);
 //		}
 	}
-	$iframe.contentWindow.mw_render(undefined, 0)
-		.then(() => resize($iframe));
-/*
-//	if (s && s !== sync) {
-//		return;
-//	}
-	for (let $i = $view.firstChild; $i !== null; $i = $view.firstChild) {
-		mw_removeChild($i);
-	}
-//	if (debug === undefined) {
-//		debug = self.mw_debugLevel;
-//	}
-//	self.mw_debugLevel = 1;
-	$view.innerHTML = '<div scope.glob=""' + (fillingOff ? "" : ` is_filling='' on.mount.self='this.removeAttribute("is_filling")'`) + `
-		exec='if (this._init) { return }
-			this._init = true;
-			const pSet = new Set();
-			for (const $s of this.querySelectorAll("script")) {
-				if ($s.type !== "module") {
-					self.eval($s.textContent);
-					continue;
-				}
-				pSet.add(import($s.src || URL.createObjectURL(new Blob([$s.textContent], {
-						type: "text/javascript"
-					})))
-						.then(m => {
-							for (const i in m) {
-								const j = m[i];
-								glob[mw_p_target][j.name !== undefined ? j.name : i] = m[i];
-							}
-						}));
-			}
-			return Promise.all(pSet);'>${code}</div>`;
-	mw_render($view.firstElementChild)
-//		.then(() => setTimeout(() => self.mw_debugLevel = debug, 500))
-		.catch(err => {
-			self.mw_debugLevel = debug;
-			throw err;
-		});*/
-}
-export function onLoad(scope, $iframe) {
-	if (!$iframe.src) {
-		return;
-	}
-	scope.code = prepareCode($iframe.contentDocument.body.innerHTML);
-	$iframe.contentDocument.documentElement.addEventListener("render", () => resize($iframe));
+	$iframe.style.height = "";
+	$iframe.contentWindow.mw_render(undefined, 0);
 }
 function prepareCode(code) {
 	return code.trim().replaceAll("&lt;", "<").replaceAll("&gt;", ">");
 }
 function resize($iframe) {
-	$iframe.style.height = "";
+	if ($iframe.contentDocument === null || $iframe.style.maxHeight) {
+		return;
+	}
+//	if (!$iframe.style.maxHeight) {
+		$iframe.style.overflow = "hidden";
+		$iframe.contentDocument.documentElement.style.overflow = "hidden";
+//	}
 	$iframe.style.height = $iframe.contentDocument.scrollingElement.scrollHeight + "px";
 }
 export function onKeyDown($e, evt) {

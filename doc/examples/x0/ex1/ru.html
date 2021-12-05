@@ -12,42 +12,68 @@
 <!-- *** имена CSS-классов
 	- используются только для применения стилей к элементам *** -->
 <h1>Tic-tac-toe - example, myweb</h1>
-<div class="x0"
+<div class="x0" is_filling="" on.mount.self="this.removeAttribute(`is_filling`)"
 	scope.game=""
-	exec="if (!game.score) init(game)"
+	exec="if (!game.score) init(game, 3)"
 	attr.class.game_over="game.winner">
+	<div class="x0-size">
+		<label>Size: <input type="number" min="3"
+			attr.value="game.size"
+			on.change="if (this.value >= 3) init(game, this.value * 1)" /> </label>
+	</div>
 	<div class="x0-score">
-		<div class="x0-score-i player_x">X = ${game.score.X}</div>
-		<div class="x0-score-i player_0">0 = ${game.score["0"]}</div>
+		<div class="x0-score-i player_x">× = ${game.score.X}</div>
+		<div class="x0-score-i player_0">⊙ = ${game.score["0"]}</div>
 	</div>
 	<div class="x0-message">${game.message}</div>
 	<div if="game.winner">
 		<button on.click="newGame(game)">Start new game</button>
 	</div>
 	<div class="x0-board">
-		<div class="x0-board-cell"
-			foreach..cell="new Array(9)"
-				exec.player="game.log.find(i => i.cell === cell)?.player"
-				attr.class.player_x="player === `X`"
-				attr.class.player_0="player === `0`"
-				on.click="!player && !game.winner && setMove(game, `X`, cell)"></div>
+		<div class="x0-board-row"
+			foreach..i="new Array(game.size)">
+			<div class="x0-board-cell"
+				foreach..j="new Array(game.size)"
+					exec.cell="i * game.size + j"
+					exec.player="game.log.find(i => i.cell === cell)?.player"
+					attr.class.player_x="player === `X`"
+					attr.class.player_0="player === `0`"
+					on.click="!player && !game.winner && setMove(game, `X`, cell)">
+					<div class="x0-board-cell-name">${cell + 1}</div>
+			</div>
+		</div>
 	</div>
 	<div class="x0-log">
 		<div class="x0-log-title">Game log</div>
 		<button class="x0-log-i"
 			foreach.move.i="game.log"
-				on.click="goToMove(game, i)">Move #${i + 1}: player ${move.player} move to ${move.cell + 1} cell</button>
+				on.click="goToMove(game, i)">Move #${i + 1}: player "${move.player}" move to ${move.cell + 1} cell</button>
 	</div>
 </div>
 <script>
 	//0 1 2
 	//3 4 5
 	//6 7 8
-	//Все выигрышные комбинации
-	const winArr = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 	//Инициализация компонента
-	function init(game) {
+	function init(game, size) {
+		game.size = size;
 		game.score = { X: 0, "0": 0 };
+		game.currentPlayer = undefined;
+		//Записываем все выигрышные комбинации
+		const len = size * 2;
+		game.winArr = new Array(len + 2);
+		for (let i = len + 1; i > -1; i--) {
+			game.winArr[i] = new Array(size);
+		}
+		for (let j, i = 0, left = 0, right = size - 1; i < size; i++, left += size + 1, right += size - 1) {
+			game.winArr[0][i] = left;
+			game.winArr[1][i] = right;
+			for (j = 0; j < size; j++) {
+				game.winArr[i + 2][j] = i * size + j;
+				game.winArr[i + size + 2][j] = i + j * size;
+			}
+		}
+		//Начинаем игру
 		newGame(game);
 	}
 	//Запускаем новую игру
@@ -59,47 +85,86 @@
 			game.message = `The first one walks X is you`;
 			return;
 		}
-                do {//Первый ход 0 случайный (от 0 до 8) и проверяем что бы это был угол
-                	const i = Math.floor(9 * Math.random());
-			switch (i) {
-				case 0:
-				case 2:
-				case 6:
-				case 8:
-					setMove(game, "0", i);
-					return;
-			}
-		} while (true);
+		setMove(game, "0", getNextMove(game, "0"));//(game.size * game.size - 1) / 2);
 	}
 	//Делаем ход
 	function setMove(game, player, cell) {
-		if (testWin(game, player, cell)) {
+		if (cell !== undefined) {
+			if (testWin(game, player, cell)) {
+				game.log.push({ player, cell });
+				gameOver(game, player, true);
+				return;
+			}
 			game.log.push({ player, cell });
-			gameOver(game, player, true);
-			return;
 		}
-		game.log.push({ player, cell });
 		if (player === "0") {
 			game.message = "Your turn";
 			return;
 		}
-		const n0 = getNextMove(game, "0");
-		if (n0 === -1) {
+		const move = getNextMove(game, "0");
+		if (move === -1) {
 			gameOver(game, player, false);
 			return;
 		}
-		if (testWin(game, "0", n0)) {
-			setMove(game, "0", n0);
-			return;
+		setMove(game, "0", move);
+	}
+	//Вычисляем следующий ход для нашего ИИ
+	function getNextMove(game, player) {
+		const rivalName = player !== "X" ? "X" : "0",
+			cells = new Set(),
+			playerCells = new Set(),
+			rivalCells = new Set();
+		game.log.forEach(l => l.player === player ? playerCells.add(l.cell) : rivalCells.add(l.cell));
+		//Линии, которые могут выиграть
+		const lines = game.winArr.filter(line => line.findIndex(i => rivalCells.has(i)) === -1);
+		//Если у игрока нет возможнасти выиграть, то делаем лучщий ход противника, но если и упротивника нет хода ведущего к выигрышу - тогда ничья
+		if (lines.length === 0) {
+			if (game.winArr.find(line => line.findIndex(i => playerCells.has(i)) === -1) === undefined) {
+				return -1;
+			}
+			const move = getNextMove(game, rivalName);
+			playerCells.add(move);
+			if (game.winArr.find(line => line.findIndex(i => playerCells.has(i)) === -1) === undefined) {
+				game.log.push({ player, cell: move });
+				return -1;
+			}
+			return move;
 		}
-		const nX = getNextMove(game, "X");
-		if (nX !== -1) {
-			setMove(game, "0", nX);
+		//Проверяем можно ли выиграть следующим ходом
+		let move = lines.sort((a, b) => a.filter(i => playerCells.has(i)).length < b.filter(i => playerCells.has(i)).length ? 1 : -1)[0].find(i => !playerCells.has(i));
+		if (testWin(game, player, move) || player === "X") {
+			return move;
 		}
-		if (getNextMove(game, "X") === -1) {
-			gameOver(game, player, false);
-			return;
+		//Проверяем может ли соперник выиграть следующим ходом
+		const nextRivalMove = getNextMove(game, rivalName);		
+		if (nextRivalMove !== -1 && testWin(game, rivalName, nextRivalMove)) {
+			return nextRivalMove;
 		}
+		//Ищим самый жирный ход
+		move = -1;
+		let weight = -1;
+		const exists = new Set();
+		for (let j, i = lines.length - 1; i > -1; i--) {
+			for (j = lines[i].length - 1; j > -1; j--) {
+				const iMove = lines[i][j];
+				if (exists.has(iMove) || playerCells.has(iMove) || rivalCells.has(iMove)) {
+					continue;
+				}
+				const iWeight = lines.filter(line => line.indexOf(iMove) !== -1).length;
+				if (weight < iWeight) {
+					move = iMove;
+					weight = iWeight;
+				}
+				exists.add(iMove);
+			}
+		}
+		return move;
+	}
+	//Проверяем ход на победу
+	function testWin(game, player, cell) {
+		const playerCells = new Set([cell]);
+		game.log.forEach(l => l.player === player && playerCells.add(l.cell));
+		return game.winArr.findIndex(line => line.filter(i => playerCells.has(i)).length === game.size) !== -1;
 	}
 	//Возвращается к предыдущему ходу
 	function goToMove(game, i) {
@@ -109,42 +174,10 @@
 			}
 			delete game.winner;
 		}
-		game.log.splice(game.log[i].player === "X" ? i : i - 1);//ход можно отменить, только так что бы X ходил следующим
-	}
-	//Проверяем ход на победу
-	function testWin(game, player, cell) {
-		const playerCells = new Set([cell]);
-		game.log.forEach(l => l.player === player && playerCells.add(l.cell));
-		return winArr.findIndex(line => line.filter(i => playerCells.has(i)).length === 3) !== -1;
-	}
-	//Вычисляем следующий ход для нашего ИИ
-	function getNextMove(game, player) {
-		const cells = new Set(),
-			playerCells = new Set(),
-			rivalCells = new Set();
-		game.log.forEach(l => {
-			if (l.player === player) {
-				playerCells.add(l.cell);
-				return;
-			}
-			rivalCells.add(l.cell);
-		});
-		const lines = winArr
-			.filter(line => line.findIndex(i => rivalCells.has(i)) === -1);
-		if (lines.length === 0) {
-			return player === "X" ? getNextMove(game, "0") : -1;
-		}
-		if (player === "0") {
-			const line = lines.sort((a, b) => a.filter(i => playerCells.has(i)).length < b.filter(i => playerCells.has(i)).length ? 1 : -1)[0];
-			return playerCells.has(line[0]) ? playerCells.has(line[2]) ? line[1] : line[2] : line[0];
-		}
-		for (let i = lines.length - 1; i > -1; i--) {
-			const c = lines[i].filter(i => !playerCells.has(i));
-			if (c.length === 1) {
-				return c[0];
-			}
-		}
-		return getNextMove(game, "0");
+		//Ход нужно отменить, так что бы X ходил следующим
+		const player = game.log[i].player;
+		game.log.splice(player !== "0" ? i : i !== 0 ? i - 1 : 1);
+		setMove(game, "0");
 	}
 	//Инициализация окончания игры
 	function gameOver(game, player, isWin) {

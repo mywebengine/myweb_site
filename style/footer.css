@@ -1,5 +1,5 @@
 .f {
-	font-size: 14px;
+	font-size: var(--sfont_size);
 }
 .f > .w {
 	border-top: solid 1px #ccc;
@@ -19,4 +19,13 @@
 	left: calc(var(--gap) * -1 - 1px);
 	width: 0px;
 	border-left: solid 1px #ccc;
+}
+
+@media screen and (max-width: 640px) {
+	.f.is_col2 > .w {
+		margin-left: var(--gap);
+	}
+	.f.is_col2 > .w::before {
+		display: none;
+	}
 }

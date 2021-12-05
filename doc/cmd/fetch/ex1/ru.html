@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes" />
+		<script src="https://mywebengine.org/myweb/myweb.js?debug=1" type="module" async=""></script>
+		<link href="https://mywebengine.org/myweb/myweb.css" type="text/css" rel="stylesheet" />
+		<title>fetch commaand - example, myweb</title>
+	</head>
+	<body>
+
+<link fetch="location.href"
+	on.load="console.log(`load #1`, evt.detail.res)" 
+	on.ok="console.log(`ok #1`, evt.detail.res)"/>
+<link fetch="`./aaaa`"
+	on.load="console.log(`load #2`, evt.detail.res)"
+	on.ok="console.log(`ok #2`, evt.detail.res)" />
+<link fetch="`zz://aaaa`"
+	on.error="console.log(`error #3`, evt.detail.err)" />
+
+<div scope.load-page="">
+	<button exec="if (!loadPage.log) loadPage.log = []"
+		on.click="loadPage.load = {}">Load page</button>
+	<link watch="loadPage.load"
+		fetch="location.href"
+		on.load="loadPage.log.unshift({ date: new Date(), status: evt.detail.res.status })" />
+	<ul>
+		<li foreach.v="loadPage.log">${v.status}, ${v.date}</li>
+	</ul>
+</div>
+
+
+	</body>
+</html>

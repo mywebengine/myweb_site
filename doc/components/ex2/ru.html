@@ -10,12 +10,11 @@
 	<body>
 
 <h3>Component expecting an array named "list"</h3>
-<div scope.s="" exec="s.myList = [
+<div exec.list="[
 		{ name: `name 1`, descr: `Descr text 1` },
 		{ name: `name 2`, descr: `Descr text 2` }
 	]">
-	<div exec.list="myList"
-		inc="`/doc/components/inc/ul.html`"></div>
+	<div inc="`/doc/components/inc/ul.html`"></div>
 </div>
 
 	</body>

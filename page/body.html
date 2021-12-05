@@ -1,7 +1,25 @@
 <header class="h"
 	exec="self.isCol2 = loc.path.indexOf(`/doc`) === 0">
 	<div class="w">
-		<link inc="getLangInc(`/page/body/header`, self.glob.lang)" />
+		<div class="h-logo">
+			<a attr.href.push="loc.path !== `/index.html` && `/index.html`" translate="no">myweb</a>
+		</div>
+		<div class="h-menu">
+			<div class="h-menu-burger-btn"
+				onclick="this.parentNode.lastElementChild.classList.add(`show`)">
+				<div class="h-menu-burger-btn-i"></div>
+				<div class="h-menu-burger-btn-i"></div>
+				<div class="h-menu-burger-btn-i"></div>
+			</div>
+			<div class="h-menu-popup"
+				on.click="if (evt.target.nodeName === `A` || evt.target.nodeName === `SPAN` || evt.target === this) this.classList.remove(`show`)">
+				<div class="h-menu-popup-cnt">
+					<nav class="h-menu-top">
+						<link inc="getLangInc(`/page/body/header/menu`, self.glob.lang)" />
+					</nav>
+				</div>
+			</div>
+		</div>
 	</div>
 </header>
 <main class="m">

@@ -1,0 +1,18 @@
+<h2>Menu</h2>
+<ul>
+	<li foreach.i="[{
+		name: `Home`,
+		href: `/`
+	}, {
+		name: `About`,
+		href: `/about.html`
+	}, {
+		name: `Contacts`,
+		href: `/contacts.html`
+	}, {
+		name: `Not found example`,
+		href: `/fdsalffgs4233`
+	}]">
+		<a attr.href.push="loc.path !== i.href && i.href">${i.name}</a>
+	</li>
+</ul>

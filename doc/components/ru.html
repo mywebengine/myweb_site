@@ -11,7 +11,7 @@
 <p>Данные в компонент передавайть не нужно - они там будут по правилам <a attr.href.push="`/doc/cmd/scope.html`">области видимости</a>.
 	Т.е каждый тэг имеет свою обаласть видимости (в которую попадает область видимости родителя), и поэтому в компоненте будут доступны все переменные текущей области видимости.</p>
 <div class="p info">
-	<p>Можно использовать команду <a attr.href.push="`/doc/exec.html`" translate="no">exec</a> и назвать имена перевенных так, как этого ожидает компонент.</p>
+	<p>Можно использовать команду <a attr.href.push="`/doc/cmd/exec.html`" translate="no">exec</a> и назвать имена перевенных так, как этого ожидает компонент.</p>
 </div>
 <h2>Получение сообщений от компонента</h2>
 <p>Для того что бы дочерние компонеты могли сообщийть о том, что с ними происходит родительским комптонентам - можно использовать стандартные событя браузера.</p>
@@ -28,26 +28,18 @@
 <h2>Пример</h2>
 <p>Далее рассмотри пример в котором будем использовать компонент <a href="/doc/components/inc/button.html" target="_blank" translate="no">button.html</a>:</p>
 <div class="code cd" html.t="fetch(`/doc/components/inc/button.html`).then(res => res.text())"></div>
-<p>Вы этом копоненте есть экспортируемая функция <span class="cd" translate="no">click</span>, котолрая будет достептольтко в <a attr.href.push="`/doc/cmd/scope.html`">области видимости</a>
-	элементов этого копонента (в данном примере только тэг <span class="cd" translate="no">&lt;button></span>).</p>
-<p>В примере ниже используем этот копонент передавая значение переменной text и разметку для слота по умолчанию:</p>
+<p>Вы этом компоненте есть экспортируемая функция <span class="cd" translate="no">click</span>, котолрая будет достептольтко в <a attr.href.push="`/doc/cmd/scope.html`">области видимости</a>
+	элементов этого компонента (в данном примере только тэг <span class="cd" translate="no">&lt;button></span>).</p>
+<p>Ниже в примере используется этот компонент, которому передаётся: значение переменной text и разметка для слота по умолчанию.</p>
 <link exec.url="getLangEx(`./components/ex1`, self.glob.lang)"
 	inc="`/ctrl/mwex/mwex.html`" />
-<p>Далее рассмотрим пример, как использовать компоненты в компонетах:</p>
-<ol>
-	<li>
-		<p>Список, файл компонента <a href="/doc/components/inc/ul.html" target="_blank" translate="no">ul.html</a></p>
-		<div class="code cd" html.t="fetch(`/doc/components/inc/ul.html`).then(res => res.text())"></div>
-	</li>
-	<li>
-		<p>Элемент списка - <a href="/doc/components/inc/li.html" target="_blank" translate="no">li.html</a></p>
-		<div class="code cd" html.t="fetch(`/doc/components/inc/li.html`).then(res => res.text())"></div>
-	</li>
-	<li>
-		<p>Кнопка (описанная выше) - <a href="/doc/components/inc/button.html" target="_blank" translate="no">button.html</a></p>
-		<div class="code cd" html.t="fetch(`/doc/components/inc/button.html`).then(res => res.text())"></div>
-	</li>
-</ol>
+<p>Далее рассмотрим пример, как использовать компоненты в компонетах - используемые файлы приведены ниже.</p>
+<p>"Список" - файл компонента <a href="/doc/components/inc/ul.html" target="_blank" translate="no">ul.html</a></p>
+<div class="code cd" html.t="fetch(`/doc/components/inc/ul.html`).then(res => res.text())"></div>
+<p>"Элемент списка" - <a href="/doc/components/inc/li.html" target="_blank" translate="no">li.html</a></p>
+<div class="code cd" html.t="fetch(`/doc/components/inc/li.html`).then(res => res.text())"></div>
+<p>"Кнопка" (описанная выше) - <a href="/doc/components/inc/button.html" target="_blank" translate="no">button.html</a></p>
+<div class="code cd" html.t="fetch(`/doc/components/inc/button.html`).then(res => res.text())"></div>
 <!--p class="aaa" scope.s="">${s.url}</p-->
 <link exec.url="getLangEx(`./components/ex2`, self.glob.lang)"
 	inc="`/ctrl/mwex/mwex.html`" />

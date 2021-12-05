@@ -53,9 +53,26 @@
 	</li>
 	<li id="mw_setDelay">
 		<div class="props-marker">
-			<span class="cd" translate="no">mw_setDelay(delay)</span>
+			<span class="cd" translate="no">mw_setDelay(delay[, callback])</span>
 		</div>
-		<p>Функция устанавлиевает задержку в мс, перед запуском рендера</p>
+		<p>Функция устанавлиевает задержку перед запуском рендера в мс</p>
+		<ul class="props">
+			<li>
+				<div class="props-marker">
+					<span class="cd" translate="no">delay</span>
+				</div>
+				<p>Задержка в мс</p>
+			</li>
+			<li>
+				<div class="props-marker">
+					<span class="cd" translate="no">callback</span> <span class="nr">необязательный</span>
+				</div>
+				<p>Функция обратного вызова которая вызовется после изменения значения, и после выполнения установит значение задержки равным тому что было до вызова этой функции.</p>
+			</li>
+		</ul>
+		<p>Пример: <span class="cd" translate="no">mw_setDelay(100, () => glob.query = "123")</span> - установит задержку в 100 мс перед запуском рендареа,
+			который будут инициирован изменением рективной переменнной <span class="cd" translate="no">glob.query</span>, и после вернёт старое значение здержки.
+			За эти 100 мс мы можем изменеить значение <span class="cd" translate="no">glob.query</span>, или другой код может иницировать рендер, и тогда всё будет отрендерено одной пачкой.</p>
 	</li>
 	<li id="mw_debugLevel">
 		<div class="props-marker">

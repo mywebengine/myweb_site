@@ -1,0 +1,22 @@
+<ul>
+	<li exec="self.menu || (self.menu = [{
+			name: `Документация`,
+			href: `/doc.html`
+		},
+		/*{
+				name: `О проекте`,
+			href: `/about.html`
+		},*/
+		{
+			name: `Поддержать myweb`,
+			href: `/donate.html`
+		}])"
+		foreach.p="self.menu"
+		attr.id="p.href === `/doc.html` && `h_menu_doc`">
+		<a attr.href.push="loc.path !== p.href && p.href"
+			html="p.name"></a>
+	</li>
+	<!--li>
+		<a class="no_href">Язык</a>
+	</li-->
+</ul>

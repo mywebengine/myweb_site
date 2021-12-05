@@ -1,5 +1,5 @@
-<nav class="sub_menu"
-	exec="self.leftNav = [{
+<ul>
+	<li exec="self.leftNav || (self.leftNav = [{
 			name: `Введение`,
 			href: `/doc.html`
 		},
@@ -87,7 +87,11 @@
 		},
 		{
 			name: `Маршрутизация`,
-			href: `/doc/routing.html`
+			href: `/doc/loc.html`
+		},
+		{
+			name: `Адаптивная верстка`,
+			href: `/doc/view.html`
 		},
 		{
 			name: `Серверный рендеринг`,
@@ -97,7 +101,7 @@
 			name: `Примеры`,
 			href: `/doc/examples.html`,
 			li: [
-/*				{
+				/*{
 					name: `Получение данных с сервера`,
 					href: `/doc/examples/todo.html`
 				},
@@ -118,15 +122,13 @@
 		{
 			name: `API`,
 			href: `/doc/api.html`
-		}]">
-	<ul>
-		<li foreach.p="self.leftNav">
-			<a attr.href.push="loc.path !== p.href && p.href" html="p.name"></a>
-			<ul if="p.li">
-				<li foreach.p="p.li">
-					<a attr.href.push="loc.path !== p.href && p.href" html="p.name"></a>
-				</li>
-			</ul>
-		</li>
-	</ul>
-</nav>
+		}])"
+		foreach.p="self.leftNav">
+		<a attr.href.push="loc.path !== p.href && p.href" html="p.name"></a>
+		<ul if="p.li">
+			<li foreach.p="p.li">
+				<a attr.href.push="loc.path !== p.href && p.href" html="p.name"></a>
+			</li>
+		</ul>
+	</li>
+</ul>

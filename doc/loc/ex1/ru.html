@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes" />
+		<script src="https://mywebengine.org/myweb/myweb.js?debug=1" type="module" async=""></script>
+		<link href="https://mywebengine.org/myweb/myweb.css" type="text/css" rel="stylesheet" />
+		<title>loc (routing) - example, myweb</title>
+	</head> 
+	<body>
+
+<script>
+	//Нужно для того чтобы у нас появилось понимание где главная страница
+	history.replaceState(undefined, undefined, "/");
+</script>
+<!-- Текущий URL документа -->
+<p>URL: ${loc.path}</p>
+<hr />
+<!-- Блок с навигацией -->
+<link inc="`/doc/loc/ex1/nav.html`" />
+<hr />
+<!-- Блок с контентной частью
+* URL файла для вставки текущей страницы получаем следующим образом:
+"/doc/loc/ex1/" + location.pathname - т.е на сервере в директории
+"/doc/loc/ex1/" должен находится файл указанный в адресной строке.
+* Если на сервере нет нужного файла, то будем вставлять "404.html".
+* Перед запросом на сервер проверяем есть ли нужная вставка в кэше вставок.
+-->
+<link inc="const r = new Request(`/doc/loc/ex1/${loc.path !== `/` ? loc.path : `home.html`}`);
+	return mw_incCache.has(r.url) ? r.url : fetch(r.url)
+		.then(r => r.ok ? r : `/doc/loc/ex1/404.html`)" />
+
+	</body>
+</html>

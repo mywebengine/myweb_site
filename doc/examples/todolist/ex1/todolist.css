@@ -3,7 +3,8 @@
         --b-color: silver;
 }
 .todos {
-	margin-bottom: 60px;
+	max-width: 768px;
+	margin: 0 auto 60px auto;
 }
 .todos-top,
 .todos-top form,
@@ -60,4 +61,7 @@ label {
 .sel {
 	font-weight: bold;
 	cursor: default !important;
+}
+body > h1 {
+	text-align: center;
 }

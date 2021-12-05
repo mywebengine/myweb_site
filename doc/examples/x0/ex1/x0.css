@@ -6,15 +6,17 @@
 }
 .x0-board {
 	grid-area: board;
-	display: grid;
-	grid-template-columns: repeat(3, 50px);
-	grid-template-rows: repeat(3, 50px);
 	border: solid 1px #000;
 	border-right: 0;
 	border-bottom: 0;
+	font-family: monosapce;
 }
 .x0.game_over .x0-board {
 	opacity: 0.5;
+}
+.x0-board-row {
+	display: grid;
+	grid-auto-flow: column;
 }
 .x0-board-cell {
 	display: flex;
@@ -26,6 +28,9 @@
 	border-top: 0;
 	border-left: 0;
 	cursor: pointer;
+	width: 50px;
+	height: 50px;
+	position: relative;
 }
 .x0-board-cell.player_x,
 .x0-board-cell.player_0,
@@ -33,12 +38,23 @@
 	cursor: default;
 }
 .x0-board-cell.player_x::before {
-	content: "X";
+	content: "×";
 }
 .x0-board-cell.player_0::before {
-	content: "0";
+	content: "⊙";
+}
+.x0-board-cell-name {
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	font-size: 10px;
+	line-height: 1em;
+	color: #999;
 }
 
+.x0-size input {
+	width: 50px;
+}
 .x0-score {
 	grid-area: score;
 	display: flex;

@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes" />
+		<script src="https://mywebengine.org/myweb/myweb.js?debug=1" type="module" async=""></script>
+		<link href="https://mywebengine.org/myweb/myweb.css" type="text/css" rel="stylesheet" />
+		<title>inc commaand - example2, myweb</title>
+	</head>
+	<body>
+
+<div scope.inc="">
+	<h3>Dynamic URL example and slots</h3>
+	<select on.change="inc.dynamicUrl = this.value">
+		<option value="">empty</option>
+		<option value="../inc/inc1.html">../inc/inc1.html</option>
+		<option value="../inc/inc2.html">../inc/inc2.html</option>
+	</select>
+	<hr />
+	<div inc="inc.dynamicUrl">
+		<div slot="header">Header text</div>
+		<p>This text moves to the default slot without a name</p>
+		<div slot="footer">Footer text</div>
+	</div>
+</div>
+
+	</body>
+</html>
