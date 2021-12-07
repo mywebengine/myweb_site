@@ -1,0 +1,86 @@
+.page {
+	display: grid;
+	grid-template-areas:
+		"header	header"
+		"left	content";
+	grid-template-columns:
+		150px	1fr;
+	grid-template-rows:
+		50px
+		1fr;
+	gap: 20px;
+}
+.header {
+	grid-area: header;
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	background: cyan;
+}
+.left {
+	grid-area: left;
+	background: yellow;
+}
+.content {
+	grid-area: content;
+	background: green;
+}
+.menu {
+	background: red;
+}
+.left.scrolling .menu {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 150px;
+	overflow: auto;
+}
+.menu a {
+	display: block;
+}
+.burger {
+	display: none;
+}
+@media screen and (max-width: 400px) {
+	.page {
+		grid-template-areas:
+			"header"
+			"content";
+		grid-template-columns:
+			1fr;
+	}
+	.left {
+		display: none;
+	}
+	.burger {
+		display: block;
+		position: relative;
+	}
+	.burger-icon {
+		border-top: solid 4px;
+		border-bottom: solid 4px;
+		width: 20px;
+		height: 12px;
+		cursor: pointer;
+	}
+	.burger-icon::after {
+		content: "";
+		display: block;
+		margin: 4px 0;
+		border: solid 2px;
+	}
+	.burger-popup {
+		display: none;
+	}
+	.burger.show .burger-popup {
+		display: block;
+		position: absolute;
+		top: 0;
+	}
+}
+html,
+body {
+	margin: 0;
+	padding: 0;
+}

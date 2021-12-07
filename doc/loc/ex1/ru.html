@@ -10,25 +10,26 @@
 	<body>
 
 <script>
-	//Нужно для того чтобы у нас появилось понимание где главная страница
+	//Нужно для понимания где главная страница
 	history.replaceState(undefined, undefined, "/");
 </script>
 <!-- Текущий URL документа -->
 <p>URL: ${loc.path}</p>
-<hr />
+<hr>
 <!-- Блок с навигацией -->
 <link inc="`/doc/loc/ex1/nav.html`" />
-<hr />
+<hr>
 <!-- Блок с контентной частью
 * URL файла для вставки текущей страницы получаем следующим образом:
-"/doc/loc/ex1/" + location.pathname - т.е на сервере в директории
-"/doc/loc/ex1/" должен находится файл указанный в адресной строке.
-* Если на сервере нет нужного файла, то будем вставлять "404.html".
-* Перед запросом на сервер проверяем есть ли нужная вставка в кэше вставок.
+"/doc/loc/ex1/" + loc.path - т.е на сервере в директории
+"/doc/loc/ex1/" должен находится файл указанный в адресной строке
+* Если на сервере нет нужного файла, то будем вставлять "404.html"
+* Перед запросом на сервер проверяем есть ли нужная вставка в кэше
 -->
-<link inc="const r = new Request(`/doc/loc/ex1/${loc.path !== `/` ? loc.path : `home.html`}`);
-	return mw_incCache.has(r.url) ? r.url : fetch(r.url)
-		.then(r => r.ok ? r : `/doc/loc/ex1/404.html`)" />
+<link inc="const url = loc.path !== `/` ? loc.path : `home.html`,
+		req = new Request(`/doc/loc/ex1/${url}`);
+	return mw_incCache.has(req.url) ? req.url : fetch(req.url)
+		.then(res => res.ok ? res : `/doc/loc/ex1/404.html`)" />
 
 	</body>
 </html>

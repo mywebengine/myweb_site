@@ -41,20 +41,20 @@
 		<div class="props-marker">
 			<span class="cd" translate="no">load</span>
 		</div>
-		<p>Отправляется после получения данных. Ответ сервера находится в переменной <span class="cd" translate="no">evt.detail.res</span> (это <span class="cd" translate="no">Response</span>).</p>
+		<p>Отправляется после получения данных. Ответ сервера находится в: <span class="cd" translate="no">&lt;текущее событие>.detail.res</span> (это <span class="cd" translate="no">Response</span>).</p>
 	</li>
 	<li>
 		<div class="props-marker">
 			<span class="cd" translate="no">ok</span>
 		</div>
-		<p>Отправляется после получения данных и статус ответа сервера равен 200 - <span class="cd" translate="no">evt.detail.res.ok === true</span>.
-			Ответ сервера находится в переменной <span class="cd" translate="no">evt.detail.res</span> (это <span class="cd" translate="no">Response</span>).</p>
+		<p>Отправляется после получения данных, если статус ответа сервера равен 200: <span class="cd" translate="no">&lt;текущее событие>.detail.res.ok === true</span>.
+			Ответ сервера находится в: <span class="cd" translate="no">&lt;текущее событие>.detail.res</span> (это <span class="cd" translate="no">Response</span>).</p>
 	</li>
 	<li>
 		<div class="props-marker">
 			<span class="cd" translate="no">error</span>
 		</div>
-		<p>Отправляется если в процессе загрузки произошла ошибка. Объект произошедшей ошибки находится в переменной <span class="cd" translate="no">evt.detail.err</span>.</p>
+		<p>Отправляется если в процессе загрузки произошла ошибка. Объект произошедшей ошибки находится в: <span class="cd" translate="no">&lt;текущее событие>.detail.err</span>.</p>
 	</li>
 </ul>
 <link exec.url="getLangEx(`./fetch/ex1`, self.glob.lang)"

@@ -6,13 +6,13 @@
 		</div>
 		<div class="h-menu">
 			<div class="h-menu-burger-btn"
-				onclick="this.parentNode.lastElementChild.classList.add(`show`)">
+				onclick="this.parentNode.classList.add(`show`)">
 				<div class="h-menu-burger-btn-i"></div>
 				<div class="h-menu-burger-btn-i"></div>
 				<div class="h-menu-burger-btn-i"></div>
 			</div>
 			<div class="h-menu-popup"
-				on.click="if (evt.target.nodeName === `A` || evt.target.nodeName === `SPAN` || evt.target === this) this.classList.remove(`show`)">
+				on.click="if (evt.target.nodeName === `A` || evt.target.nodeName === `SPAN` || evt.target === this) this.parentNode.classList.remove(`show`)">
 				<div class="h-menu-popup-cnt">
 					<nav class="h-menu-top">
 						<link inc="getLangInc(`/page/body/header/menu`, self.glob.lang)" />

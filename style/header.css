@@ -10,6 +10,7 @@
 	padding: var(--gap);
 	align-items: center;
 	border-bottom: solid 1px #ccc;
+	min-height: 88px;
 }
 .h-logo {
 	grid-area: logo;
@@ -32,7 +33,7 @@
 }
 .h-menu ul {
 	display: flex;
-	gap: var(--gap2);
+	gap: var(--gap);
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -70,7 +71,7 @@
 	.h-menu-popup {
 		display: none;
 	}
-	.h-menu-popup.show {
+	.h-menu.show .h-menu-popup {
 		display: block;
 		position: fixed;
 		top: 0;
@@ -80,7 +81,7 @@
 		z-index: 999;
 		background: rgb(0 0 0 / 20%);
 	}
-	.h-menu-popup.show .h-menu-popup-cnt {
+	.h-menu.show .h-menu-popup-cnt {
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
@@ -94,19 +95,19 @@
 		padding: 30px 20px 30px 30px;
 		overflow: auto;
 	}
-	.h-menu-popup.show .sub_menu {
+	.h-menu.show .sub_menu {
 		margin-top: 0;
 		margin-bottom: 20px;
 		padding-right: 0;
 		padding-left: 10px;
 		font-size: 0.95em;
 	}
-	.h-menu-popup.show ul {
+	.h-menu.show ul {
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
 	}
-	.h-menu-popup.show .sub_menu ul {
+	.h-menu.show .sub_menu ul {
 		gap: 0px;
 	}
 }

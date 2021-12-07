@@ -49,7 +49,7 @@ export function onInput($cnt, $iframe) {//, fillingOff, s) {
 	$iframe.contentWindow.mw_render(undefined, 0);
 }
 function prepareCode(code) {
-	return code.trim().replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+	return code.trim().replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&amp;", "&");
 }
 function resize($iframe) {
 	if ($iframe.contentDocument === null || $iframe.style.maxHeight) {

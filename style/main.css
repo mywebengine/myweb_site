@@ -213,11 +213,11 @@
 
 .cd,
 .mwex-cnt-code {
-	font-size: 1.1em;
+	font-size: 1.2em;
 }
 
 
-.scrolling .sub_menu {
+.sub_menu.scrolling {
 	position: fixed;
 	top: 10px;
 	bottom: 10px;

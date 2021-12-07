@@ -5,30 +5,42 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes" />
 		<script src="https://mywebengine.org/myweb/myweb.js?debug=1" type="module" async=""></script>
 		<link href="https://mywebengine.org/myweb/myweb.css" type="text/css" rel="stylesheet" />
-		<title>loc (routing) - example, myweb</title>
+		<title>view (adapive design) - example, myweb</title>
 	</head> 
 	<body>
 
-<script>
-	//Нужно для того чтобы у нас появилось понимание где главная страница
-	history.replaceState(undefined, undefined, "/");
-</script>
-<!-- Текущий URL документа -->
-<p>URL: ${loc.path}</p>
-<hr />
-<!-- Блок с навигацией -->
-<link inc="`/doc/routing/ex1/nav.html`" />
-<hr />
-<!-- Блок с контентной частью
-* URL файла для вставки текущей страницы получаем следующим образом:
-"/doc/routing/ex1/" + location.pathname - т.е на сервере в директории
-"/doc/routing/ex1/" должен находится файл указанный в адресной строке.
-* Если на сервере нет нужного файла, то будем вставлять "404.html".
-* Перед запросом на сервер проверяем есть ли нужная вставка в кэше вставок.
--->
-<link inc="const r = new Request(`/doc/routing/ex1/${loc.path !== `/` ? loc.path : `home.html`}`);
-	return mw_incCache.has(r.url) ? r.url : fetch(r.url)
-		.then(r => r.ok ? r : `/doc/routing/ex1/404.html`)" />
+<div class="page">
+	<div class="header">
+		<div class="burger"
+			on.click.stop="this.classList.add(`show`);
+				document.addEventListener(`click`, () => this.classList.remove(`show`), {once: true})">
+			<div class="burger-icon"></div>
+			<div class="burger-popup"
+				on.click.stop=""></div>
+		</div>
+		<div class="logo">LOGO</div>
+	</div>
+	<!-- Если горизонтальная прокрутка больше 70px и высота стрницы
+		больше высоты меню (смысл второго условия в том, что бы
+		после того как меню станет position fixed на странице
+		останется скролл), тогда добавляем класс scrolling -->
+	<div class="left" attr.class.scrolling="view.scrollTop > 70 && document.scrollingElement.scrollHeight > this.firstElementChild.offsetHeight + 70">
+		<!-- При изменении ширины окно, проверяем где должно
+			находится меню, и если оно не там, то переносим
+			его туда куда нужно -->
+		<div class="menu"
+			exec="const $p = document.querySelector(400 >= view.clientWidth ? `.burger-popup` : `.left`);
+				if ($p !== this.parentNode) $p.appendChild(this)">
+			<a>Home page</a>
+			<a>About</a>
+			<a>Contacts</a>
+		</div>
+	</div>
+	<div class="content" style="height: 1000px">
+		<p>Content text - height 1000px</p>
+	</div>
+</div>
+<link href="/doc/view/ex1/ex1.css" type="text/css" rel="stylesheet" />
 
 	</body>
 </html>

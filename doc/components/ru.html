@@ -1,6 +1,6 @@
 <h1 exec="glob.pageTitle = `${this.textContent} - myweb`">Компоненты</h1>
 <p>Компоненты документа - это куски шаблона, которые можно использовать повторно. Каждый компонент может включать в себя другие компаненты, скрипты, файлы стилей и другую разметку HTML.</p>
-<p>Подключение компонета - это использование команды <a attr.href.push="`/doc/inc.html`" translate="no">inc</a>, которая по указанному URL подключает шаблон.</p>
+<p>Подключение компонета - это использование команды <a attr.href.push="`/doc/cmd/inc.html`" class="cd" translate="no">inc</a>, которая по указанному URL подключает шаблон.</p>
 <div class="p info">
 	<p>Когда вставка подключает скрипт-модуль <span class="cd" translate="no">&lt;script type="module"></span>, то всё что экспортируется из скрипта попадает
 		в <a attr.href.push="`/doc/cmd/scope.html`">область видимости</a> тегов этой вставки.</p>
@@ -33,7 +33,7 @@
 <p>Ниже в примере используется этот компонент, которому передаётся: значение переменной text и разметка для слота по умолчанию.</p>
 <link exec.url="getLangEx(`./components/ex1`, self.glob.lang)"
 	inc="`/ctrl/mwex/mwex.html`" />
-<p>Далее рассмотрим пример, как использовать компоненты в компонетах - используемые файлы приведены ниже.</p>
+<p>Далее рассмотрим пример, как использовать компоненты в компонетах. Используемые файлы приведены ниже.</p>
 <p>"Список" - файл компонента <a href="/doc/components/inc/ul.html" target="_blank" translate="no">ul.html</a></p>
 <div class="code cd" html.t="fetch(`/doc/components/inc/ul.html`).then(res => res.text())"></div>
 <p>"Элемент списка" - <a href="/doc/components/inc/li.html" target="_blank" translate="no">li.html</a></p>

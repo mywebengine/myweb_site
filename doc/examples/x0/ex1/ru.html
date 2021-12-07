@@ -131,7 +131,7 @@
 			return move;
 		}
 		//Проверяем можно ли выиграть следующим ходом
-		let move = lines.sort((a, b) => a.filter(i => playerCells.has(i)).length < b.filter(i => playerCells.has(i)).length ? 1 : -1)[0].find(i => !playerCells.has(i));
+		let move = lines.slice().sort((a, b) => a.filter(i => playerCells.has(i)).length < b.filter(i => playerCells.has(i)).length ? 1 : -1)[0].find(i => !playerCells.has(i));
 		if (testWin(game, player, move) || player === "X") {
 			return move;
 		}
@@ -144,7 +144,7 @@
 		move = -1;
 		let weight = -1;
 		const exists = new Set();
-		for (let j, i = lines.length - 1; i > -1; i--) {
+		for (let k, j, i = lines.length - 1; i > -1; i--) {
 			for (j = lines[i].length - 1; j > -1; j--) {
 				const iMove = lines[i][j];
 				if (exists.has(iMove) || playerCells.has(iMove) || rivalCells.has(iMove)) {
