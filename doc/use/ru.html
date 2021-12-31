@@ -1,10 +1,10 @@
 <h1 exec="glob.pageTitle = `${this.textContent} - myweb`">Поключение</h1>
-<p>Что бы подключить myweb нужно добвить скрипт и CSS-файл на страницу. Размер сжатой минимизированной версии (алгоритмом Brotli): скрипт&#160;<span class="cd">28&#160;KB</span>
-	<span style="white-space: nowrap">и CSS-файла 1 KB</span>.</p>
+<p>Что бы подключить myweb нужно добвить скрипт и CSS-файл на страницу. Размер сжатой минимизированной версии (алгоритмом Brotli): скрипт&#160;<span class="cd">28KB</span>
+	и&#160;CSS-файла меньше&#160;<span class="cd">1KB</span>.</p>
 <p>Подключать CSS-файл не обязательно, будет достаточно, если вы скопируете в свой CSS правило (это правило нужно
-	для скрытия элементов тегом <a attr.href.push="`/doc/cmd.html#tag_template`" class="cd" translate="no">&lt;template></a>
+	для скрытия элементов тегом <a attr.href.push="`/doc/render.html#template-hide`" class="cd" translate="no">&lt;template _hide=""></a>
 	и для скртия элеменов командой <a attr.href.push="`/doc/cmd/filling.html`" class="cd" translate="no">filling</a>):</p>
-<div class="p code cd">template,
+<div class="p code cd">template[_hide],
 *[is_filling] > * {
 	display: none !important;
 }</div>
@@ -26,6 +26,7 @@
 &lt;link href="https://cdn.jsdelivr.net/gh/mywebengine/myweb@0.9.03/myweb.min.css" type="text/css" rel="stylesheet" /></div-->
 
 <h2>Файлы можно взять с GitHub</h2>
+<p>Репозиторий на GitHub <a href="https://github.com/mywebengine/myweb" target="_blank">github.com/mywebengine/myweb</a></p>
 <div class="p code cd">git clone git@github.com:mywebengine/myweb.git</div>
 <p>Подключение файлов с вашего хоста:</p>
 <div class="p code cd">&lt;script src="/myweb/myweb.js" type="module" async="">&lt;/script>
@@ -76,6 +77,5 @@
 	&lt;/body>
 &lt;/html>
 </div>
-<p></p>
 <link exec.menu="self.leftNav"
 	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />

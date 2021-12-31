@@ -5,11 +5,18 @@ export function onMount(scope, $iframe) {
 //	$iframe.contentWindow.addEventListener(`DOMContentLoaded`, () => {
 //		onLoad(scope, $iframe);
 //	});
+//	load(scope, $iframe);
 	$iframe.src = scope.url;
 }
 function load(scope, $iframe, state) {
+/*
+	if ($iframe.contentWindow.mw_debugLevel === undefined) {
+		setTimeout(() => load(scope, $iframe), 10);
+		return;
+	}
+	onLoad(scope, $iframe);*/
 	if ($iframe.contentDocument.readyState === state) {
-		setTimeout(() => load(scope, $iframe, state), 0);
+		setTimeout(() => load(scope, $iframe, state), 100);
 		return;
 	}
 	if ($iframe.contentDocument.readyState === `interactive` || $iframe.contentDocument.readyState === `complete`) {

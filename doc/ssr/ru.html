@@ -15,17 +15,17 @@
 			- обсуждается в <a attr.href.push="`/doc/use.html#linking`">разделе подключение</a></p>
 	</li>
 	<li>
-		<p>Все скрытые конструкция оборачиваются в <span class="cd" translate="no">&lt;template></span> - с повторение всех атрибутов скрытого элемента.
+		<p>Все скрытые конструкция оборачиваются в <span class="cd" translate="no">&lt;template _hide=""></span> - с повторение всех атрибутов скрытого элемента.
 			Скрываются теги в двух случаях: для команды <span class="cd" translate="no">if/switch</span> и <span class="cd" translate="no">foreach</span>.</p>
 		<p>Для <span class="cd" translate="no">if</span> это выглядит так:</p>
 		<div class="p info">
 			<p>Шаблон:<br /><span class="cd" translate="no">&lt;div if="0 > 1">...&lt;/div>&lt;div else="">...&lt;/div></span></p>
-			<p>Должно получиться:<br /><span class="cd" translate="no">&lt;template if="0 > 1">&lt;div if="0 > 1">...&lt;/div>&lt;/template>&lt;div else="">...&lt;/div></span></p>
+			<p>Должно получиться:<br /><span class="cd" translate="no">&lt;template _hide="" if="0 > 1">&lt;div if="0 > 1">...&lt;/div>&lt;/template>&lt;div else="">...&lt;/div></span></p>
 		</div>
 		<p>Для <span class="cd" translate="no">foreach</span> это выглядит так:</p>
 		<div class="p info">
 			<p>Шаблон:<br /><span class="cd" translate="no">&lt;div foreach="[]">...&lt;/div></span></p>
-			<p>Должно получиться:<br /><span class="cd" translate="no">&lt;template foreach="[]">&lt;div foreach="[]">...&lt;/div>&lt;/template></span></p>
+			<p>Должно получиться:<br /><span class="cd" translate="no">&lt;template _hide="" foreach="[]">&lt;div foreach="[]">...&lt;/div>&lt;/template></span></p>
 		</div>
 	</li>
 	<li>

@@ -21,7 +21,7 @@ body {
 	--gap2: 15px;
 	--text_gap: 1em;
         --menu_width: 150px;
-        --cnt_width: 680px;
+        --cnt_width: 820px;
         --sfont_size: 0.9em;
 
 	display: flex;
@@ -36,9 +36,6 @@ body {
 }
 a[href] {
 	text-decoration: none;
-	color: blue;
-}
-a:visited {
 	color: blue;
 }
 a[href]:hover,

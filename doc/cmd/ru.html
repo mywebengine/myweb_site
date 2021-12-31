@@ -26,13 +26,5 @@
 		<p>Выраженеие команды, которое является строкой javascript-кода и выполняется в контексте текущего HTML элемента</p>
 	</li>
 </ul>
-<h2 id="tag_template">Скрытие элементов за тегом <span class="cd">&lt;template></span></h2>
-<p>Когда по логике команды она должна скрыть элемент в документе, используетмся механизм переноса DOM элемента в элемент <span class="cd">&lt;template></span>.
-	Для того что бы скрыть элемент на тег <span class="cd">&lt;template></span> применяется CSS правило
-	(которое находится в файле myweb.css - подробнее о подключении файла можно прочитать в разделе <a attr.href.push="`/doc/use.html`">подключение</a>):</p>
-<div class="p code cd">template {
-	display: none !important;
-}</div>
-<p>Это правило может инициировать конфиликт с ранее созданой HTML-разметкой, если в нём использубтся теги <span class="cd">&lt;template></span></p>
 <link exec.menu="self.leftNav"
 	inc="getLangInc(`/page/next_prev`, self.glob.lang)" />
