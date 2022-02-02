@@ -120,6 +120,10 @@
 					href: `/doc/examples/todolist.html`
 				},
 				{
+					name: `Календарь`,
+					href: `/doc/examples/calendar.html`
+				},
+				{
 					name: `Крестики-нолики`,
 					href: `/doc/examples/x0.html`
 				}
@@ -130,10 +134,10 @@
 			href: `/doc/api.html`
 		}])"
 		foreach.p="self.leftNav">
-		<a attr.href.push="loc.path !== p.href && p.href" html="p.name"></a>
+		<a attr.href.push="loc.pathname !== p.href && p.href" html="p.name"></a>
 		<ul if="p.li">
 			<li foreach.p="p.li">
-				<a attr.href.push="loc.path !== p.href && p.href" html="p.name"></a>
+				<a attr.href.push="loc.pathname !== p.href && p.href" html="p.name"></a>
 			</li>
 		</ul>
 	</li>

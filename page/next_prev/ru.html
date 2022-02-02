@@ -1,7 +1,7 @@
 <link href="./next_prev.css" type="text/css" rel="stylesheet" />
 <div class="sub_menu next_prev"
 	exec.menu="menu.flatMap(i => i.li ? [i, ...i.li] : i)"
-	exec.i="menu.findIndex(i => i.href === loc.path)">
+	exec.i="menu.findIndex(i => i.href === loc.pathname)">
 	<a if.m="menu[i - 1]"
 		attr.href.push="m.href">
 		<span html="m.name"></span>

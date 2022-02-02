@@ -17,7 +17,7 @@
 		<div class="props-marker">
 			<span class="cd" translate="no">path</span>
 		</div>
-		<p>Строка содержащая URL без хоста, для теущего документа равна: <span class="cd" translate="no">${loc.path}</span></p>
+		<p>Строка содержащая URL без хоста, для теущего документа равна: <span class="cd" translate="no">${loc.pathname}</span></p>
 	</li>
 	<li>
 		<div class="props-marker">
@@ -41,7 +41,7 @@
 				<div class="props-marker">
 					<span class="cd" translate="no">path</span>
 				</div>
-				<p>Строка с хэшем исключая символ "#", для теущего документа равна: <span class="cd" translate="no">${loc.hash.path || `empty string`}</span></p>
+				<p>Строка с хэшем исключая символ "#", для теущего документа равна: <span class="cd" translate="no">${loc.hash.pathname || `empty string`}</span></p>
 			</li>
 		</ul>
 	</li>

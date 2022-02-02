@@ -1,20 +1,30 @@
 export function onMount(scope, $iframe) {
-//!!это из-за Сафари, такое чувство, что после начала загрузки она инициализирует новый виндов и тем самым сбрасывает установленный DOMContentLoaded
-	load(scope, $iframe, $iframe.contentDocument.readyState);
-//, поуму должно роальтоать так:
-//	$iframe.contentWindow.addEventListener(`DOMContentLoaded`, () => {
-//		onLoad(scope, $iframe);
-//	});
-//	load(scope, $iframe);
 	$iframe.src = scope.url;
+	load(scope, $iframe, $iframe.contentDocument.readyState);
+/*так должно быть так
+//!!это из-за Сафари, такое чувство, что после начала загрузки она инициализирует новый виндов и тем самым сбрасывает установленный DOMContentLoaded
+	$iframe.contentWindow.addEventListener("DOMContentLoaded", () => {
+		scope.code = prepareCode($iframe.contentDocument.body.innerHTML);
+		addOnRender($iframe);
+	});*/
 }
 function load(scope, $iframe, state) {
-/*
-	if ($iframe.contentWindow.mw_debugLevel === undefined) {
-		setTimeout(() => load(scope, $iframe), 10);
+	if ($iframe.contentDocument.readyState === state) {
+		setTimeout(() => load(scope, $iframe, state), 5);
 		return;
 	}
-	onLoad(scope, $iframe);*/
+	if ($iframe.contentDocument.readyState === `interactive` || $iframe.contentDocument.readyState === `complete`) {
+		init$frame(scope, $iframe);
+		resize($iframe);
+		return;
+	}
+	$iframe.contentWindow.addEventListener("DOMContentLoaded", () => {
+		init$frame(scope, $iframe);
+	});
+/*
+
+
+	onLoad(scope, $iframe);
 	if ($iframe.contentDocument.readyState === state) {
 		setTimeout(() => load(scope, $iframe, state), 100);
 		return;
@@ -23,10 +33,18 @@ function load(scope, $iframe, state) {
 		onLoad(scope, $iframe);
 		return;
 	}
-	$iframe.contentWindow.addEventListener(`DOMContentLoaded`, () => onLoad(scope, $iframe));
+	$iframe.contentWindow.addEventListener(`DOMContentLoaded`, () => onLoad(scope, $iframe));*/
 }
-export function onLoad(scope, $iframe) {
+function init$frame(scope, $iframe) {
 	scope.code = prepareCode($iframe.contentDocument.body.innerHTML);
+//	if ($iframe.contentDocument === null || $iframe.style.maxHeight || $iframe.contentDocument.documentElement.addEventListener) {
+//alert(($iframe.contentDocument === null) + " || " + $iframe.style.maxHeight + "," + $iframe.contentDocument.documentElement.addEventListener);
+//		return;
+//	}
+//	if (!$iframe.style.maxHeight) {
+		$iframe.style.overflow = "hidden";
+		$iframe.contentDocument.documentElement.style.overflow = "hidden";
+//	}
 	let sync = 0
 	$iframe.contentDocument.documentElement.addEventListener("render", function(evt) {
 		const s = ++sync;
@@ -36,6 +54,9 @@ export function onLoad(scope, $iframe) {
 			}
 		}, 100);
 	});
+}
+function resize($iframe) {
+	$iframe.style.height = $iframe.contentDocument.scrollingElement.scrollHeight + "px";
 }
 export function onInput($cnt, $iframe) {//, fillingOff, s) {
 	for (const sync of $iframe.contentWindow.mw_syncInRender) {
@@ -57,16 +78,6 @@ export function onInput($cnt, $iframe) {//, fillingOff, s) {
 }
 function prepareCode(code) {
 	return code.trim().replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&amp;", "&");
-}
-function resize($iframe) {
-	if ($iframe.contentDocument === null || $iframe.style.maxHeight) {
-		return;
-	}
-//	if (!$iframe.style.maxHeight) {
-		$iframe.style.overflow = "hidden";
-		$iframe.contentDocument.documentElement.style.overflow = "hidden";
-//	}
-	$iframe.style.height = $iframe.contentDocument.scrollingElement.scrollHeight + "px";
 }
 export function onKeyDown($e, evt) {
 	const val = $e.textContent,

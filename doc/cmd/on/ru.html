@@ -90,6 +90,7 @@
 		</div>
 		<p>Для событий <a href="https://developer.mozilla.org/docs/Web/API/InputEvent" target="_blank">InputEvent</a> - если пользователь ввёл текст значение,
 			которого равно <span class="cd" translate="no">string</span> - регистр не имеет занчения - <span class="cd" translate="no">&lt;текущее событие>.data.toLowerCase()</span>.</p>
+		<p class="info">InputEvent.data не рабоатет в Chrome, наверое, это временно</p>
 		<p>Пример: <span class="cd" translate="no">&lt;div on.input.abc="alert(&lt;текущее событие>.data)" ...</span> - срабоатет тогда когда пользователь вставит из буфера строку "abc".</p>
 		<p><i>Для собтий этого типа нет возможнасти определить нажаты ли клавиши: ctrl, alt, shift, meta.</i></p>
 	</li>
